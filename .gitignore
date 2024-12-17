@@ -1,0 +1,16 @@
+.idea
+cmake-build-debug
+cmake-build-release
+cmake-build-debug-clang
+cmake-build-release-clang
+cmake-build-debug-clang-coverage
+obj
+bin
+test_ir*
+fuzz_example
+fuzz.sh
+findings
+out
+*.spidir
+*.asm
+*.dot

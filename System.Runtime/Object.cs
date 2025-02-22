@@ -1,10 +1,20 @@
+using System.Reflection;
+using System.Runtime.InteropServices;
+
 namespace System;
+
 
 public class Object
 {
 
-    private uint _vtable;
-    private uint _reserved;
+    [StructLayout(LayoutKind.Sequential)]
+    private struct ObjectVTable
+    {
+        public RuntimeTypeInfo Type;
+    }
+    
+    private unsafe ObjectVTable* _vtable;
+    private ulong _reserved;
     
     public Object()
     {
@@ -28,7 +38,10 @@ public class Object
 
     public Type GetType()
     {
-        throw null;
+        unsafe
+        {
+            return _vtable->Type;
+        }
     }
 
     protected object MemberwiseClone()

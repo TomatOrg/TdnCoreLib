@@ -11,6 +11,7 @@ public sealed partial class String
     public static readonly string Empty = "";
     
     private int _length;
+    private int _hashcode;
     private char _firstChar;
 
     public int Length => _length;

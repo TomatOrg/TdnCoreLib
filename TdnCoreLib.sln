@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.Runtime", "System.Runtime\System.Runtime.csproj", "{023D24BF-295D-4E9B-8878-DB57D0920ABD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.Private.CoreLib", "System.Private.CoreLib\System.Private.CoreLib.csproj", "{023D24BF-295D-4E9B-8878-DB57D0920ABD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{E418827B-0EF1-4A48-9C9D-0E531354F40C}"
 EndProject

@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 namespace System.Reflection;
 
 [StructLayout(LayoutKind.Sequential)]
-internal class RuntimeMethodBody : MethodBody
+internal sealed class RuntimeMethodBody : MethodBody
 {
 
     private RuntimeLocalVariableInfo[] _localVariables;

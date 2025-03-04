@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 namespace System.Reflection;
 
 [StructLayout(LayoutKind.Sequential)]
-internal class RuntimeExceptionHandlingClause : ExceptionHandlingClause
+internal sealed class RuntimeExceptionHandlingClause : ExceptionHandlingClause
 {
 
     private RuntimeTypeInfo _catchType;

@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 namespace System.Reflection;
 
 [StructLayout(LayoutKind.Sequential)]
-internal class RuntimeMethodInfo : MethodInfo
+internal sealed class RuntimeMethodInfo : MethodInfo
 {
     private RuntimeTypeInfo _declaringType;
     private RuntimeModule _module;

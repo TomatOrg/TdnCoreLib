@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 namespace System.Reflection;
 
 [StructLayout(LayoutKind.Sequential)]
-internal class RuntimeAssembly : Assembly
+internal sealed class RuntimeAssembly : Assembly
 {
 
     private RuntimeAssembly[] _assemblyRefs;

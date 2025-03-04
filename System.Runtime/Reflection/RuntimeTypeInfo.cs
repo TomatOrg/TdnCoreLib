@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 namespace System.Reflection;
 
 [StructLayout(LayoutKind.Sequential)]
-internal class RuntimeTypeInfo : Type
+internal sealed class RuntimeTypeInfo : Type
 {
 
     private RuntimeTypeInfo _declaringType;
@@ -48,4 +48,8 @@ internal class RuntimeTypeInfo : Type
     
     public override string Name => _name;
 
+    public override string ToString()
+    {
+        return Name;
+    }
 }

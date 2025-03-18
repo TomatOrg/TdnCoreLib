@@ -17,5 +17,11 @@ internal static class ThrowHelper
         throw new IndexOutOfRangeException();
     }
 
+
+    [DoesNotReturn]
+    internal static void ThrowInvalidOperationException_InvalidOperation_NoValue()
+    {
+        throw new InvalidOperationException("Nullable object must have a value.");
+    }
     
 }

@@ -9,6 +9,8 @@ public readonly struct Int32
     public const int MaxValue = 0x7fffffff;
     public const int MinValue = unchecked((int)0x80000000);
     
+    private readonly int _value;
+    
     public int CompareTo(object? value)
     {
         if (value == null)

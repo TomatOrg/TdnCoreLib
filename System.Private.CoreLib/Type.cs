@@ -9,4 +9,9 @@ public abstract class Type : MemberInfo
     {
     }
 
+    public static TypeCode GetTypeCode(Type? type)
+    {
+        return TypeCode.Object;
+    }
+    
 }

@@ -7,7 +7,7 @@ internal static class Program
 {
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static int ReduceDelegate(int[] a, Func<int,int,int> d)
+    private static double ReduceDelegate(double[] a, Func<double,double,double> d)
     {
         if (a.Length == 0) return 0;
 
@@ -18,15 +18,15 @@ internal static class Program
         return result;
     }
 
-    public static int Add(int a, int b)
+    public static double Add(double a, double b)
     {
         return a + b;
     }
     
     public static int Main(string[] args)
     {
-        var a = new Func<int, int, int>(Add);
-        return a(1, 2);
-        // return ReduceDelegate([1,2,3], new Func<int, int, int>(Add));
+        var a = new Func<double, double, double>(Add);
+        // return a(1, 2);
+        return (int)ReduceDelegate([1,2,3], new Func<double, double, double>(Add));
     }
 }

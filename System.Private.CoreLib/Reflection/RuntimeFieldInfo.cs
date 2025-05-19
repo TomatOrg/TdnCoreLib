@@ -10,6 +10,7 @@ internal sealed class RuntimeFieldInfo : FieldInfo
     private RuntimeModule _module;
     private string _name;
     private int _metadataToken;
+    private int _padding;
 
     private FieldAttributes _attributes;
     private RuntimeTypeInfo _fieldType;

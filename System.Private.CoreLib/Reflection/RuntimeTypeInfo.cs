@@ -10,6 +10,7 @@ internal sealed class RuntimeTypeInfo : Type
     private RuntimeModule _module;
     private string _name;
     private int _metadataToken;
+    private int _padding;
     
     private RuntimeTypeInfo? _arrayType;
     private RuntimeTypeInfo? _byRefType;
@@ -21,6 +22,7 @@ internal sealed class RuntimeTypeInfo : Type
     private RuntimeTypeInfo _baseType;
     private UIntPtr _genericTypeInstances;
     private RuntimeConstructorInfo _typeInitialized;
+    private UIntPtr _managedPointers;
     private UIntPtr _interfaceImpls;
     private RuntimeTypeInfo _interfaceImplementors;
     private RuntimeConstructorInfo[] _declaredConstructors;

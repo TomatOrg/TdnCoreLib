@@ -3,17 +3,17 @@ namespace System;
 public class ArithmeticException : SystemException
 {
     public ArithmeticException()
-        : base("Overflow or underflow in the arithmetic operation.")
+        : base(SR.Arg_ArithmeticException)
     {
     }
     
     public ArithmeticException(string? message)
-        : base(message)
+        : base(message ?? SR.Arg_ArithmeticException)
     {
     }
     
     public ArithmeticException(string? message, Exception? innerException)
-        : base(message, innerException)
+        : base(message ?? SR.Arg_ArithmeticException, innerException)
     {
     }
     

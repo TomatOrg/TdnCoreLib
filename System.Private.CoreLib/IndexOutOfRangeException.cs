@@ -4,17 +4,17 @@ public sealed class IndexOutOfRangeException : SystemException
 {
     
     public IndexOutOfRangeException()
-        : base("Index was outside the bounds of the array.")
+        : base(SR.Arg_IndexOutOfRangeException)
     {
     }
 
     public IndexOutOfRangeException(string? message)
-        : base(message)
+        : base(message ?? SR.Arg_IndexOutOfRangeException)
     {
     }
 
     public IndexOutOfRangeException(string? message, Exception? innerException)
-        : base(message, innerException)
+        : base(message ?? SR.Arg_IndexOutOfRangeException, innerException)
     {
     }
 

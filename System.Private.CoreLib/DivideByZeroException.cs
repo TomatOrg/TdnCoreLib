@@ -4,17 +4,17 @@ public class DivideByZeroException : ArithmeticException
 {
     
     public DivideByZeroException()
-        : base("Attempted to divide by zero.")
+        : base(SR.Arg_DivideByZero)
     {
     }
     
     public DivideByZeroException(string? message)
-        : base(message)
+        : base(message ?? SR.Arg_DivideByZero)
     {
     }
 
     public DivideByZeroException(string? message, Exception? innerException)
-        : base(message, innerException)
+        : base(message ?? SR.Arg_DivideByZero, innerException)
     {
     }
     

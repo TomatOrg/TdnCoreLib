@@ -4,17 +4,17 @@ public class NotImplementedException : SystemException
 {
     
     public NotImplementedException()
-        : base("The method or operation is not implemented.")
+        : base(SR.Arg_NotImplementedException)
     {
     }
     
     public NotImplementedException(string? message)
-        : base(message)
+        : base(message ?? SR.Arg_NotImplementedException)
     {
     }
     
     public NotImplementedException(string? message, Exception? inner)
-        : base(message, inner)
+        : base(message ?? SR.Arg_NotImplementedException, inner)
     {
     }
     

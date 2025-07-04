@@ -7,22 +7,22 @@ public class ArgumentNullException : ArgumentException
 {
 
     public ArgumentNullException()
-        : base("Value cannot be null.")
+        : base(SR.ArgumentNull_Generic)
     {
     }
 
     public ArgumentNullException(string? paramName)
-        : base("Value cannot be null.", paramName)
+        : base(SR.ArgumentNull_Generic, paramName)
     {
     }
 
     public ArgumentNullException(string? message, Exception? innerException)
-        : base(message, innerException)
+        : base(message ?? SR.ArgumentNull_Generic, innerException)
     {
     }
 
     public ArgumentNullException(string? paramName, string? message)
-        : base(message, paramName)
+        : base(message ?? SR.ArgumentNull_Generic, paramName)
     {
     }
     

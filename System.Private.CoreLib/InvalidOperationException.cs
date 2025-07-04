@@ -4,17 +4,17 @@ public class InvalidOperationException : SystemException
 {
     
     public InvalidOperationException()
-        : base("Operation is not valid due to the current state of the object.")
+        : base(SR.Arg_InvalidOperationException)
     {
     }
 
     public InvalidOperationException(string? message)
-        : base(message)
+        : base(message ?? SR.Arg_InvalidOperationException)
     {
     }
 
     public InvalidOperationException(string? message, Exception? innerException)
-        : base(message, innerException)
+        : base(message ?? SR.Arg_InvalidOperationException, innerException)
     {
     }
     

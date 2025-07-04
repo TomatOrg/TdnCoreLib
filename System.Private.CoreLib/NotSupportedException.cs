@@ -4,17 +4,17 @@ public class NotSupportedException : SystemException
 {
     
     public NotSupportedException()
-        : base("Specified method is not supported.")
+        : base(SR.Arg_NotSupportedException)
     {
     }
 
     public NotSupportedException(string? message)
-        : base(message)
+        : base(message ?? SR.Arg_NotSupportedException)
     {
     }
 
     public NotSupportedException(string? message, Exception? innerException)
-        : base(message, innerException)
+        : base(message ?? SR.Arg_NotSupportedException, innerException)
     {
     }
     

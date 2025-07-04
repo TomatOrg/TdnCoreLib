@@ -27,7 +27,8 @@ internal static class Program
     {
         // var a = new Func<double, double, double>(Add);
         // // return a(1, 2);
+        int[] a = [1, 2, 3];
         // return (int)ReduceDelegate([1,2,3], new Func<double, double, double>(Add));
-        return 123;
+        return Array.IndexOf(a, 2, 0, a.Length);
     }
 }

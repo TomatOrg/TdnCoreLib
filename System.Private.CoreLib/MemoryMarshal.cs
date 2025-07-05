@@ -14,9 +14,9 @@ public static class MemoryMarshal
 {
     
     [MethodImpl(MethodImplOptions.AggressiveInlining, MethodCodeType = MethodCodeType.Runtime)]
-    public static extern ref T GetArrayDataReference<T>(T[] array);
+    internal static extern ref T GetArrayDataReference<T>(T[] array);
 
-    public static ref byte GetArrayDataReference(Array array)
+    internal static ref byte GetArrayDataReference(Array array)
     {
         var type = Unsafe.As<RuntimeTypeInfo>(array.GetType());
         var align = type._stackAlignment;

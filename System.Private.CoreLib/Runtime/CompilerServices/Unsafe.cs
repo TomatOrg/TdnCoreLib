@@ -95,11 +95,8 @@ public static unsafe class Unsafe
     [MethodImpl(MethodImplOptions.AggressiveInlining, MethodCodeType = MethodCodeType.Runtime)]
     public static extern void InitBlockUnaligned(void* startAddress, byte value, uint byteCount);
 
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void InitBlockUnaligned(ref byte startAddress, byte value, uint byteCount)
-    {
-        for (uint i = 0; i < byteCount; i++) AddByteOffset(ref startAddress, i) = value;
-    }
+    [MethodImpl(MethodImplOptions.AggressiveInlining, MethodCodeType = MethodCodeType.Runtime)]
+    public static extern void InitBlockUnaligned(ref byte startAddress, byte value, uint byteCount);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static T ReadUnaligned<T>(void* source)

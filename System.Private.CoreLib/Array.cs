@@ -7,6 +7,16 @@ namespace System;
 [StructLayout(LayoutKind.Sequential)]
 public abstract class Array
 {
+    
+    private static class EmptyArray<T>
+    {
+        internal static readonly T[] Value = new T[0];
+    }
+
+    public static T[] Empty<T>()
+    {
+        return EmptyArray<T>.Value;
+    }
 
     private int _length;
     private int _subLength;
@@ -15,17 +25,6 @@ public abstract class Array
     
     internal Array()
     {
-    }
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static nuint AlignUp(nuint x, nuint align)
-    {
-        return (x + align - 1) & ~(align - 1);
-    }
-
-    private static void CheckIndexOf(Array? array, int count, int startIndex)
-    {
-
     }
     
     public static int IndexOf<T>(T[]? array, T value, int startIndex, int count)
@@ -79,16 +78,7 @@ public abstract class Array
         if ((uint)(destinationIndex + length) > (nuint)destinationArray._length)
             throw new ArgumentException(SR.Arg_LongerThanDestArray, nameof(destinationArray));
 
-        ref byte src = ref Unsafe.As<T, byte>(ref Unsafe.Add(ref MemoryMarshal.GetArrayDataReference(sourceArray), sourceIndex));
-        ref byte dst = ref Unsafe.As<T, byte>(ref Unsafe.Add(ref MemoryMarshal.GetArrayDataReference(destinationArray), destinationIndex));
-        
-        nuint elementSize = (nuint)Unsafe.SizeOf<T>();
-        nuint byteCount = (uint)length * elementSize;
-        
-        if (RuntimeHelpers.IsReferenceOrContainsReferences<T>())
-            Buffer.BulkMoveWithWriteBarrier(ref dst, ref src, byteCount);
-        else
-            Buffer.Memmove(ref dst, ref src, byteCount);
+        Buffer.Memmove(ref destinationArray[destinationIndex], ref sourceArray[sourceIndex], (nuint)length);
     }
     
 }

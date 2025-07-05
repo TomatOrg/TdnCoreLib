@@ -101,6 +101,12 @@ internal static class ThrowHelper
     }
     
     [DoesNotReturn]
+    internal static void ThrowArgumentOutOfRangeException()
+    {
+        throw new ArgumentOutOfRangeException();
+    }
+
+    [DoesNotReturn]
     internal static void ThrowArgumentOutOfRangeException(string argument, string resource)
     {
         throw new ArgumentOutOfRangeException(argument, resource);

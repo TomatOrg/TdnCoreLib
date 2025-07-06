@@ -14,6 +14,10 @@ internal static class SR
     public const string Arg_LongerThanDestArray = "Destination array was not long enough. Check the destination index, length, and the array's lower bounds.";
     
     public const string ArgumentNull_Generic = "Value cannot be null.";
+
+    public const string ArgumentException_ValueTupleIncorrectType = "Argument must be of type {0}.";
+    public const string ArgumentException_ValueTupleLastArgumentNotAValueTuple = "The last element of an eight element ValueTuple must be a ValueTuple.";
+    
     public const string Argument_InvalidOffLen = "Offset and length were out of bounds for the array or count is greater than the number of elements from index to the end of the source collection.";
     public const string Argument_DestinationTooShort = "Destination is too short.";
     

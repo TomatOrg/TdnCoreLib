@@ -51,6 +51,13 @@ internal static class ThrowHelper
         throw new ArgumentNullException(argument);
     }
     
+    
+    [DoesNotReturn]
+    internal static void ThrowArgumentException_TupleIncorrectType(object obj)
+    {
+        throw new ArgumentException(SR.ArgumentException_ValueTupleIncorrectType, "other");
+    }
+    
     [DoesNotReturn]
     internal static void ThrowArraySegmentCtorValidationFailedExceptions(Array? array, int offset, int count)
     {

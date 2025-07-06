@@ -11,4 +11,11 @@ public static class Debug
         // TODO: thing
     }
 
+    [Conditional("DEBUG")]
+    [DoesNotReturn]
+    public static void Fail(string? message)
+    {
+        // TODO: thing        
+    }
+
 }

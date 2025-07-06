@@ -13,5 +13,10 @@ public abstract class Type : MemberInfo
     {
         return TypeCode.Object;
     }
+
+    public static Type? GetTypeFromHandle(RuntimeTypeHandle handle)
+    {
+        return handle._type;
+    }
     
 }

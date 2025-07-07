@@ -6,5 +6,5 @@ namespace System;
 [StructLayout(LayoutKind.Sequential)]
 public struct RuntimeTypeHandle
 {
-    internal RuntimeTypeInfo _type;
+    internal readonly RuntimeTypeInfo _type;
 }

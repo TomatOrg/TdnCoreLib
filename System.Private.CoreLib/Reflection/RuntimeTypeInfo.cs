@@ -49,6 +49,7 @@ internal sealed class RuntimeTypeInfo : Type
     internal uint _flags;
     
     public override string Name => _name;
+    public override Type? BaseType => _baseType;
 
     public override string ToString()
     {

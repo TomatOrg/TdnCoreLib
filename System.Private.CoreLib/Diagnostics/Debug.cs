@@ -12,6 +12,12 @@ public static class Debug
     }
 
     [Conditional("DEBUG")]
+    public static void Assert([DoesNotReturnIf(false)] bool condition, string? message)
+    {
+        
+    }
+    
+    [Conditional("DEBUG")]
     [DoesNotReturn]
     public static void Fail(string? message)
     {

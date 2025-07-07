@@ -12,11 +12,30 @@ internal static class ThrowHelper
     {
         throw new NotSupportedException();
     }
+    
+    
+    [DoesNotReturn]
+    internal static void ThrowValueArgumentOutOfRange_NeedNonNegNumException()
+    {
+        throw new ArgumentOutOfRangeException("value", SR.ArgumentOutOfRange_NeedNonNegNum);
+    }
 
     [DoesNotReturn]
     internal static void ThrowIndexOutOfRangeException()
     {
         throw new IndexOutOfRangeException();
+    }
+    
+    [DoesNotReturn]
+    internal static void ThrowOverflowException()
+    {
+        throw new OverflowException();
+    }
+    
+    [DoesNotReturn]
+    internal static void ThrowArgumentException_OverlapAlignmentMismatch()
+    {
+        throw new ArgumentException(SR.Argument_OverlapAlignmentMismatch);
     }
 
     [DoesNotReturn]
@@ -29,6 +48,12 @@ internal static class ThrowHelper
     internal static void ThrowInvalidOperationException_InvalidOperation_NoValue()
     {
         throw new InvalidOperationException("Nullable object must have a value.");
+    }
+    
+    [DoesNotReturn]
+    internal static void ThrowArgumentException(string resource, string argument)
+    {
+        throw new ArgumentException(resource, argument);
     }
     
     [DoesNotReturn]
@@ -113,6 +138,12 @@ internal static class ThrowHelper
         throw new ArgumentOutOfRangeException();
     }
 
+    [DoesNotReturn]
+    internal static void ThrowArgumentOutOfRangeException(string argument)
+    {
+        throw new ArgumentOutOfRangeException(argument);
+    }
+    
     [DoesNotReturn]
     internal static void ThrowArgumentOutOfRangeException(string argument, string resource)
     {

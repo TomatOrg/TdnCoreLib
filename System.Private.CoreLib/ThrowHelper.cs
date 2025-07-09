@@ -13,6 +13,17 @@ internal static class ThrowHelper
         throw new NotSupportedException();
     }
     
+    [DoesNotReturn]
+    internal static void ThrowArgumentException_BadComparer(object? comparer)
+    {
+        throw new ArgumentException(SR.Arg_BogusIComparer);
+    }
+    
+    [DoesNotReturn]
+    internal static void ThrowOutOfMemoryException_StringTooLong()
+    {
+        throw new OutOfMemoryException(SR.OutOfMemory_StringTooLong);
+    }
     
     [DoesNotReturn]
     internal static void ThrowValueArgumentOutOfRange_NeedNonNegNumException()
@@ -43,11 +54,23 @@ internal static class ThrowHelper
     {
         throw new InvalidOperationException(resource);
     }
-
+    
+    [DoesNotReturn]
+    internal static void ThrowInvalidOperationException(string resource, Exception e)
+    {
+        throw new InvalidOperationException(resource, e);
+    }
+    
     [DoesNotReturn]
     internal static void ThrowInvalidOperationException_InvalidOperation_NoValue()
     {
         throw new InvalidOperationException("Nullable object must have a value.");
+    }
+    
+    [DoesNotReturn]
+    internal static void ThrowArgumentException(string resource)
+    {
+        throw new ArgumentException(resource);
     }
     
     [DoesNotReturn]

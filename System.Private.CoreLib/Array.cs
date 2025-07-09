@@ -1,3 +1,5 @@
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
@@ -7,6 +9,8 @@ namespace System;
 [StructLayout(LayoutKind.Sequential)]
 public abstract class Array
 {
+    
+    internal const int IntrosortSizeThreshold = 16;
     
     private static class EmptyArray<T>
     {
@@ -79,6 +83,42 @@ public abstract class Array
             throw new ArgumentException(SR.Arg_LongerThanDestArray, nameof(destinationArray));
 
         Buffer.Memmove(ref destinationArray[destinationIndex], ref sourceArray[sourceIndex], (nuint)length);
+    }
+    
+    public static void Resize<T>([NotNull] ref T[]? array, int newSize)
+    {
+        if (newSize < 0)
+            ThrowHelper.ThrowArgumentOutOfRangeException(nameof(newSize), SR.ArgumentOutOfRange_NeedNonNegNum);
+
+        T[]? larray = array; // local copy
+        if (larray == null)
+        {
+            array = new T[newSize];
+            return;
+        }
+
+        if (larray.Length != newSize)
+        {
+            // Due to array variance, it's possible that the incoming array is
+            // actually of type U[], where U:T; or that an int[] <-> uint[] or
+            // similar cast has occurred. In any case, since it's always legal
+            // to reinterpret U as T in this scenario (but not necessarily the
+            // other way around), we can use Buffer.Memmove here.
+
+            T[] newArray = new T[newSize];
+            Buffer.Memmove(
+                ref MemoryMarshal.GetArrayDataReference(newArray),
+                ref MemoryMarshal.GetArrayDataReference(larray),
+                (uint)Math.Min(newSize, larray.Length));
+            array = newArray;
+        }
+
+        Debug.Assert(array != null);
+    }
+    
+    public object Clone()
+    {
+        return MemberwiseClone();
     }
     
 }

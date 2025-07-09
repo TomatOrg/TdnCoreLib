@@ -299,14 +299,15 @@ public readonly ref struct ReadOnlySpan<T>
     /// For <see cref="ReadOnlySpan{Char}"/>, returns a new instance of string that represents the characters pointed to by the span.
     /// Otherwise, returns a <see cref="string"/> with the name of the type and the number of elements.
     /// </summary>
-    // public override string ToString()
-    // {
-    //     if (typeof(T) == typeof(char))
-    //     {
-    //         return new string(new ReadOnlySpan<char>(ref Unsafe.As<T, char>(ref _reference), _length));
-    //     }
-    //     return $"System.ReadOnlySpan<{typeof(T).Name}>[{_length}]";
-    // }
+    public override string ToString()
+    {
+        if (typeof(T) == typeof(char))
+        {
+            return new string(new ReadOnlySpan<char>(ref Unsafe.As<T, char>(ref _reference), _length));
+        }
+        throw new NotImplementedException();
+        // return $"System.ReadOnlySpan<{typeof(T).Name}>[{_length}]";
+    }
 
     /// <summary>
     /// Forms a slice out of the given read-only span, beginning at 'start'.

@@ -42,7 +42,7 @@ public class ArgumentNullException : ArgumentException
         }
     }
     
-    internal static unsafe void ThrowIfNull(IntPtr argument, [CallerArgumentExpression(nameof(argument))] string? paramName = null)
+    internal static void ThrowIfNull(IntPtr argument, [CallerArgumentExpression(nameof(argument))] string? paramName = null)
     {
         if (argument == IntPtr.Zero)
         {

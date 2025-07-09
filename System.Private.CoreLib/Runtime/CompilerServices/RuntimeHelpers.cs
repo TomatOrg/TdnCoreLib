@@ -8,5 +8,8 @@ public static class RuntimeHelpers
     
     [MethodImpl(MethodImplOptions.AggressiveInlining, MethodCodeType = MethodCodeType.Runtime)]
     public static extern bool IsReferenceOrContainsReferences<T>();
-
+    
+    [MethodImpl(MethodImplOptions.AggressiveInlining, MethodCodeType = MethodCodeType.Runtime)]
+    internal static extern bool IsBitwiseEquatable<T>();
+    
 }

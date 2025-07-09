@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 
@@ -21,6 +22,7 @@ internal static class Program
     
     public static int Main(string[] args)
     {
-        return ReduceDelegate<int>([1, 1, 1, 1, 1, 1]);
+        Debug.WriteLine("Hello World!");
+        return 0;
     }
 }

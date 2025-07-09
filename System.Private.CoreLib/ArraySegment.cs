@@ -5,17 +5,32 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-using System.Runtime.CompilerServices;
 
 namespace System;
 
+/// <summary>
+/// Delimits a section of a one-dimensional array.
+/// </summary>
+// Note: users should make sure they copy the fields out of an ArraySegment onto their stack
+// then validate that the fields describe valid bounds within the array.  This must be done
+// because assignments to value types are not atomic, and also because one thread reading
+// three fields from an ArraySegment may not see the same ArraySegment from one call to another
+// (ie, users could assign a new value to the old location).
 public readonly struct ArraySegment<T> : IList<T>, IReadOnlyList<T>
 {
+    // ArraySegment<T> doesn't implement IEquatable<T>, even though it provides a strongly-typed
+    // Equals(T), as that results in different comparison semantics than comparing item-by-item
+    // the elements returned from its IEnumerable<T> implementation.  This then is a breaking change
+    // for usage like that in xunit's Assert.Equal, which will prioritize using an instance's IEquatable<T>
+    // over its IEnumerable<T>.
+
+    // Do not replace the array allocation with Array.Empty. We don't want to have the overhead of
+    // instantiating another generic type in addition to ArraySegment<T> for new type parameters.
     public static ArraySegment<T> Empty { get; } = new ArraySegment<T>(new T[0]);
 
-    private readonly T[]? _array;
-    private readonly int _offset;
-    private readonly int _count;
+    private readonly T[]? _array; // Do not rename (binary serialization)
+    private readonly int _offset; // Do not rename (binary serialization)
+    private readonly int _count; // Do not rename (binary serialization)
 
     public ArraySegment(T[] array)
     {
@@ -241,10 +256,10 @@ public readonly struct ArraySegment<T> : IList<T>, IReadOnlyList<T>
     }
     #endregion
 
-    // #region IEnumerable
-    //
-    // IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable<T>)this).GetEnumerator();
-    // #endregion
+    #region IEnumerable
+
+    IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable<T>)this).GetEnumerator();
+    #endregion
 
     private void ThrowInvalidOperationIfDefault()
     {

@@ -4,6 +4,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 #pragma warning disable SA1121 // explicitly using type aliases instead of built-in types
 
 using nint_t = System.Int64;

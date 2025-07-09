@@ -33,7 +33,7 @@ public sealed class CharEnumerator : IEnumerator, IEnumerator<char>, IDisposable
 
     public void Dispose() => _str = null!;
 
-    // object? IEnumerator.Current => Current;
+    object? IEnumerator.Current => Current;
 
     public char Current
     {

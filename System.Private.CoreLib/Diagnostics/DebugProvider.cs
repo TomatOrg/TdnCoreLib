@@ -23,7 +23,6 @@ public class DebugProvider
     [DoesNotReturn]
     public virtual void Fail(string? message, string? detailMessage)
     {
-        while (true) ;
         string stackTrace = "";
         // try
         // {

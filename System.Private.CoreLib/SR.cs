@@ -23,6 +23,7 @@ internal static class SR
     public const string Arg_MustBeNullTerminatedString = "The string must be null-terminated.";
     public const string Arg_BogusIComparer = "Unable to sort because the IComparer.Compare() method returns inconsistent results. Either a value does not compare equal to itself, or one value repeatedly compared to another value yields different results. IComparer: '{0}'.";
     public const string Arg_ArgumentException = "Value does not fall within the expected range.";
+    public const string Arg_FormatException = "One of the identified items was in an invalid format.";
     
     public const string Arg_MustBeDouble = "Object must be of type Double.";
     public const string Arg_MustBeSByte = "Object must be of type SByte.";
@@ -95,6 +96,8 @@ internal static class SR
     
     public const string Arithmetic_NaN = "Function does not accept floating point Not-a-Number values.";
 
+    public const string Format_BadBoolean = "String '{0}' was not recognized as a valid Boolean.";
+    
     public const string OutOfMemory_StringTooLong = "String length exceeded supported range.";
 
 }

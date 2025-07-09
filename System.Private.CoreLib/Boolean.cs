@@ -15,8 +15,8 @@ public readonly struct Boolean
     : IComparable,
         // IConvertible,
         IComparable<bool>,
-        IEquatable<bool>
-        // ISpanParsable<bool>
+        IEquatable<bool>,
+        ISpanParsable<bool>
 {
     //
     // Member Variables
@@ -85,38 +85,38 @@ public readonly struct Boolean
         return TrueLiteral;
     }
 
-    // public string ToString(IFormatProvider? provider)
-    // {
-    //     return ToString();
-    // }
-    //
-    // public bool TryFormat(Span<char> destination, out int charsWritten)
-    // {
-    //     if (m_value)
-    //     {
-    //         if (destination.Length > 3)
-    //         {
-    //             ulong true_val = BitConverter.IsLittleEndian ? 0x65007500720054ul : 0x54007200750065ul; // "True"
-    //             MemoryMarshal.Write(MemoryMarshal.AsBytes(destination), in true_val);
-    //             charsWritten = 4;
-    //             return true;
-    //         }
-    //     }
-    //     else
-    //     {
-    //         if (destination.Length > 4)
-    //         {
-    //             ulong fals_val = BitConverter.IsLittleEndian ? 0x73006C00610046ul : 0x460061006C0073ul; // "Fals"
-    //             MemoryMarshal.Write(MemoryMarshal.AsBytes(destination), in fals_val);
-    //             destination[4] = 'e';
-    //             charsWritten = 5;
-    //             return true;
-    //         }
-    //     }
-    //
-    //     charsWritten = 0;
-    //     return false;
-    // }
+    public string ToString(IFormatProvider? provider)
+    {
+        return ToString();
+    }
+    
+    public bool TryFormat(Span<char> destination, out int charsWritten)
+    {
+        if (m_value)
+        {
+            if (destination.Length > 3)
+            {
+                ulong true_val = BitConverter.IsLittleEndian ? 0x65007500720054ul : 0x54007200750065ul; // "True"
+                MemoryMarshal.Write(MemoryMarshal.AsBytes(destination), in true_val);
+                charsWritten = 4;
+                return true;
+            }
+        }
+        else
+        {
+            if (destination.Length > 4)
+            {
+                ulong fals_val = BitConverter.IsLittleEndian ? 0x73006C00610046ul : 0x460061006C0073ul; // "Fals"
+                MemoryMarshal.Write(MemoryMarshal.AsBytes(destination), in fals_val);
+                destination[4] = 'e';
+                charsWritten = 5;
+                return true;
+            }
+        }
+    
+        charsWritten = 0;
+        return false;
+    }
 
     // Determines whether two Boolean objects are equal.
     public override bool Equals([NotNullWhen(true)] object? obj)
@@ -183,115 +183,115 @@ public readonly struct Boolean
 
     // Custom string compares for early application use by config switches, etc
     //
-    // internal static bool IsTrueStringIgnoreCase(ReadOnlySpan<char> value)
-    // {
-    //     // JIT inlines and unrolls this, see https://github.com/dotnet/runtime/pull/77398
-    //     return value.Equals(TrueLiteral, StringComparison.OrdinalIgnoreCase);
-    // }
+    internal static bool IsTrueStringIgnoreCase(ReadOnlySpan<char> value)
+    {
+        // JIT inlines and unrolls this, see https://github.com/dotnet/runtime/pull/77398
+        return value.Equals(TrueLiteral, StringComparison.OrdinalIgnoreCase);
+    }
+    
+    internal static bool IsFalseStringIgnoreCase(ReadOnlySpan<char> value)
+    {
+        return value.Equals(FalseLiteral, StringComparison.OrdinalIgnoreCase);
+    }
+    
+    // Determines whether a String represents true or false.
     //
-    // internal static bool IsFalseStringIgnoreCase(ReadOnlySpan<char> value)
-    // {
-    //     return value.Equals(FalseLiteral, StringComparison.OrdinalIgnoreCase);
-    // }
+    public static bool Parse(string value)
+    {
+        ArgumentNullException.ThrowIfNull(value);
+    
+        return Parse(value.AsSpan());
+    }
+    
+    public static bool Parse(ReadOnlySpan<char> value)
+    {
+        if (!TryParse(value, out bool result))
+        {
+            ThrowHelper.ThrowFormatException_BadBoolean(value);
+        }
+        return result;
+    }
+    
+    // Determines whether a String represents true or false.
     //
-    // // Determines whether a String represents true or false.
-    // //
-    // public static bool Parse(string value)
-    // {
-    //     ArgumentNullException.ThrowIfNull(value);
-    //
-    //     return Parse(value.AsSpan());
-    // }
-    //
-    // public static bool Parse(ReadOnlySpan<char> value)
-    // {
-    //     if (!TryParse(value, out bool result))
-    //     {
-    //         ThrowHelper.ThrowFormatException_BadBoolean(value);
-    //     }
-    //     return result;
-    // }
-    //
-    // // Determines whether a String represents true or false.
-    // //
-    // public static bool TryParse([NotNullWhen(true)] string? value, out bool result) =>
-    //     TryParse(value.AsSpan(), out result);
-    //
-    // public static bool TryParse(ReadOnlySpan<char> value, out bool result)
-    // {
-    //     // Boolean.{Try}Parse allows for optional whitespace/null values before and
-    //     // after the case-insensitive "true"/"false", but we don't expect those to
-    //     // be the common case. We check for "true"/"false" case-insensitive in the
-    //     // fast, inlined call path, and then only if neither match do we fall back
-    //     // to trimming and making a second post-trimming attempt at matching those
-    //     // same strings.
-    //
-    //     if (IsTrueStringIgnoreCase(value))
-    //     {
-    //         result = true;
-    //         return true;
-    //     }
-    //
-    //     if (IsFalseStringIgnoreCase(value))
-    //     {
-    //         result = false;
-    //         return true;
-    //     }
-    //
-    //     return TryParseUncommon(value, out result);
-    //
-    //     [MethodImpl(MethodImplOptions.NoInlining)]
-    //     static bool TryParseUncommon(ReadOnlySpan<char> value, out bool result)
-    //     {
-    //         // With "true" being 4 characters, even if we trim something from <= 4 chars,
-    //         // it can't possibly match "true" or "false".
-    //         int originalLength = value.Length;
-    //         if (originalLength >= 5)
-    //         {
-    //             value = TrimWhiteSpaceAndNull(value);
-    //             if (value.Length != originalLength)
-    //             {
-    //                 // Something was trimmed.  Try matching again.
-    //                 if (IsTrueStringIgnoreCase(value))
-    //                 {
-    //                     result = true;
-    //                     return true;
-    //                 }
-    //
-    //                 result = false;
-    //                 return IsFalseStringIgnoreCase(value);
-    //             }
-    //         }
-    //
-    //         result = false;
-    //         return false;
-    //     }
-    // }
-    //
-    // private static ReadOnlySpan<char> TrimWhiteSpaceAndNull(ReadOnlySpan<char> value)
-    // {
-    //     int start = 0;
-    //     while (start < value.Length)
-    //     {
-    //         if (!char.IsWhiteSpace(value[start]) && value[start] != '\0')
-    //         {
-    //             break;
-    //         }
-    //         start++;
-    //     }
-    //
-    //     int end = value.Length - 1;
-    //     while (end >= start)
-    //     {
-    //         if (!char.IsWhiteSpace(value[end]) && value[end] != '\0')
-    //         {
-    //             break;
-    //         }
-    //         end--;
-    //     }
-    //
-    //     return value.Slice(start, end - start + 1);
-    // }
+    public static bool TryParse([NotNullWhen(true)] string? value, out bool result) =>
+        TryParse(value.AsSpan(), out result);
+    
+    public static bool TryParse(ReadOnlySpan<char> value, out bool result)
+    {
+        // Boolean.{Try}Parse allows for optional whitespace/null values before and
+        // after the case-insensitive "true"/"false", but we don't expect those to
+        // be the common case. We check for "true"/"false" case-insensitive in the
+        // fast, inlined call path, and then only if neither match do we fall back
+        // to trimming and making a second post-trimming attempt at matching those
+        // same strings.
+    
+        if (IsTrueStringIgnoreCase(value))
+        {
+            result = true;
+            return true;
+        }
+    
+        if (IsFalseStringIgnoreCase(value))
+        {
+            result = false;
+            return true;
+        }
+    
+        return TryParseUncommon(value, out result);
+    
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        static bool TryParseUncommon(ReadOnlySpan<char> value, out bool result)
+        {
+            // With "true" being 4 characters, even if we trim something from <= 4 chars,
+            // it can't possibly match "true" or "false".
+            int originalLength = value.Length;
+            if (originalLength >= 5)
+            {
+                value = TrimWhiteSpaceAndNull(value);
+                if (value.Length != originalLength)
+                {
+                    // Something was trimmed.  Try matching again.
+                    if (IsTrueStringIgnoreCase(value))
+                    {
+                        result = true;
+                        return true;
+                    }
+    
+                    result = false;
+                    return IsFalseStringIgnoreCase(value);
+                }
+            }
+    
+            result = false;
+            return false;
+        }
+    }
+    
+    private static ReadOnlySpan<char> TrimWhiteSpaceAndNull(ReadOnlySpan<char> value)
+    {
+        int start = 0;
+        while (start < value.Length)
+        {
+            if (!char.IsWhiteSpace(value[start]) && value[start] != '\0')
+            {
+                break;
+            }
+            start++;
+        }
+    
+        int end = value.Length - 1;
+        while (end >= start)
+        {
+            if (!char.IsWhiteSpace(value[end]) && value[end] != '\0')
+            {
+                break;
+            }
+            end--;
+        }
+    
+        return value.Slice(start, end - start + 1);
+    }
 
     //
     // IConvertible implementation
@@ -376,20 +376,20 @@ public readonly struct Boolean
     // {
     //     return Convert.DefaultToType((IConvertible)this, type, provider);
     // }
+    
     //
-    // //
-    // // IParsable
-    // //
+    // IParsable
     //
-    // static bool IParsable<bool>.Parse(string s, IFormatProvider? provider) => Parse(s);
+    
+    static bool IParsable<bool>.Parse(string s, IFormatProvider? provider) => Parse(s);
+    
+    static bool IParsable<bool>.TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider, out bool result) => TryParse(s, out result);
+    
     //
-    // static bool IParsable<bool>.TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider, out bool result) => TryParse(s, out result);
+    // ISpanParsable
     //
-    // //
-    // // ISpanParsable
-    // //
-    //
-    // static bool ISpanParsable<bool>.Parse(ReadOnlySpan<char> s, IFormatProvider? provider) => Parse(s);
-    //
-    // static bool ISpanParsable<bool>.TryParse(ReadOnlySpan<char> s, IFormatProvider? provider, out bool result) => TryParse(s, out result);
+    
+    static bool ISpanParsable<bool>.Parse(ReadOnlySpan<char> s, IFormatProvider? provider) => Parse(s);
+    
+    static bool ISpanParsable<bool>.TryParse(ReadOnlySpan<char> s, IFormatProvider? provider, out bool result) => TryParse(s, out result);
 }

@@ -62,4 +62,6 @@ internal sealed class SZGenericArrayEnumerator<T> : SZGenericArrayEnumeratorBase
             return _array![_index];
         }
     }
+    
+    object? IEnumerator.Current => Current;
 }

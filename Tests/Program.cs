@@ -22,7 +22,6 @@ internal static class Program
     
     public static int Main(string[] args)
     {
-        Debug.WriteLine("Hello World!");
-        return 0;
+        return bool.Parse("true") ? 1 : 2;
     }
 }

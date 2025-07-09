@@ -311,7 +311,7 @@ public readonly struct ArraySegment<T> : IList<T>, IReadOnlyList<T>
             }
         }
 
-        // object? IEnumerator.Current => Current;
+        object? IEnumerator.Current => Current;
 
         void IEnumerator.Reset()
         {

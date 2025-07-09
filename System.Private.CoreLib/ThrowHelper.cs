@@ -14,6 +14,12 @@ internal static class ThrowHelper
     }
     
     [DoesNotReturn]
+    internal static void ThrowFormatException_BadBoolean(ReadOnlySpan<char> value)
+    {
+        throw new FormatException(SR.Format_BadBoolean);
+    }
+    
+    [DoesNotReturn]
     internal static void ThrowArgumentException_BadComparer(object? comparer)
     {
         throw new ArgumentException(SR.Arg_BogusIComparer);

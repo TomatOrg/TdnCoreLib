@@ -14,6 +14,36 @@ internal static class ThrowHelper
     }
     
     [DoesNotReturn]
+    internal static void ThrowIndexArgumentOutOfRange_NeedNonNegNumException()
+    {
+        throw new ArgumentOutOfRangeException("index", SR.ArgumentOutOfRange_NeedNonNegNum);
+    }
+    
+    [DoesNotReturn]
+    internal static void ThrowStartIndexArgumentOutOfRange_ArgumentOutOfRange_IndexMustBeLess()
+    {
+        throw new ArgumentOutOfRangeException("startIndex", SR.ArgumentOutOfRange_IndexMustBeLess);
+    }
+    
+    [DoesNotReturn]
+    internal static void ThrowNotSupportedException(string resource)
+    {
+        throw new NotSupportedException(resource);
+    }
+
+    [DoesNotReturn]
+    internal static void ThrowInvalidOperationException_InvalidOperation_EnumFailedVersion()
+    {
+        throw new InvalidOperationException(SR.InvalidOperation_EnumFailedVersion);
+    }
+    
+    [DoesNotReturn]
+    internal static void ThrowInvalidOperationException_InvalidOperation_EnumOpCantHappen()
+    {
+        throw new InvalidOperationException(SR.InvalidOperation_EnumOpCantHappen);
+    }
+
+    [DoesNotReturn]
     internal static void ThrowFormatException_BadBoolean(ReadOnlySpan<char> value)
     {
         throw new FormatException(SR.Format_BadBoolean);

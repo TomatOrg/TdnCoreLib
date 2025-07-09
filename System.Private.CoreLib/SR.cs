@@ -24,6 +24,7 @@ internal static class SR
     public const string Arg_BogusIComparer = "Unable to sort because the IComparer.Compare() method returns inconsistent results. Either a value does not compare equal to itself, or one value repeatedly compared to another value yields different results. IComparer: '{0}'.";
     public const string Arg_ArgumentException = "Value does not fall within the expected range.";
     public const string Arg_FormatException = "One of the identified items was in an invalid format.";
+    public const string Arg_InvalidCastException = "Specified cast is not valid.";
     
     public const string Arg_MustBeDouble = "Object must be of type Double.";
     public const string Arg_MustBeSByte = "Object must be of type SByte.";
@@ -80,12 +81,17 @@ internal static class SR
     public const string ArgumentOutOfRange_Generic_MustBeEqual = "{0} ('{1}') must be equal to '{2}";
     public const string ArgumentOutOfRange_Generic_MustBeNotEqual = "{0} ('{1}') must not be equal to '{2}";
     public const string ArgumentOutOfRange_IndexLength = "Index and length must refer to a location within the string.";
-
+    public const string ArgumentOutOfRange_SmallCapacity = "capacity was less than the current size.";
+    public const string ArgumentOutOfRange_ListInsert = "Index must be within the bounds of the List.";
+    public const string ArgumentOutOfRange_BiggerThanCollection = "Larger than collection size.";
+    
     public const string InvalidOperation_EnumNotStarted = "Enumeration has not started. Call MoveNext.";
     public const string InvalidOperation_EnumEnded = "Enumeration already finished.";
     public const string InvalidOperation_NullArray = "The underlying array is null.";
     public const string InvalidOperation_SpanOverlappedOperation = "This operation is invalid on overlapping buffers.";
     public const string InvalidOperation_IComparerFailed = "Failed to compare two elements in the array.";
+    public const string InvalidOperation_EnumFailedVersion = "Collection was modified after the enumerator was instantiated.";
+    public const string InvalidOperation_EnumOpCantHappen = "Enumeration has either not started or has already finished.";
     
     public const string HashCode_HashCodeNotSupported = "HashCode is a mutable struct and should not be compared with other HashCodes. Use ToHashCode to retrieve the computed hash code.";
     public const string HashCode_EqualityNotSupported = "HashCode is a mutable struct and should not be compared with other HashCodes.";
@@ -93,6 +99,7 @@ internal static class SR
     public const string NotSupported_CannotCallEqualsOnSpan = "Equals() on Span and ReadOnlySpan is not supported. Use operator== instead.";
     public const string NotSupported_CannotCallGetHashCodeOnSpan = "GetHashCode() on Span and ReadOnlySpan is not supported.";
     public const string NotSupported_StringComparison = "The string comparison type passed in is currently not supported.";
+    public const string NotSupported_ReadOnlyCollection = "Collection is read-only.";
     
     public const string Arithmetic_NaN = "Function does not accept floating point Not-a-Number values.";
 

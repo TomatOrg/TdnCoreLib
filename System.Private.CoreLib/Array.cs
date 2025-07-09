@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
@@ -23,7 +25,7 @@ public abstract class Array
     }
 
     private int _length;
-    private int _subLength;
+    internal int _subLength;
     
     public int Length => _length;
     

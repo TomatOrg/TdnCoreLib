@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Numerics;
 using System.Runtime.CompilerServices;
@@ -22,8 +23,14 @@ internal static class Program
     
     public static int Main(string[] args)
     {
-        var span = new Span<int>([1, 2, 3]);
-        Debug.WriteLine(span.ToString());
+        var list = new List<string>();
+        list.Add("1");
+        list.Add("3");
+        list.Add("6");
+        foreach (var i in list)
+        {
+            Debug.WriteLine(i);
+        }
         return 0;
     }
 }

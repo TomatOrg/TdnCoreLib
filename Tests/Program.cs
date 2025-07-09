@@ -22,6 +22,8 @@ internal static class Program
     
     public static int Main(string[] args)
     {
-        return bool.Parse("true") ? 1 : 2;
+        var span = new Span<int>([1, 2, 3]);
+        Debug.WriteLine(span.ToString());
+        return 0;
     }
 }

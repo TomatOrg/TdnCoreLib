@@ -355,8 +355,7 @@ public readonly ref struct Span<T>
         {
             return new string(new ReadOnlySpan<char>(ref Unsafe.As<T, char>(ref _reference), _length));
         }
-        throw new NotImplementedException();
-        // return $"System.Span<{typeof(T).Name}>[{_length}]";
+        return $"System.Span<{typeof(T).Name}>[{_length}]";
     }
 
     /// <summary>

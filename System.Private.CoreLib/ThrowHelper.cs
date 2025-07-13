@@ -14,6 +14,24 @@ internal static class ThrowHelper
     }
     
     [DoesNotReturn]
+    internal static void ThrowFormatIndexOutOfRange()
+    {
+        throw new FormatException(SR.Format_IndexOutOfRange);
+    }
+    
+    [DoesNotReturn]
+    internal static void ThrowFormatInvalidString()
+    {
+        throw new FormatException(SR.Format_InvalidString);
+    }
+
+    [DoesNotReturn]
+    internal static void ThrowFormatInvalidString(int offset, string resource)
+    {
+        throw new FormatException(string.Format(SR.Format_InvalidStringWithOffsetAndReason, offset, resource));
+    }
+    
+    [DoesNotReturn]
     internal static void ThrowIndexArgumentOutOfRange_NeedNonNegNumException()
     {
         throw new ArgumentOutOfRangeException("index", SR.ArgumentOutOfRange_NeedNonNegNum);
@@ -46,13 +64,13 @@ internal static class ThrowHelper
     [DoesNotReturn]
     internal static void ThrowFormatException_BadBoolean(ReadOnlySpan<char> value)
     {
-        throw new FormatException(SR.Format_BadBoolean);
+        throw new FormatException(string.Format(SR.Format_BadBoolean, new string(value)));
     }
     
     [DoesNotReturn]
     internal static void ThrowArgumentException_BadComparer(object? comparer)
     {
-        throw new ArgumentException(SR.Arg_BogusIComparer);
+        throw new ArgumentException(string.Format(SR.Arg_BogusIComparer, comparer));
     }
     
     [DoesNotReturn]
@@ -139,7 +157,7 @@ internal static class ThrowHelper
     [DoesNotReturn]
     internal static void ThrowArgumentException_TupleIncorrectType(object obj)
     {
-        throw new ArgumentException(SR.ArgumentException_ValueTupleIncorrectType, "other");
+        throw new ArgumentException(string.Format(SR.ArgumentException_ValueTupleIncorrectType, obj.GetType()), "other");
     }
     
     [DoesNotReturn]

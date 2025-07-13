@@ -23,14 +23,16 @@ internal static class Program
     
     public static int Main(string[] args)
     {
-        var list = new List<string>();
-        list.Add("1");
-        list.Add("3");
-        list.Add("6");
-        foreach (var i in list)
-        {
-            Debug.WriteLine(i);
-        }
+        Debug.WriteLine(string.Format("{0} {1}!", "Hello", "World"));
         return 0;
+        // var list = new List<string>();
+        // list.Add("1");
+        // list.Add("3");
+        // list.Add("6");
+        // foreach (var i in list)
+        // {
+        //     Debug.WriteLine(i);
+        // }
+        // return 0;
     }
 }

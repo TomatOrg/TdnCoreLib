@@ -44,6 +44,7 @@ public class ArgumentOutOfRangeException : ArgumentException
         _actualValue = actualValue;
     }
 
+
     // public override string Message
     // {
     //     get
@@ -51,7 +52,7 @@ public class ArgumentOutOfRangeException : ArgumentException
     //         string s = base.Message;
     //         if (_actualValue != null)
     //         {
-    //             string valueMessage = SR.Format(SR.ArgumentOutOfRange_ActualValue, _actualValue);
+    //             string valueMessage = string.Format(SR.ArgumentOutOfRange_ActualValue, _actualValue);
     //             if (s == null)
     //                 return valueMessage;
     //             return s + Environment.NewLineConst + valueMessage;
@@ -65,39 +66,39 @@ public class ArgumentOutOfRangeException : ArgumentException
 
     [DoesNotReturn]
     private static void ThrowZero<T>(T value, string? paramName) =>
-        throw new ArgumentOutOfRangeException(paramName, value, SR.ArgumentOutOfRange_Generic_MustBeNonZero);
+        throw new ArgumentOutOfRangeException(paramName, value, string.Format(SR.ArgumentOutOfRange_Generic_MustBeNonZero, paramName, value));
 
     [DoesNotReturn]
     private static void ThrowNegative<T>(T value, string? paramName) =>
-        throw new ArgumentOutOfRangeException(paramName, value, SR.ArgumentOutOfRange_Generic_MustBeNonNegative);
+        throw new ArgumentOutOfRangeException(paramName, value, string.Format(SR.ArgumentOutOfRange_Generic_MustBeNonNegative, paramName, value));
 
     [DoesNotReturn]
     private static void ThrowNegativeOrZero<T>(T value, string? paramName) =>
-        throw new ArgumentOutOfRangeException(paramName, value, SR.ArgumentOutOfRange_Generic_MustBeNonNegativeNonZero);
+        throw new ArgumentOutOfRangeException(paramName, value, string.Format(SR.ArgumentOutOfRange_Generic_MustBeNonNegativeNonZero, paramName, value));
 
     [DoesNotReturn]
     private static void ThrowGreater<T>(T value, T other, string? paramName) =>
-        throw new ArgumentOutOfRangeException(paramName, value, SR.ArgumentOutOfRange_Generic_MustBeLessOrEqual);
+        throw new ArgumentOutOfRangeException(paramName, value, string.Format(SR.ArgumentOutOfRange_Generic_MustBeLessOrEqual, paramName, value, other));
 
     [DoesNotReturn]
     private static void ThrowGreaterEqual<T>(T value, T other, string? paramName) =>
-        throw new ArgumentOutOfRangeException(paramName, value, SR.ArgumentOutOfRange_Generic_MustBeLess);
+        throw new ArgumentOutOfRangeException(paramName, value, string.Format(SR.ArgumentOutOfRange_Generic_MustBeLess, paramName, value, other));
 
     [DoesNotReturn]
     private static void ThrowLess<T>(T value, T other, string? paramName) =>
-        throw new ArgumentOutOfRangeException(paramName, value, SR.ArgumentOutOfRange_Generic_MustBeGreaterOrEqual);
+        throw new ArgumentOutOfRangeException(paramName, value, string.Format(SR.ArgumentOutOfRange_Generic_MustBeGreaterOrEqual, paramName, value, other));
 
     [DoesNotReturn]
     private static void ThrowLessEqual<T>(T value, T other, string? paramName) =>
-        throw new ArgumentOutOfRangeException(paramName, value, SR.ArgumentOutOfRange_Generic_MustBeGreater);
+        throw new ArgumentOutOfRangeException(paramName, value, string.Format(SR.ArgumentOutOfRange_Generic_MustBeGreater, paramName, value, other));
 
     [DoesNotReturn]
     private static void ThrowEqual<T>(T value, T other, string? paramName) =>
-        throw new ArgumentOutOfRangeException(paramName, value, SR.ArgumentOutOfRange_Generic_MustBeNotEqual);
+        throw new ArgumentOutOfRangeException(paramName, value, string.Format(SR.ArgumentOutOfRange_Generic_MustBeNotEqual, paramName, (object?)value ?? "null", (object?)other ?? "null"));
 
     [DoesNotReturn]
     private static void ThrowNotEqual<T>(T value, T other, string? paramName) =>
-        throw new ArgumentOutOfRangeException(paramName, value, SR.ArgumentOutOfRange_Generic_MustBeEqual);
+        throw new ArgumentOutOfRangeException(paramName, value, string.Format(SR.ArgumentOutOfRange_Generic_MustBeEqual, paramName, (object?)value ?? "null", (object?)other ?? "null"));
 
     /// <summary>Throws an <see cref="ArgumentOutOfRangeException"/> if <paramref name="value"/> is zero.</summary>
     /// <param name="value">The argument to validate as non-zero.</param>

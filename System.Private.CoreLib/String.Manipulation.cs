@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Text;
 
 namespace System;
@@ -136,7 +137,8 @@ public partial class String
                 return firstValue ?? Empty;
             }
 
-            var result = new ValueStringBuilder(stackalloc char[StackallocCharBufferSizeLimit]);
+            // var result = new ValueStringBuilder(stackalloc char[StackallocCharBufferSizeLimit]);
+            var result = new ValueStringBuilder(new char[StackallocCharBufferSizeLimit]);
 
             result.Append(firstValue);
 
@@ -415,74 +417,75 @@ public partial class String
         return copiedLength == totalLength ? result : Concat((string?[])values.Clone());
     }
 
-    // public static string Format([StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, object? arg0)
-    // {
-    //     return FormatHelper(null, format, new ReadOnlySpan<object?>(in arg0));
-    // }
-    //
-    // public static string Format([StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, object? arg0, object? arg1)
-    // {
-    //     TwoObjects two = new TwoObjects(arg0, arg1);
-    //     return FormatHelper(null, format, MemoryMarshal.CreateReadOnlySpan(ref two.Arg0, 2));
-    // }
-    //
-    // public static string Format([StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, object? arg0, object? arg1, object? arg2)
-    // {
-    //     ThreeObjects three = new ThreeObjects(arg0, arg1, arg2);
-    //     return FormatHelper(null, format, MemoryMarshal.CreateReadOnlySpan(ref three.Arg0, 3));
-    // }
-    //
-    // public static string Format([StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, params object?[] args)
-    // {
-    //     if (args is null)
-    //     {
-    //         // To preserve the original exception behavior, throw an exception about format if both
-    //         // args and format are null. The actual null check for format is in FormatHelper.
-    //         ArgumentNullException.Throw(format is null ? nameof(format) : nameof(args));
-    //     }
-    //
-    //     return FormatHelper(null, format, args);
-    // }
-    //
-    // public static string Format(IFormatProvider? provider, [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, object? arg0)
-    // {
-    //     return FormatHelper(provider, format, new ReadOnlySpan<object?>(in arg0));
-    // }
-    //
-    // public static string Format(IFormatProvider? provider, [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, object? arg0, object? arg1)
-    // {
-    //     TwoObjects two = new TwoObjects(arg0, arg1);
-    //     return FormatHelper(provider, format, MemoryMarshal.CreateReadOnlySpan(ref two.Arg0, 2));
-    // }
-    //
-    // public static string Format(IFormatProvider? provider, [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, object? arg0, object? arg1, object? arg2)
-    // {
-    //     ThreeObjects three = new ThreeObjects(arg0, arg1, arg2);
-    //     return FormatHelper(provider, format, MemoryMarshal.CreateReadOnlySpan(ref three.Arg0, 3));
-    // }
-    //
-    // public static string Format(IFormatProvider? provider, [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, params object?[] args)
-    // {
-    //     if (args is null)
-    //     {
-    //         // To preserve the original exception behavior, throw an exception about format if both
-    //         // args and format are null. The actual null check for format is in FormatHelper.
-    //         ArgumentNullException.Throw(format is null ? nameof(format) : nameof(args));
-    //     }
-    //
-    //     return FormatHelper(provider, format, args);
-    // }
-    //
-    // private static string FormatHelper(IFormatProvider? provider, string format, ReadOnlySpan<object?> args)
-    // {
-    //     ArgumentNullException.ThrowIfNull(format);
-    //
-    //     var sb = new ValueStringBuilder(stackalloc char[StackallocCharBufferSizeLimit]);
-    //     sb.EnsureCapacity(format.Length + args.Length * 8);
-    //     sb.AppendFormatHelper(provider, format, args);
-    //     return sb.ToString();
-    // }
-    //
+    public static string Format([StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, object? arg0)
+    {
+        return FormatHelper(null, format, new ReadOnlySpan<object?>(in arg0));
+    }
+    
+    public static string Format([StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, object? arg0, object? arg1)
+    {
+        TwoObjects two = new TwoObjects(arg0, arg1);
+        return FormatHelper(null, format, MemoryMarshal.CreateReadOnlySpan(ref two.Arg0, 2));
+    }
+    
+    public static string Format([StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, object? arg0, object? arg1, object? arg2)
+    {
+        ThreeObjects three = new ThreeObjects(arg0, arg1, arg2);
+        return FormatHelper(null, format, MemoryMarshal.CreateReadOnlySpan(ref three.Arg0, 3));
+    }
+    
+    public static string Format([StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, params object?[] args)
+    {
+        if (args is null)
+        {
+            // To preserve the original exception behavior, throw an exception about format if both
+            // args and format are null. The actual null check for format is in FormatHelper.
+            ArgumentNullException.Throw(format is null ? nameof(format) : nameof(args));
+        }
+    
+        return FormatHelper(null, format, args);
+    }
+    
+    public static string Format(IFormatProvider? provider, [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, object? arg0)
+    {
+        return FormatHelper(provider, format, new ReadOnlySpan<object?>(in arg0));
+    }
+    
+    public static string Format(IFormatProvider? provider, [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, object? arg0, object? arg1)
+    {
+        TwoObjects two = new TwoObjects(arg0, arg1);
+        return FormatHelper(provider, format, MemoryMarshal.CreateReadOnlySpan(ref two.Arg0, 2));
+    }
+    
+    public static string Format(IFormatProvider? provider, [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, object? arg0, object? arg1, object? arg2)
+    {
+        ThreeObjects three = new ThreeObjects(arg0, arg1, arg2);
+        return FormatHelper(provider, format, MemoryMarshal.CreateReadOnlySpan(ref three.Arg0, 3));
+    }
+    
+    public static string Format(IFormatProvider? provider, [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, params object?[] args)
+    {
+        if (args is null)
+        {
+            // To preserve the original exception behavior, throw an exception about format if both
+            // args and format are null. The actual null check for format is in FormatHelper.
+            ArgumentNullException.Throw(format is null ? nameof(format) : nameof(args));
+        }
+    
+        return FormatHelper(provider, format, args);
+    }
+    
+    private static string FormatHelper(IFormatProvider? provider, string format, ReadOnlySpan<object?> args)
+    {
+        ArgumentNullException.ThrowIfNull(format);
+    
+        // var sb = new ValueStringBuilder(stackalloc char[StackallocCharBufferSizeLimit]);
+        var sb = new ValueStringBuilder(new char[StackallocCharBufferSizeLimit]);
+        sb.EnsureCapacity(format.Length + args.Length * 8);
+        sb.AppendFormatHelper(provider, format, args);
+        return sb.ToString();
+    }
+    
     // /// <summary>
     // /// Replaces the format item or items in a <see cref="CompositeFormat"/> with the string representation of the corresponding objects.
     // /// A parameter supplies culture-specific formatting information.
@@ -724,7 +727,8 @@ public partial class String
             }
 
             // Null separator and values are handled by the StringBuilder
-            var result = new ValueStringBuilder(stackalloc char[StackallocCharBufferSizeLimit]);
+            // TODO: var result = new ValueStringBuilder(stackalloc char[StackallocCharBufferSizeLimit]);
+            var result = new ValueStringBuilder(new char[StackallocCharBufferSizeLimit]);
 
             result.Append(firstValue);
 
@@ -764,7 +768,8 @@ public partial class String
             return firstString ?? Empty;
         }
 
-        var result = new ValueStringBuilder(stackalloc char[StackallocCharBufferSizeLimit]);
+        // TODO: var result = new ValueStringBuilder(stackalloc char[StackallocCharBufferSizeLimit]);
+        TODO: var result = new ValueStringBuilder(new char[StackallocCharBufferSizeLimit]);
 
         result.Append(firstString);
 
@@ -832,7 +837,8 @@ public partial class String
 
                 // Create the builder, add the char we already enumerated,
                 // add the rest, and then get the resulting string.
-                var result = new ValueStringBuilder(stackalloc char[StackallocCharBufferSizeLimit]);
+                // var result = new ValueStringBuilder(stackalloc char[StackallocCharBufferSizeLimit]);
+                var result = new ValueStringBuilder(new char[StackallocCharBufferSizeLimit]);
                 result.Append(c); // first value
                 do
                 {
@@ -887,7 +893,8 @@ public partial class String
                     return firstString ?? Empty;
                 }
 
-                var result = new ValueStringBuilder(stackalloc char[StackallocCharBufferSizeLimit]);
+                // TODO: var result = new ValueStringBuilder(stackalloc char[StackallocCharBufferSizeLimit]);
+                var result = new ValueStringBuilder(new char[StackallocCharBufferSizeLimit]);
 
                 result.Append(firstString);
                 do
@@ -1205,7 +1212,8 @@ public partial class String
         newValue ??= Empty;
 
         // Track the locations of oldValue to be replaced.
-        var replacementIndices = new ValueListBuilder<int>(stackalloc int[StackallocIntBufferSizeLimit]);
+        // TODO: var replacementIndices = new ValueListBuilder<int>(stackalloc int[StackallocIntBufferSizeLimit]);
+        var replacementIndices = new ValueListBuilder<int>(new int[StackallocIntBufferSizeLimit]);
 
         if (oldValue.Length == 1)
         {
@@ -1577,7 +1585,8 @@ public partial class String
             options &= ~StringSplitOptions.TrimEntries;
         }
 
-        var sepListBuilder = new ValueListBuilder<int>(stackalloc int[StackallocIntBufferSizeLimit]);
+        // TODO: var sepListBuilder = new ValueListBuilder<int>(stackalloc int[StackallocIntBufferSizeLimit]);
+        var sepListBuilder = new ValueListBuilder<int>(new int[StackallocIntBufferSizeLimit]);
 
         MakeSeparatorListAny(this, separators, ref sepListBuilder);
         ReadOnlySpan<int> sepList = sepListBuilder.AsSpan();
@@ -1653,8 +1662,10 @@ public partial class String
             }
         }
 
-        var sepListBuilder = new ValueListBuilder<int>(stackalloc int[StackallocIntBufferSizeLimit]);
-        var lengthListBuilder = new ValueListBuilder<int>(stackalloc int[StackallocIntBufferSizeLimit]);
+        // TODO: var sepListBuilder = new ValueListBuilder<int>(stackalloc int[StackallocIntBufferSizeLimit]);
+        // TODO: var lengthListBuilder = new ValueListBuilder<int>(stackalloc int[StackallocIntBufferSizeLimit]);
+        var sepListBuilder = new ValueListBuilder<int>(new int[StackallocIntBufferSizeLimit]);
+        var lengthListBuilder = new ValueListBuilder<int>(new int[StackallocIntBufferSizeLimit]);
 
         MakeSeparatorListAny(this, separators, ref sepListBuilder, ref lengthListBuilder);
         ReadOnlySpan<int> sepList = sepListBuilder.AsSpan();
@@ -1700,7 +1711,8 @@ public partial class String
 
     private string[] SplitInternal(string separator, int count, StringSplitOptions options)
     {
-        var sepListBuilder = new ValueListBuilder<int>(stackalloc int[StackallocIntBufferSizeLimit]);
+        // var sepListBuilder = new ValueListBuilder<int>(stackalloc int[StackallocIntBufferSizeLimit]);
+        var sepListBuilder = new ValueListBuilder<int>(new int[StackallocIntBufferSizeLimit]);
 
         MakeSeparatorList(this, separator, ref sepListBuilder);
         ReadOnlySpan<int> sepList = sepListBuilder.AsSpan();

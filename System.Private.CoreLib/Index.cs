@@ -130,21 +130,21 @@ public readonly struct Index : IEquatable<Index>
     public static implicit operator Index(int value) => FromStart(value);
 
     /// <summary>Converts the value of the current Index object to its equivalent string representation.</summary>
-    // public override string ToString()
-    // {
-    //     if (IsFromEnd)
-    //         return ToStringFromEnd();
-    //
-    //     return ((uint)Value).ToString();
-    // }
+    public override string ToString()
+    {
+        if (IsFromEnd)
+            return ToStringFromEnd();
+    
+        return ((uint)Value).ToString();
+    }
 
     private static void ThrowValueArgumentOutOfRange_NeedNonNegNumException()
     {
         throw new ArgumentOutOfRangeException("value", SR.ArgumentOutOfRange_NeedNonNegNum);
     }
 
-    // private string ToStringFromEnd()
-    // {
-    //     return '^' + Value.ToString();
-    // }
+    private string ToStringFromEnd()
+    {
+        return '^' + Value.ToString();
+    }
 }

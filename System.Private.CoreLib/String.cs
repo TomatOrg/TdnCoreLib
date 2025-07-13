@@ -123,20 +123,20 @@ public sealed partial class String
         return result;
     }
 
-    // /// <summary>Creates a new string by using the specified provider to control the formatting of the specified interpolated string.</summary>
-    // /// <param name="provider">An object that supplies culture-specific formatting information.</param>
-    // /// <param name="handler">The interpolated string.</param>
-    // /// <returns>The string that results for formatting the interpolated string using the specified format provider.</returns>
-    // public static string Create(IFormatProvider? provider, [InterpolatedStringHandlerArgument(nameof(provider))] ref DefaultInterpolatedStringHandler handler) =>
-    //     handler.ToStringAndClear();
-    //
-    // /// <summary>Creates a new string by using the specified provider to control the formatting of the specified interpolated string.</summary>
-    // /// <param name="provider">An object that supplies culture-specific formatting information.</param>
-    // /// <param name="initialBuffer">The initial buffer that may be used as temporary space as part of the formatting operation. The contents of this buffer may be overwritten.</param>
-    // /// <param name="handler">The interpolated string.</param>
-    // /// <returns>The string that results for formatting the interpolated string using the specified format provider.</returns>
-    // public static string Create(IFormatProvider? provider, Span<char> initialBuffer, [InterpolatedStringHandlerArgument(nameof(provider), nameof(initialBuffer))] ref DefaultInterpolatedStringHandler handler) =>
-    //     handler.ToStringAndClear();
+    /// <summary>Creates a new string by using the specified provider to control the formatting of the specified interpolated string.</summary>
+    /// <param name="provider">An object that supplies culture-specific formatting information.</param>
+    /// <param name="handler">The interpolated string.</param>
+    /// <returns>The string that results for formatting the interpolated string using the specified format provider.</returns>
+    public static string Create(IFormatProvider? provider, [InterpolatedStringHandlerArgument(nameof(provider))] ref DefaultInterpolatedStringHandler handler) =>
+        handler.ToStringAndClear();
+    
+    /// <summary>Creates a new string by using the specified provider to control the formatting of the specified interpolated string.</summary>
+    /// <param name="provider">An object that supplies culture-specific formatting information.</param>
+    /// <param name="initialBuffer">The initial buffer that may be used as temporary space as part of the formatting operation. The contents of this buffer may be overwritten.</param>
+    /// <param name="handler">The interpolated string.</param>
+    /// <returns>The string that results for formatting the interpolated string using the specified format provider.</returns>
+    public static string Create(IFormatProvider? provider, Span<char> initialBuffer, [InterpolatedStringHandlerArgument(nameof(provider), nameof(initialBuffer))] ref DefaultInterpolatedStringHandler handler) =>
+        handler.ToStringAndClear();
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static implicit operator ReadOnlySpan<char>(string? value) =>

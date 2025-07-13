@@ -3740,14 +3740,16 @@ public static partial class MemoryExtensions
             return 0;
         }
 
-        scoped ValueListBuilder<int> separatorList = new ValueListBuilder<int>(stackalloc int[string.StackallocIntBufferSizeLimit]);
+        // TODO: scoped ValueListBuilder<int> separatorList = new ValueListBuilder<int>(stackalloc int[string.StackallocIntBufferSizeLimit]);
+        scoped ValueListBuilder<int> separatorList = new ValueListBuilder<int>(new int[string.StackallocIntBufferSizeLimit]);
         scoped ValueListBuilder<int> lengthList = default;
 
         int separatorLength;
         int rangeCount = 0;
         if (!stringSeparators.IsEmpty)
         {
-            lengthList = new ValueListBuilder<int>(stackalloc int[string.StackallocIntBufferSizeLimit]);
+            // TODO: lengthList = new ValueListBuilder<int>(stackalloc int[string.StackallocIntBufferSizeLimit]);
+            lengthList = new ValueListBuilder<int>(new int[string.StackallocIntBufferSizeLimit]);
             string.MakeSeparatorListAny(source, stringSeparators, ref separatorList, ref lengthList);
             separatorLength = -1; // Will be set on each iteration of the loop
         }

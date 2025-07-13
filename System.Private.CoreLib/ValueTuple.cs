@@ -18,7 +18,7 @@ namespace System;
 internal interface IValueTupleInternal : ITuple
 {
     int GetHashCode(IEqualityComparer comparer);
-    // string ToStringEnd();
+    string ToStringEnd();
 }
 
 /// <summary>
@@ -116,15 +116,15 @@ public struct ValueTuple
     /// <remarks>
     /// The string returned by this method takes the form <c>()</c>.
     /// </remarks>
-    // public override string ToString()
-    // {
-    //     return "()";
-    // }
-    //
-    // string IValueTupleInternal.ToStringEnd()
-    // {
-    //     return ")";
-    // }
+    public override string ToString()
+    {
+        return "()";
+    }
+    
+    string IValueTupleInternal.ToStringEnd()
+    {
+        return ")";
+    }
 
     /// <summary>
     /// The number of positions in this data structure.
@@ -384,15 +384,15 @@ public struct ValueTuple<T1>
     /// where <c>Item1</c> represents the value of <see cref="Item1"/>. If the field is <see langword="null"/>,
     /// it is represented as <see cref="string.Empty"/>.
     /// </remarks>
-    // public override string ToString()
-    // {
-    //     return "(" + Item1?.ToString() + ")";
-    // }
-    //
-    // string IValueTupleInternal.ToStringEnd()
-    // {
-    //     return Item1?.ToString() + ")";
-    // }
+    public override string ToString()
+    {
+        return "(" + Item1?.ToString() + ")";
+    }
+    
+    string IValueTupleInternal.ToStringEnd()
+    {
+        return Item1?.ToString() + ")";
+    }
 
     /// <summary>
     /// The number of positions in this data structure.
@@ -588,15 +588,15 @@ public struct ValueTuple<T1, T2>
     /// and <see cref="Item2"/> fields. If either field value is <see langword="null"/>,
     /// it is represented as <see cref="string.Empty"/>.
     /// </remarks>
-    // public override string ToString()
-    // {
-    //     return "(" + Item1?.ToString() + ", " + Item2?.ToString() + ")";
-    // }
-    //
-    // string IValueTupleInternal.ToStringEnd()
-    // {
-    //     return Item1?.ToString() + ", " + Item2?.ToString() + ")";
-    // }
+    public override string ToString()
+    {
+        return "(" + Item1?.ToString() + ", " + Item2?.ToString() + ")";
+    }
+    
+    string IValueTupleInternal.ToStringEnd()
+    {
+        return Item1?.ToString() + ", " + Item2?.ToString() + ")";
+    }
 
     /// <summary>
     /// The number of positions in this data structure.
@@ -784,15 +784,15 @@ public struct ValueTuple<T1, T2, T3>
     /// The string returned by this method takes the form <c>(Item1, Item2, Item3)</c>.
     /// If any field value is <see langword="null"/>, it is represented as <see cref="string.Empty"/>.
     /// </remarks>
-    // public override string ToString()
-    // {
-    //     return "(" + Item1?.ToString() + ", " + Item2?.ToString() + ", " + Item3?.ToString() + ")";
-    // }
-    //
-    // string IValueTupleInternal.ToStringEnd()
-    // {
-    //     return Item1?.ToString() + ", " + Item2?.ToString() + ", " + Item3?.ToString() + ")";
-    // }
+    public override string ToString()
+    {
+        return "(" + Item1?.ToString() + ", " + Item2?.ToString() + ", " + Item3?.ToString() + ")";
+    }
+    
+    string IValueTupleInternal.ToStringEnd()
+    {
+        return Item1?.ToString() + ", " + Item2?.ToString() + ", " + Item3?.ToString() + ")";
+    }
 
     /// <summary>
     /// The number of positions in this data structure.
@@ -998,15 +998,15 @@ public struct ValueTuple<T1, T2, T3, T4>
     /// The string returned by this method takes the form <c>(Item1, Item2, Item3, Item4)</c>.
     /// If any field value is <see langword="null"/>, it is represented as <see cref="string.Empty"/>.
     /// </remarks>
-    // public override string ToString()
-    // {
-    //     return "(" + Item1?.ToString() + ", " + Item2?.ToString() + ", " + Item3?.ToString() + ", " + Item4?.ToString() + ")";
-    // }
-    //
-    // string IValueTupleInternal.ToStringEnd()
-    // {
-    //     return Item1?.ToString() + ", " + Item2?.ToString() + ", " + Item3?.ToString() + ", " + Item4?.ToString() + ")";
-    // }
+    public override string ToString()
+    {
+        return "(" + Item1?.ToString() + ", " + Item2?.ToString() + ", " + Item3?.ToString() + ", " + Item4?.ToString() + ")";
+    }
+    
+    string IValueTupleInternal.ToStringEnd()
+    {
+        return Item1?.ToString() + ", " + Item2?.ToString() + ", " + Item3?.ToString() + ", " + Item4?.ToString() + ")";
+    }
 
     /// <summary>
     /// The number of positions in this data structure.
@@ -1230,15 +1230,15 @@ public struct ValueTuple<T1, T2, T3, T4, T5>
     /// The string returned by this method takes the form <c>(Item1, Item2, Item3, Item4, Item5)</c>.
     /// If any field value is <see langword="null"/>, it is represented as <see cref="string.Empty"/>.
     /// </remarks>
-    // public override string ToString()
-    // {
-    //     return "(" + Item1?.ToString() + ", " + Item2?.ToString() + ", " + Item3?.ToString() + ", " + Item4?.ToString() + ", " + Item5?.ToString() + ")";
-    // }
-    //
-    // string IValueTupleInternal.ToStringEnd()
-    // {
-    //     return Item1?.ToString() + ", " + Item2?.ToString() + ", " + Item3?.ToString() + ", " + Item4?.ToString() + ", " + Item5?.ToString() + ")";
-    // }
+    public override string ToString()
+    {
+        return "(" + Item1?.ToString() + ", " + Item2?.ToString() + ", " + Item3?.ToString() + ", " + Item4?.ToString() + ", " + Item5?.ToString() + ")";
+    }
+    
+    string IValueTupleInternal.ToStringEnd()
+    {
+        return Item1?.ToString() + ", " + Item2?.ToString() + ", " + Item3?.ToString() + ", " + Item4?.ToString() + ", " + Item5?.ToString() + ")";
+    }
 
     /// <summary>
     /// The number of positions in this data structure.
@@ -1480,15 +1480,15 @@ public struct ValueTuple<T1, T2, T3, T4, T5, T6>
     /// The string returned by this method takes the form <c>(Item1, Item2, Item3, Item4, Item5, Item6)</c>.
     /// If any field value is <see langword="null"/>, it is represented as <see cref="string.Empty"/>.
     /// </remarks>
-    // public override string ToString()
-    // {
-    //     return "(" + Item1?.ToString() + ", " + Item2?.ToString() + ", " + Item3?.ToString() + ", " + Item4?.ToString() + ", " + Item5?.ToString() + ", " + Item6?.ToString() + ")";
-    // }
-    //
-    // string IValueTupleInternal.ToStringEnd()
-    // {
-    //     return Item1?.ToString() + ", " + Item2?.ToString() + ", " + Item3?.ToString() + ", " + Item4?.ToString() + ", " + Item5?.ToString() + ", " + Item6?.ToString() + ")";
-    // }
+    public override string ToString()
+    {
+        return "(" + Item1?.ToString() + ", " + Item2?.ToString() + ", " + Item3?.ToString() + ", " + Item4?.ToString() + ", " + Item5?.ToString() + ", " + Item6?.ToString() + ")";
+    }
+    
+    string IValueTupleInternal.ToStringEnd()
+    {
+        return Item1?.ToString() + ", " + Item2?.ToString() + ", " + Item3?.ToString() + ", " + Item4?.ToString() + ", " + Item5?.ToString() + ", " + Item6?.ToString() + ")";
+    }
 
     /// <summary>
     /// The number of positions in this data structure.
@@ -1748,15 +1748,15 @@ public struct ValueTuple<T1, T2, T3, T4, T5, T6, T7>
     /// The string returned by this method takes the form <c>(Item1, Item2, Item3, Item4, Item5, Item6, Item7)</c>.
     /// If any field value is <see langword="null"/>, it is represented as <see cref="string.Empty"/>.
     /// </remarks>
-    // public override string ToString()
-    // {
-    //     return "(" + Item1?.ToString() + ", " + Item2?.ToString() + ", " + Item3?.ToString() + ", " + Item4?.ToString() + ", " + Item5?.ToString() + ", " + Item6?.ToString() + ", " + Item7?.ToString() + ")";
-    // }
-    //
-    // string IValueTupleInternal.ToStringEnd()
-    // {
-    //     return Item1?.ToString() + ", " + Item2?.ToString() + ", " + Item3?.ToString() + ", " + Item4?.ToString() + ", " + Item5?.ToString() + ", " + Item6?.ToString() + ", " + Item7?.ToString() + ")";
-    // }
+    public override string ToString()
+    {
+        return "(" + Item1?.ToString() + ", " + Item2?.ToString() + ", " + Item3?.ToString() + ", " + Item4?.ToString() + ", " + Item5?.ToString() + ", " + Item6?.ToString() + ", " + Item7?.ToString() + ")";
+    }
+    
+    string IValueTupleInternal.ToStringEnd()
+    {
+        return Item1?.ToString() + ", " + Item2?.ToString() + ", " + Item3?.ToString() + ", " + Item4?.ToString() + ", " + Item5?.ToString() + ", " + Item6?.ToString() + ", " + Item7?.ToString() + ")";
+    }
 
     /// <summary>
     /// The number of positions in this data structure.
@@ -2160,25 +2160,25 @@ public struct ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>
     /// The string returned by this method takes the form <c>(Item1, Item2, Item3, Item4, Item5, Item6, Item7, Rest)</c>.
     /// If any field value is <see langword="null"/>, it is represented as <see cref="string.Empty"/>.
     /// </remarks>
-    // public override string ToString()
-    // {
-    //     if (Rest is IValueTupleInternal)
-    //     {
-    //         return "(" + Item1?.ToString() + ", " + Item2?.ToString() + ", " + Item3?.ToString() + ", " + Item4?.ToString() + ", " + Item5?.ToString() + ", " + Item6?.ToString() + ", " + Item7?.ToString() + ", " + ((IValueTupleInternal)Rest).ToStringEnd();
-    //     }
-    //
-    //     return "(" + Item1?.ToString() + ", " + Item2?.ToString() + ", " + Item3?.ToString() + ", " + Item4?.ToString() + ", " + Item5?.ToString() + ", " + Item6?.ToString() + ", " + Item7?.ToString() + ", " + Rest.ToString() + ")";
-    // }
-    //
-    // string IValueTupleInternal.ToStringEnd()
-    // {
-    //     if (Rest is IValueTupleInternal)
-    //     {
-    //         return Item1?.ToString() + ", " + Item2?.ToString() + ", " + Item3?.ToString() + ", " + Item4?.ToString() + ", " + Item5?.ToString() + ", " + Item6?.ToString() + ", " + Item7?.ToString() + ", " + ((IValueTupleInternal)Rest).ToStringEnd();
-    //     }
-    //
-    //     return Item1?.ToString() + ", " + Item2?.ToString() + ", " + Item3?.ToString() + ", " + Item4?.ToString() + ", " + Item5?.ToString() + ", " + Item6?.ToString() + ", " + Item7?.ToString() + ", " + Rest.ToString() + ")";
-    // }
+    public override string ToString()
+    {
+        if (Rest is IValueTupleInternal)
+        {
+            return "(" + Item1?.ToString() + ", " + Item2?.ToString() + ", " + Item3?.ToString() + ", " + Item4?.ToString() + ", " + Item5?.ToString() + ", " + Item6?.ToString() + ", " + Item7?.ToString() + ", " + ((IValueTupleInternal)Rest).ToStringEnd();
+        }
+    
+        return "(" + Item1?.ToString() + ", " + Item2?.ToString() + ", " + Item3?.ToString() + ", " + Item4?.ToString() + ", " + Item5?.ToString() + ", " + Item6?.ToString() + ", " + Item7?.ToString() + ", " + Rest.ToString() + ")";
+    }
+    
+    string IValueTupleInternal.ToStringEnd()
+    {
+        if (Rest is IValueTupleInternal)
+        {
+            return Item1?.ToString() + ", " + Item2?.ToString() + ", " + Item3?.ToString() + ", " + Item4?.ToString() + ", " + Item5?.ToString() + ", " + Item6?.ToString() + ", " + Item7?.ToString() + ", " + ((IValueTupleInternal)Rest).ToStringEnd();
+        }
+    
+        return Item1?.ToString() + ", " + Item2?.ToString() + ", " + Item3?.ToString() + ", " + Item4?.ToString() + ", " + Item5?.ToString() + ", " + Item6?.ToString() + ", " + Item7?.ToString() + ", " + Rest.ToString() + ")";
+    }
 
     /// <summary>
     /// The number of positions in this data structure.

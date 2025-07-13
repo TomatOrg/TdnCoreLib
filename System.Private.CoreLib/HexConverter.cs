@@ -43,4 +43,18 @@ internal static class HexConverter
         return (uint)(c - '0') <= 9 || (uint)(c - 'a') <= ('f' - 'a');
     }
     
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static char ToCharUpper(int value)
+    {
+        value &= 0xF;
+        value += '0';
+
+        if (value > '9')
+        {
+            value += ('A' - ('9' + 1));
+        }
+
+        return (char)value;
+    }
+    
 }

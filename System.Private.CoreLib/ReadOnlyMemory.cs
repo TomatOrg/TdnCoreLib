@@ -128,18 +128,18 @@ public readonly struct ReadOnlyMemory<T> : IEquatable<ReadOnlyMemory<T>>
     /// </summary>
     public bool IsEmpty => _length == 0;
 
-    // /// <summary>
-    // /// For <see cref="ReadOnlyMemory{Char}"/>, returns a new instance of string that represents the characters pointed to by the memory.
-    // /// Otherwise, returns a <see cref="string"/> with the name of the type and the number of elements.
-    // /// </summary>
-    // public override string ToString()
-    // {
-    //     if (typeof(T) == typeof(char))
-    //     {
-    //         return (_object is string str) ? str.Substring(_index, _length) : Span.ToString();
-    //     }
-    //     return $"System.ReadOnlyMemory<{typeof(T).Name}>[{_length}]";
-    // }
+    /// <summary>
+    /// For <see cref="ReadOnlyMemory{Char}"/>, returns a new instance of string that represents the characters pointed to by the memory.
+    /// Otherwise, returns a <see cref="string"/> with the name of the type and the number of elements.
+    /// </summary>
+    public override string ToString()
+    {
+        if (typeof(T) == typeof(char))
+        {
+            return (_object is string str) ? str.Substring(_index, _length) : Span.ToString();
+        }
+        return $"System.ReadOnlyMemory<{typeof(T).Name}>[{_length}]";
+    }
 
     /// <summary>
     /// Forms a slice out of the given memory, beginning at 'start'.

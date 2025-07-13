@@ -11,10 +11,6 @@
         <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     </PropertyGroup>
 
-    <ItemGroup>
-      <Folder Include="Text\Unicode\" />
-    </ItemGroup>
-
     <Target Name="CustomizeReferences" BeforeTargets="BeforeCompile" AfterTargets="FindReferenceAssembliesForReferences">
         <ItemGroup>
             <ReferencePathWithRefAssemblies Remove="@(ReferencePathWithRefAssemblies)" />

@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Text
 {
-    internal ref partial struct ValueStringBuilder
+    public ref partial struct ValueStringBuilder
     {
         private char[]? _arrayToReturnToPool;
         private Span<char> _chars;

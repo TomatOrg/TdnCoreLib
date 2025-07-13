@@ -1254,7 +1254,7 @@ public static partial class Math
 
         if (mode < MidpointRounding.ToEven || mode > MidpointRounding.ToPositiveInfinity)
         {
-            throw new ArgumentException(SR.Argument_InvalidEnumValue, nameof(mode));
+            throw new ArgumentException(string.Format(SR.Argument_InvalidEnumValue, mode, nameof(MidpointRounding)), nameof(mode));
         }
 
         if (Abs(value) < doubleRoundLimit)
@@ -1300,7 +1300,7 @@ public static partial class Math
                 }
                 default:
                 {
-                    throw new ArgumentException(SR.Argument_InvalidEnumValue, nameof(mode));
+                    throw new ArgumentException(string.Format(SR.Argument_InvalidEnumValue, mode, nameof(MidpointRounding)), nameof(mode));
                 }
             }
 
@@ -1394,7 +1394,7 @@ public static partial class Math
     [DoesNotReturn]
     internal static void ThrowMinMaxException<T>(T min, T max)
     {
-        throw new ArgumentException(SR.Argument_MinMaxValue);
+        throw new ArgumentException(string.Format(SR.Argument_MinMaxValue, min, max));
     }
 
     public static double ScaleB(double x, int n)

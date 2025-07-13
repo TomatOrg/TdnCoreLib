@@ -611,97 +611,97 @@ namespace System
             return Unsafe.ReadUnaligned<double>(ref MemoryMarshal.GetReference(value));
         }
 
-        // /// <summary>
-        // /// Converts the numeric value of each element of a specified array of bytes
-        // /// to its equivalent hexadecimal string representation.
-        // /// </summary>
-        // /// <param name="value">An array of bytes.</param>
-        // /// <param name="startIndex">The starting position within <paramref name="value"/>.</param>
-        // /// <param name="length">The number of array elements in <paramref name="value"/> to convert.</param>
-        // /// <returns>A string of hexadecimal pairs separated by hyphens,
-        // /// where each pair represents the corresponding element in a subarray of <paramref name="value"/>;
-        // /// for example, "7F-2C-4A-00".</returns>
-        // /// <exception cref="ArgumentNullException"><paramref name="value"/> is <see langword="null"/>.</exception>
-        // /// <exception cref="ArgumentOutOfRangeException">
-        // /// <paramref name="startIndex"/> or <paramref name="length"/> is less than zero.
-        // /// <para>-or-</para>
-        // /// <paramref name="startIndex"/> is greater than zero and is greater than or equal to the length of <paramref name="value"/>.
-        // /// </exception>
-        // /// <exception cref="ArgumentException">
-        // /// The combination of <paramref name="startIndex"/> and <paramref name="length"/> does not specify a position within <paramref name="value"/>;
-        // /// that is, the <paramref name="startIndex"/> parameter is greater than the length of <paramref name="value"/> minus the <paramref name="length"/> parameter.
-        // /// </exception>
-        // public static string ToString(byte[] value, int startIndex, int length)
-        // {
-        //     if (value == null)
-        //         ThrowHelper.ThrowArgumentNullException(nameof(value));
-        //     if (startIndex < 0 || startIndex >= value.Length && startIndex > 0)
-        //         ThrowHelper.ThrowArgumentOutOfRangeException(nameof(startIndex), ExceptionResource.ArgumentOutOfRange_IndexMustBeLess);
-        //     ArgumentOutOfRangeException.ThrowIfNegative(length);
-        //     if (startIndex > value.Length - length)
-        //         ThrowHelper.ThrowArgumentException(ExceptionResource.Arg_ByteArrayTooSmallForValue, nameof(value));
-        //
-        //     if (length == 0)
-        //     {
-        //         return string.Empty;
-        //     }
-        //
-        //     // (int.MaxValue / 3) == 715,827,882 Bytes == 699 MB
-        //     ArgumentOutOfRangeException.ThrowIfGreaterThan(length, int.MaxValue / 3);
-        //
-        //     string result = string.FastAllocateString(length * 3 - 1);
-        //
-        //     var dst = new Span<char>(ref result.GetRawStringData(), result.Length);
-        //     var src = new ReadOnlySpan<byte>(value, startIndex, length);
-        //     int i = 0;
-        //     int j = 0;
-        //     byte b = src[i++];
-        //     dst[j++] = HexConverter.ToCharUpper(b >> 4);
-        //     dst[j++] = HexConverter.ToCharUpper(b);
-        //     while (i < src.Length)
-        //     {
-        //         b = src[i++];
-        //         dst[j++] = '-';
-        //         dst[j++] = HexConverter.ToCharUpper(b >> 4);
-        //         dst[j++] = HexConverter.ToCharUpper(b);
-        //     }
-        //
-        //     return result;
-        // }
+        /// <summary>
+        /// Converts the numeric value of each element of a specified array of bytes
+        /// to its equivalent hexadecimal string representation.
+        /// </summary>
+        /// <param name="value">An array of bytes.</param>
+        /// <param name="startIndex">The starting position within <paramref name="value"/>.</param>
+        /// <param name="length">The number of array elements in <paramref name="value"/> to convert.</param>
+        /// <returns>A string of hexadecimal pairs separated by hyphens,
+        /// where each pair represents the corresponding element in a subarray of <paramref name="value"/>;
+        /// for example, "7F-2C-4A-00".</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="value"/> is <see langword="null"/>.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// <paramref name="startIndex"/> or <paramref name="length"/> is less than zero.
+        /// <para>-or-</para>
+        /// <paramref name="startIndex"/> is greater than zero and is greater than or equal to the length of <paramref name="value"/>.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// The combination of <paramref name="startIndex"/> and <paramref name="length"/> does not specify a position within <paramref name="value"/>;
+        /// that is, the <paramref name="startIndex"/> parameter is greater than the length of <paramref name="value"/> minus the <paramref name="length"/> parameter.
+        /// </exception>
+        public static string ToString(byte[] value, int startIndex, int length)
+        {
+            if (value == null)
+                ThrowHelper.ThrowArgumentNullException(nameof(value));
+            if (startIndex < 0 || startIndex >= value.Length && startIndex > 0)
+                ThrowHelper.ThrowArgumentOutOfRangeException(nameof(startIndex), SR.ArgumentOutOfRange_IndexMustBeLess);
+            ArgumentOutOfRangeException.ThrowIfNegative(length);
+            if (startIndex > value.Length - length)
+                ThrowHelper.ThrowArgumentException(SR.Arg_ByteArrayTooSmallForValue, nameof(value));
+        
+            if (length == 0)
+            {
+                return string.Empty;
+            }
+        
+            // (int.MaxValue / 3) == 715,827,882 Bytes == 699 MB
+            ArgumentOutOfRangeException.ThrowIfGreaterThan(length, int.MaxValue / 3);
+        
+            string result = string.FastAllocateString(length * 3 - 1);
+        
+            var dst = new Span<char>(ref result.GetRawStringData(), result.Length);
+            var src = new ReadOnlySpan<byte>(value, startIndex, length);
+            int i = 0;
+            int j = 0;
+            byte b = src[i++];
+            dst[j++] = HexConverter.ToCharUpper(b >> 4);
+            dst[j++] = HexConverter.ToCharUpper(b);
+            while (i < src.Length)
+            {
+                b = src[i++];
+                dst[j++] = '-';
+                dst[j++] = HexConverter.ToCharUpper(b >> 4);
+                dst[j++] = HexConverter.ToCharUpper(b);
+            }
+        
+            return result;
+        }
 
-        // /// <summary>
-        // /// Converts the numeric value of each element of a specified array of bytes
-        // /// to its equivalent hexadecimal string representation.
-        // /// </summary>
-        // /// <param name="value">An array of bytes.</param>
-        // /// <returns>A string of hexadecimal pairs separated by hyphens,
-        // /// where each pair represents the corresponding element in <paramref name="value"/>;
-        // /// for example, "7F-2C-4A-00".</returns>
-        // /// <exception cref="ArgumentNullException"><paramref name="value"/> is <see langword="null"/>.</exception>
-        // public static string ToString(byte[] value)
-        // {
-        //     if (value == null)
-        //         ThrowHelper.ThrowArgumentNullException(nameof(value));
-        //     return ToString(value, 0, value.Length);
-        // }
-        //
-        // /// <summary>
-        // /// Converts the numeric value of each element of a specified array of bytes
-        // /// to its equivalent hexadecimal string representation.
-        // /// </summary>
-        // /// <param name="value">An array of bytes.</param>
-        // /// <param name="startIndex">The starting position within <paramref name="value"/>.</param>
-        // /// <returns>A string of hexadecimal pairs separated by hyphens,
-        // /// where each pair represents the corresponding element in a subarray of <paramref name="value"/>;
-        // /// for example, "7F-2C-4A-00".</returns>
-        // /// <exception cref="ArgumentNullException"><paramref name="value"/> is <see langword="null"/>.</exception>
-        // /// <exception cref="ArgumentOutOfRangeException"><paramref name="startIndex"/> is less than zero or greater than the length of <paramref name="value"/> minus 1.</exception>
-        // public static string ToString(byte[] value, int startIndex)
-        // {
-        //     if (value == null)
-        //         ThrowHelper.ThrowArgumentNullException(nameof(value));
-        //     return ToString(value, startIndex, value.Length - startIndex);
-        // }
+        /// <summary>
+        /// Converts the numeric value of each element of a specified array of bytes
+        /// to its equivalent hexadecimal string representation.
+        /// </summary>
+        /// <param name="value">An array of bytes.</param>
+        /// <returns>A string of hexadecimal pairs separated by hyphens,
+        /// where each pair represents the corresponding element in <paramref name="value"/>;
+        /// for example, "7F-2C-4A-00".</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="value"/> is <see langword="null"/>.</exception>
+        public static string ToString(byte[] value)
+        {
+            if (value == null)
+                ThrowHelper.ThrowArgumentNullException(nameof(value));
+            return ToString(value, 0, value.Length);
+        }
+        
+        /// <summary>
+        /// Converts the numeric value of each element of a specified array of bytes
+        /// to its equivalent hexadecimal string representation.
+        /// </summary>
+        /// <param name="value">An array of bytes.</param>
+        /// <param name="startIndex">The starting position within <paramref name="value"/>.</param>
+        /// <returns>A string of hexadecimal pairs separated by hyphens,
+        /// where each pair represents the corresponding element in a subarray of <paramref name="value"/>;
+        /// for example, "7F-2C-4A-00".</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="value"/> is <see langword="null"/>.</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="startIndex"/> is less than zero or greater than the length of <paramref name="value"/> minus 1.</exception>
+        public static string ToString(byte[] value, int startIndex)
+        {
+            if (value == null)
+                ThrowHelper.ThrowArgumentNullException(nameof(value));
+            return ToString(value, startIndex, value.Length - startIndex);
+        }
 
         /// <summary>
         /// Returns a Boolean value converted from two bytes at a specified position in a byte array.

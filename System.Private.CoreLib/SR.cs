@@ -104,6 +104,12 @@ internal static class SR
     public const string Arithmetic_NaN = "Function does not accept floating point Not-a-Number values.";
 
     public const string Format_BadBoolean = "String '{0}' was not recognized as a valid Boolean.";
+    public const string Format_UnclosedFormatItem = "Format item ends prematurely.";
+    public const string Format_ExpectedAsciiDigit = "Expected an ASCII digit.";
+    public const string Format_InvalidString = "Input string was not in a correct format.";
+    public const string Format_InvalidStringWithOffsetAndReason = "Input string was not in a correct format. Failure to parse near offset {0}. {1}";
+    public const string Format_UnexpectedClosingBrace = "Unexpected closing brace without a corresponding opening brace.";
+    public const string Format_IndexOutOfRange = "Index (zero based) must be greater than or equal to zero and less than the size of the argument list.";
     
     public const string OutOfMemory_StringTooLong = "String length exceeded supported range.";
 

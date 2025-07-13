@@ -1127,7 +1127,7 @@ namespace System
                     invalidIsLow = false;
                 }
 
-                throw new ArgumentException(invalidIsLow ? SR.Argument_InvalidLowSurrogate : SR.Argument_InvalidHighSurrogate, nameof(s));
+                throw new ArgumentException(string.Format(invalidIsLow ? SR.Argument_InvalidLowSurrogate : SR.Argument_InvalidHighSurrogate, index), nameof(s));
 
             }
 

@@ -11,6 +11,8 @@ public class Object
     private struct ObjectVTable
     {
         public RuntimeTypeInfo Type;
+        public ulong TypeHierarchy;
+        public ulong InterfaceProduct;
     }
     
     private unsafe ObjectVTable* _vtable;

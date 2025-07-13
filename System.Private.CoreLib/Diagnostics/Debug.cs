@@ -74,9 +74,9 @@ namespace System.Diagnostics
         public static void Print(string? message) =>
             WriteLine(message);
 
-        // [Conditional("DEBUG")]
-        // public static void Print([StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, params object?[] args) =>
-        //     WriteLine(string.Format(null, format, args));
+        [Conditional("DEBUG")]
+        public static void Print([StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, params object?[] args) =>
+            WriteLine(string.Format(null, format, args));
 
         [Conditional("DEBUG")]
         public static void Assert([DoesNotReturnIf(false)] bool condition) =>
@@ -103,9 +103,9 @@ namespace System.Diagnostics
         // public static void Assert([DoesNotReturnIf(false)] bool condition, [InterpolatedStringHandlerArgument(nameof(condition))] ref AssertInterpolatedStringHandler message, [InterpolatedStringHandlerArgument(nameof(condition))] ref AssertInterpolatedStringHandler detailMessage) =>
         //     Assert(condition, message.ToStringAndClear(), detailMessage.ToStringAndClear());
 
-        // [Conditional("DEBUG")]
-        // public static void Assert([DoesNotReturnIf(false)] bool condition, string? message, [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string detailMessageFormat, params object?[] args) =>
-        //     Assert(condition, message, string.Format(detailMessageFormat, args));
+        [Conditional("DEBUG")]
+        public static void Assert([DoesNotReturnIf(false)] bool condition, string? message, [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string detailMessageFormat, params object?[] args) =>
+            Assert(condition, message, string.Format(detailMessageFormat, args));
 
         [Conditional("DEBUG")]
         [DoesNotReturn]
@@ -134,9 +134,9 @@ namespace System.Diagnostics
         public static void WriteLine(object? value, string? category) =>
             WriteLine(value?.ToString(), category);
 
-        // [Conditional("DEBUG")]
-        // public static void WriteLine([StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, params object?[] args) =>
-        //     WriteLine(string.Format(null, format, args));
+        [Conditional("DEBUG")]
+        public static void WriteLine([StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, params object?[] args) =>
+            WriteLine(string.Format(null, format, args));
 
         [Conditional("DEBUG")]
         public static void WriteLine(string? message, string? category)

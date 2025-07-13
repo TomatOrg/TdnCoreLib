@@ -1,3 +1,5 @@
+using System.Text;
+
 namespace System.Globalization;
 
 public static class CharUnicodeInfo
@@ -29,7 +31,18 @@ public static class CharUnicodeInfo
     {
         throw new NotImplementedException();
     }
+    
+    internal static double GetNumericValue(int codePoint)
+    {
+        if (!UnicodeUtility.IsValidCodePoint((uint)codePoint))
+        {
+            ThrowHelper.ThrowArgumentOutOfRangeException(nameof(codePoint));
+        }
 
+        throw new NotImplementedException();
+        // return GetNumericValueNoBoundsCheck((uint)codePoint);
+    }
+    
     internal static double GetNumericValueInternal(string s, int index)
     {
         throw new NotImplementedException();

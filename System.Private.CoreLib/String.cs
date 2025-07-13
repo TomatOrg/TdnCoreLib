@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Text;
 
 namespace System;
 // The String class represents a static string of characters.  Many of
@@ -362,16 +363,16 @@ public sealed partial class String
         return new CharEnumerator(this);
     }
 
-    // /// <summary>
-    // /// Returns an enumeration of <see cref="Rune"/> from this string.
-    // /// </summary>
-    // /// <remarks>
-    // /// Invalid sequences will be represented in the enumeration by <see cref="Rune.ReplacementChar"/>.
-    // /// </remarks>
-    // public StringRuneEnumerator EnumerateRunes()
-    // {
-    //     return new StringRuneEnumerator(this);
-    // }
+    /// <summary>
+    /// Returns an enumeration of <see cref="Rune"/> from this string.
+    /// </summary>
+    /// <remarks>
+    /// Invalid sequences will be represented in the enumeration by <see cref="Rune.ReplacementChar"/>.
+    /// </remarks>
+    public StringRuneEnumerator EnumerateRunes()
+    {
+        return new StringRuneEnumerator(this);
+    }
 
     // //
     // // IConvertible implementation

@@ -8,6 +8,7 @@ using System.Globalization;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Text;
 
 namespace System
 {
@@ -1030,13 +1031,12 @@ namespace System
 
         public static string ConvertFromUtf32(int utf32)
         {
-            throw new NotImplementedException();
-            // if (!UnicodeUtility.IsValidUnicodeScalar((uint)utf32))
-            // {
-            //     throw new ArgumentOutOfRangeException(nameof(utf32), SR.ArgumentOutOfRange_InvalidUTF32);
-            // }
-            //
-            // return Rune.UnsafeCreate((uint)utf32).ToString();
+            if (!UnicodeUtility.IsValidUnicodeScalar((uint)utf32))
+            {
+                throw new ArgumentOutOfRangeException(nameof(utf32), SR.ArgumentOutOfRange_InvalidUTF32);
+            }
+            
+            return Rune.UnsafeCreate((uint)utf32).ToString();
         }
 
         /*=============================ConvertToUtf32===================================

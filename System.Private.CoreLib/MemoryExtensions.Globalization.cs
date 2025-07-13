@@ -368,28 +368,28 @@ namespace System
             // => value.Length <= span.Length
             // && Ordinal.EqualsIgnoreCase(ref MemoryMarshal.GetReference(span), ref MemoryMarshal.GetReference(value), value.Length);
 
-        // /// <summary>
-        // /// Returns an enumeration of <see cref="Rune"/> from the provided span.
-        // /// </summary>
-        // /// <remarks>
-        // /// Invalid sequences will be represented in the enumeration by <see cref="Rune.ReplacementChar"/>.
-        // /// </remarks>
-        // public static SpanRuneEnumerator EnumerateRunes(this ReadOnlySpan<char> span)
-        // {
-        //     return new SpanRuneEnumerator(span);
-        // }
-        //
-        // /// <summary>
-        // /// Returns an enumeration of <see cref="Rune"/> from the provided span.
-        // /// </summary>
-        // /// <remarks>
-        // /// Invalid sequences will be represented in the enumeration by <see cref="Rune.ReplacementChar"/>.
-        // /// </remarks>
-        // public static SpanRuneEnumerator EnumerateRunes(this Span<char> span)
-        // {
-        //     return new SpanRuneEnumerator(span);
-        // }
-        //
+        /// <summary>
+        /// Returns an enumeration of <see cref="Rune"/> from the provided span.
+        /// </summary>
+        /// <remarks>
+        /// Invalid sequences will be represented in the enumeration by <see cref="Rune.ReplacementChar"/>.
+        /// </remarks>
+        public static SpanRuneEnumerator EnumerateRunes(this ReadOnlySpan<char> span)
+        {
+            return new SpanRuneEnumerator(span);
+        }
+        
+        /// <summary>
+        /// Returns an enumeration of <see cref="Rune"/> from the provided span.
+        /// </summary>
+        /// <remarks>
+        /// Invalid sequences will be represented in the enumeration by <see cref="Rune.ReplacementChar"/>.
+        /// </remarks>
+        public static SpanRuneEnumerator EnumerateRunes(this Span<char> span)
+        {
+            return new SpanRuneEnumerator(span);
+        }
+        
         // /// <summary>
         // /// Returns an enumeration of lines over the provided span.
         // /// </summary>

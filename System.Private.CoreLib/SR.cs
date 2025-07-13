@@ -43,6 +43,7 @@ internal static class SR
     public const string Arg_MustBeChar = "Object must be of type Char.";
     public const string Arg_MustBeBoolean = "Object must be of type Boolean.";
     public const string Arg_MustBeString = "Object must be of type String.";
+    public const string Arg_MustBeRune = "Object must be of type Rune.";
     
     public const string Overflow_NegateTwosCompNum = "Negating the minimum value of a twos complement number is invalid.";
     
@@ -63,6 +64,7 @@ internal static class SR
     public const string Argument_InvalidFlag = "Value of flags is invalid.";
     public const string Argument_EmptyString = "The value cannot be an empty string.";
     public const string Argument_EmptyOrWhiteSpaceString = "The value cannot be an empty string or composed entirely of whitespace.";
+    public const string Argument_CannotExtractScalar = "Cannot extract a Unicode scalar value from the specified index in the input.";
     
     public const string ArgumentOutOfRange_NeedNonNegNum = "Non-negative number required.";
     public const string ArgumentOutOfRange_IndexMustBeLess = "Index was out of range. Must be non-negative and less than the size of the collection.";
@@ -91,6 +93,7 @@ internal static class SR
     public const string ArgumentOutOfRange_LengthGreaterThanCapacity = "The length cannot be greater than the capacity.";
     public const string ArgumentOutOfRange_OffsetOut = "Either offset did not refer to a position in the string, or there is an insufficient length of destination character array.";
     public const string ArgumentOutOfRange_RoundingDigits_MathF = "Rounding digits must be between 0 and 6, inclusive.";
+    public const string ArgumentOutOfRange_InvalidUTF32 = "A valid UTF32 value is between 0x000000 and 0x10ffff, inclusive, and should not include surrogate codepoint values (0x00d800 ~ 0x00dfff).";
     
     public const string InvalidOperation_EnumNotStarted = "Enumeration has not started. Call MoveNext.";
     public const string InvalidOperation_EnumEnded = "Enumeration already finished.";

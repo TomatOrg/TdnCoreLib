@@ -8,6 +8,12 @@ internal static class ThrowHelper
 {
     
     [DoesNotReturn]
+    internal static void ThrowArgumentException_CannotExtractScalar(string argument)
+    {
+        throw new ArgumentException(SR.Argument_CannotExtractScalar, argument);
+    }
+    
+    [DoesNotReturn]
     internal static void ThrowNotSupportedException()
     {
         throw new NotSupportedException();

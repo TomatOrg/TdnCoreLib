@@ -854,12 +854,12 @@ public readonly struct SByte
             result = checked((sbyte)actualValue);
             return true;
         }
-        // else if (typeof(TOther) == typeof(Half))
-        // {
-        //     Half actualValue = (Half)(object)value;
-        //     result = checked((sbyte)actualValue);
-        //     return true;
-        // }
+        else if (typeof(TOther) == typeof(Half))
+        {
+            Half actualValue = (Half)(object)value;
+            result = checked((sbyte)actualValue);
+            return true;
+        }
         else if (typeof(TOther) == typeof(short))
         {
             short actualValue = (short)(object)value;
@@ -927,13 +927,13 @@ public readonly struct SByte
                 (actualValue <= MinValue) ? MinValue : (sbyte)actualValue;
             return true;
         }
-        // else if (typeof(TOther) == typeof(Half))
-        // {
-        //     Half actualValue = (Half)(object)value;
-        //     result = (actualValue >= MaxValue) ? MaxValue :
-        //         (actualValue <= MinValue) ? MinValue : (sbyte)actualValue;
-        //     return true;
-        // }
+        else if (typeof(TOther) == typeof(Half))
+        {
+            Half actualValue = (Half)(object)value;
+            result = (actualValue >= MaxValue) ? MaxValue :
+                (actualValue <= MinValue) ? MinValue : (sbyte)actualValue;
+            return true;
+        }
         else if (typeof(TOther) == typeof(short))
         {
             short actualValue = (short)(object)value;
@@ -1007,13 +1007,13 @@ public readonly struct SByte
                 (actualValue <= MinValue) ? MinValue : (sbyte)actualValue;
             return true;
         }
-        // else if (typeof(TOther) == typeof(Half))
-        // {
-        //     Half actualValue = (Half)(object)value;
-        //     result = (actualValue >= MaxValue) ? MaxValue :
-        //         (actualValue <= MinValue) ? MinValue : (sbyte)actualValue;
-        //     return true;
-        // }
+        else if (typeof(TOther) == typeof(Half))
+        {
+            Half actualValue = (Half)(object)value;
+            result = (actualValue >= MaxValue) ? MaxValue :
+                (actualValue <= MinValue) ? MinValue : (sbyte)actualValue;
+            return true;
+        }
         else if (typeof(TOther) == typeof(short))
         {
             short actualValue = (short)(object)value;

@@ -896,27 +896,27 @@ public static partial class Math
         return (val1 >= val2) ? val1 : val2;
     }
 
-    // [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    // public static float Max(float val1, float val2)
-    // {
-    //     // This matches the IEEE 754:2019 `maximum` function
-    //     //
-    //     // It propagates NaN inputs back to the caller and
-    //     // otherwise returns the greater of the inputs. It
-    //     // treats +0 as greater than -0 as per the specification.
-    //
-    //     if (val1 != val2)
-    //     {
-    //         if (!float.IsNaN(val1))
-    //         {
-    //             return val2 < val1 ? val1 : val2;
-    //         }
-    //
-    //         return val1;
-    //     }
-    //
-    //     return float.IsNegative(val2) ? val1 : val2;
-    // }
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static float Max(float val1, float val2)
+    {
+        // This matches the IEEE 754:2019 `maximum` function
+        //
+        // It propagates NaN inputs back to the caller and
+        // otherwise returns the greater of the inputs. It
+        // treats +0 as greater than -0 as per the specification.
+    
+        if (val1 != val2)
+        {
+            if (!float.IsNaN(val1))
+            {
+                return val2 < val1 ? val1 : val2;
+            }
+    
+            return val1;
+        }
+    
+        return float.IsNegative(val2) ? val1 : val2;
+    }
 
     public static ushort Max(ushort val1, ushort val2)
     {
@@ -1028,27 +1028,27 @@ public static partial class Math
         return (val1 <= val2) ? val1 : val2;
     }
 
-    // [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    // public static float Min(float val1, float val2)
-    // {
-    //     // This matches the IEEE 754:2019 `minimum` function
-    //     //
-    //     // It propagates NaN inputs back to the caller and
-    //     // otherwise returns the lesser of the inputs. It
-    //     // treats +0 as greater than -0 as per the specification.
-    //
-    //     if (val1 != val2)
-    //     {
-    //         if (!float.IsNaN(val1))
-    //         {
-    //             return val1 < val2 ? val1 : val2;
-    //         }
-    //
-    //         return val1;
-    //     }
-    //
-    //     return float.IsNegative(val1) ? val1 : val2;
-    // }
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static float Min(float val1, float val2)
+    {
+        // This matches the IEEE 754:2019 `minimum` function
+        //
+        // It propagates NaN inputs back to the caller and
+        // otherwise returns the lesser of the inputs. It
+        // treats +0 as greater than -0 as per the specification.
+    
+        if (val1 != val2)
+        {
+            if (!float.IsNaN(val1))
+            {
+                return val1 < val2 ? val1 : val2;
+            }
+    
+            return val1;
+        }
+    
+        return float.IsNegative(val1) ? val1 : val2;
+    }
 
     public static ushort Min(ushort val1, ushort val2)
     {

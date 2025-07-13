@@ -894,12 +894,12 @@ public readonly struct Int16
             result = checked((short)actualValue);
             return true;
         }
-        // else if (typeof(TOther) == typeof(Half))
-        // {
-        //     Half actualValue = (Half)(object)value;
-        //     result = checked((short)actualValue);
-        //     return true;
-        // }
+        else if (typeof(TOther) == typeof(Half))
+        {
+            Half actualValue = (Half)(object)value;
+            result = checked((short)actualValue);
+            return true;
+        }
         else if (typeof(TOther) == typeof(int))
         {
             int actualValue = (int)(object)value;
@@ -967,13 +967,13 @@ public readonly struct Int16
                 (actualValue <= MinValue) ? MinValue : (short)actualValue;
             return true;
         }
-        // else if (typeof(TOther) == typeof(Half))
-        // {
-        //     Half actualValue = (Half)(object)value;
-        //     result = (actualValue >= BitConverter.UInt16BitsToHalf(0x7800)) ? MaxValue :
-        //         (actualValue <= BitConverter.UInt16BitsToHalf(0xF800)) ? MinValue : (short)actualValue;
-        //     return true;
-        // }
+        else if (typeof(TOther) == typeof(Half))
+        {
+            Half actualValue = (Half)(object)value;
+            result = (actualValue >= BitConverter.UInt16BitsToHalf(0x7800)) ? MaxValue :
+                (actualValue <= BitConverter.UInt16BitsToHalf(0xF800)) ? MinValue : (short)actualValue;
+            return true;
+        }
         else if (typeof(TOther) == typeof(int))
         {
             int actualValue = (int)(object)value;
@@ -1046,13 +1046,13 @@ public readonly struct Int16
                 (actualValue <= MinValue) ? MinValue : (short)actualValue;
             return true;
         }
-        // else if (typeof(TOther) == typeof(Half))
-        // {
-        //     Half actualValue = (Half)(object)value;
-        //     result = (actualValue >= BitConverter.UInt16BitsToHalf(0x7800)) ? MaxValue :
-        //         (actualValue <= BitConverter.UInt16BitsToHalf(0xF800)) ? MinValue : (short)actualValue;
-        //     return true;
-        // }
+        else if (typeof(TOther) == typeof(Half))
+        {
+            Half actualValue = (Half)(object)value;
+            result = (actualValue >= BitConverter.UInt16BitsToHalf(0x7800)) ? MaxValue :
+                (actualValue <= BitConverter.UInt16BitsToHalf(0xF800)) ? MinValue : (short)actualValue;
+            return true;
+        }
         else if (typeof(TOther) == typeof(int))
         {
             int actualValue = (int)(object)value;

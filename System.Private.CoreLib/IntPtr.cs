@@ -852,12 +852,12 @@ public readonly struct IntPtr
             result = checked((nint)actualValue);
             return true;
         }
-        // else if (typeof(TOther) == typeof(Half))
-        // {
-        //     Half actualValue = (Half)(object)value;
-        //     result = checked((nint)actualValue);
-        //     return true;
-        // }
+        else if (typeof(TOther) == typeof(Half))
+        {
+            Half actualValue = (Half)(object)value;
+            result = checked((nint)actualValue);
+            return true;
+        }
         else if (typeof(TOther) == typeof(short))
         {
             short actualValue = (short)(object)value;
@@ -925,13 +925,13 @@ public readonly struct IntPtr
                 (actualValue <= nint_t.MinValue) ? unchecked((nint)nint_t.MinValue) : (nint)actualValue;
             return true;
         }
-        // else if (typeof(TOther) == typeof(Half))
-        // {
-        //     Half actualValue = (Half)(object)value;
-        //     result = (actualValue == Half.PositiveInfinity) ? unchecked((nint)nint_t.MaxValue) :
-        //         (actualValue == Half.NegativeInfinity) ? unchecked((nint)nint_t.MinValue) : (nint)actualValue;
-        //     return true;
-        // }
+        else if (typeof(TOther) == typeof(Half))
+        {
+            Half actualValue = (Half)(object)value;
+            result = (actualValue == Half.PositiveInfinity) ? unchecked((nint)nint_t.MaxValue) :
+                (actualValue == Half.NegativeInfinity) ? unchecked((nint)nint_t.MinValue) : (nint)actualValue;
+            return true;
+        }
         else if (typeof(TOther) == typeof(short))
         {
             short actualValue = (short)(object)value;
@@ -1002,13 +1002,13 @@ public readonly struct IntPtr
                 (actualValue <= nint_t.MinValue) ? unchecked((nint)nint_t.MinValue) : (nint)actualValue;
             return true;
         }
-        // else if (typeof(TOther) == typeof(Half))
-        // {
-        //     Half actualValue = (Half)(object)value;
-        //     result = (actualValue == Half.PositiveInfinity) ? unchecked((nint)nint_t.MaxValue) :
-        //         (actualValue == Half.NegativeInfinity) ? unchecked((nint)nint_t.MinValue) : (nint)actualValue;
-        //     return true;
-        // }
+        else if (typeof(TOther) == typeof(Half))
+        {
+            Half actualValue = (Half)(object)value;
+            result = (actualValue == Half.PositiveInfinity) ? unchecked((nint)nint_t.MaxValue) :
+                (actualValue == Half.NegativeInfinity) ? unchecked((nint)nint_t.MinValue) : (nint)actualValue;
+            return true;
+        }
         else if (typeof(TOther) == typeof(short))
         {
             short actualValue = (short)(object)value;

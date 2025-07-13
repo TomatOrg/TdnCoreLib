@@ -881,12 +881,12 @@ namespace System
                 result = (TOther)(object)actualResult;
                 return true;
             }
-            // else if (typeof(TOther) == typeof(Half))
-            // {
-            //     Half actualResult = (Half)value;
-            //     result = (TOther)(object)actualResult;
-            //     return true;
-            // }
+            else if (typeof(TOther) == typeof(Half))
+            {
+                Half actualResult = (Half)value;
+                result = (TOther)(object)actualResult;
+                return true;
+            }
             else if (typeof(TOther) == typeof(short))
             {
                 short actualResult = checked((short)value);
@@ -955,12 +955,12 @@ namespace System
                 result = (TOther)(object)actualResult;
                 return true;
             }
-            // else if (typeof(TOther) == typeof(Half))
-            // {
-            //     Half actualResult = (Half)value;
-            //     result = (TOther)(object)actualResult;
-            //     return true;
-            // }
+            else if (typeof(TOther) == typeof(Half))
+            {
+                Half actualResult = (Half)value;
+                result = (TOther)(object)actualResult;
+                return true;
+            }
             else if (typeof(TOther) == typeof(short))
             {
                 short actualResult = (value >= (nuint)short.MaxValue) ? short.MaxValue : (short)value;
@@ -1029,12 +1029,12 @@ namespace System
                 result = (TOther)(object)actualResult;
                 return true;
             }
-            // else if (typeof(TOther) == typeof(Half))
-            // {
-            //     Half actualResult = (Half)value;
-            //     result = (TOther)(object)actualResult;
-            //     return true;
-            // }
+            else if (typeof(TOther) == typeof(Half))
+            {
+                Half actualResult = (Half)value;
+                result = (TOther)(object)actualResult;
+                return true;
+            }
             else if (typeof(TOther) == typeof(short))
             {
                 short actualResult = (short)value;

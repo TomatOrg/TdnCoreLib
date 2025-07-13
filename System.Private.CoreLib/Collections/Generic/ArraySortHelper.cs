@@ -347,8 +347,8 @@ internal sealed partial class GenericArraySortHelper<T>
                     // so that we can do an optimized comparison as part of the actual sort
                     // on the remainder of the values.
                     if (typeof(T) == typeof(double) ||
-                        typeof(T) == typeof(float)/* ||
-                        typeof(T) == typeof(Half)*/)
+                        typeof(T) == typeof(float) ||
+                        typeof(T) == typeof(Half))
                     {
                         int nanLeft = SortUtils.MoveNansToFront(keys, default(Span<byte>));
                         if (nanLeft == keys.Length)
@@ -638,7 +638,7 @@ internal sealed partial class GenericArraySortHelper<T>
         if (typeof(T) == typeof(nint)) return (nint)(object)left < (nint)(object)right;
         if (typeof(T) == typeof(float)) return (float)(object)left < (float)(object)right;
         if (typeof(T) == typeof(double)) return (double)(object)left < (double)(object)right;
-        // if (typeof(T) == typeof(Half)) return (Half)(object)left < (Half)(object)right;
+        if (typeof(T) == typeof(Half)) return (Half)(object)left < (Half)(object)right;
         return left.CompareTo(right) < 0 ? true : false;
     }
 
@@ -657,7 +657,7 @@ internal sealed partial class GenericArraySortHelper<T>
         if (typeof(T) == typeof(nint)) return (nint)(object)left > (nint)(object)right;
         if (typeof(T) == typeof(float)) return (float)(object)left > (float)(object)right;
         if (typeof(T) == typeof(double)) return (double)(object)left > (double)(object)right;
-        // if (typeof(T) == typeof(Half)) return (Half)(object)left > (Half)(object)right;
+        if (typeof(T) == typeof(Half)) return (Half)(object)left > (Half)(object)right;
         return left.CompareTo(right) > 0 ? true : false;
     }
 }
@@ -899,8 +899,8 @@ internal sealed partial class GenericArraySortHelper<TKey, TValue>
                     // so that we can do an optimized comparison as part of the actual sort
                     // on the remainder of the values.
                     if (typeof(TKey) == typeof(double) ||
-                        typeof(TKey) == typeof(float)/* ||
-                        typeof(TKey) == typeof(Half)*/)
+                        typeof(TKey) == typeof(float) ||
+                        typeof(TKey) == typeof(Half))
                     {
                         int nanLeft = SortUtils.MoveNansToFront(keys, values);
                         if (nanLeft == keys.Length)
@@ -1135,7 +1135,7 @@ internal sealed partial class GenericArraySortHelper<TKey, TValue>
         if (typeof(TKey) == typeof(nint)) return (nint)(object)left < (nint)(object)right;
         if (typeof(TKey) == typeof(float)) return (float)(object)left < (float)(object)right;
         if (typeof(TKey) == typeof(double)) return (double)(object)left < (double)(object)right;
-        // if (typeof(TKey) == typeof(Half)) return (Half)(object)left < (Half)(object)right;
+        if (typeof(TKey) == typeof(Half)) return (Half)(object)left < (Half)(object)right;
         return left.CompareTo(right) < 0 ? true : false;
     }
 
@@ -1154,7 +1154,7 @@ internal sealed partial class GenericArraySortHelper<TKey, TValue>
         if (typeof(TKey) == typeof(nint)) return (nint)(object)left > (nint)(object)right;
         if (typeof(TKey) == typeof(float)) return (float)(object)left > (float)(object)right;
         if (typeof(TKey) == typeof(double)) return (double)(object)left > (double)(object)right;
-        // if (typeof(TKey) == typeof(Half)) return (Half)(object)left > (Half)(object)right;
+        if (typeof(TKey) == typeof(Half)) return (Half)(object)left > (Half)(object)right;
         return left.CompareTo(right) > 0 ? true : false;
     }
 }
@@ -1172,9 +1172,9 @@ internal static class SortUtils
 
         for (int i = 0; i < keys.Length; i++)
         {
-            if ((typeof(TKey) == typeof(double) && double.IsNaN((double)(object)keys[i])))
-                // (typeof(TKey) == typeof(float) && float.IsNaN((float)(object)keys[i])) ||
-                // (typeof(TKey) == typeof(Half) && Half.IsNaN((Half)(object)keys[i])))
+            if ((typeof(TKey) == typeof(double) && double.IsNaN((double)(object)keys[i])) ||
+                (typeof(TKey) == typeof(float) && float.IsNaN((float)(object)keys[i])) ||
+                (typeof(TKey) == typeof(Half) && Half.IsNaN((Half)(object)keys[i])))
             {
                 TKey temp = keys[left];
                 keys[left] = keys[i];

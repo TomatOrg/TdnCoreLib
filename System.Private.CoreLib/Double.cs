@@ -1165,13 +1165,13 @@ namespace System
             // That is, `ConvertFrom` for `double` will handle the other signed types and
             // `ConvertTo` will handle the unsigned types
 
-            // if (typeof(TOther) == typeof(Half))
-            // {
-            //     Half actualValue = (Half)(object)value;
-            //     result = (double)actualValue;
-            //     return true;
-            // }
-            /*else */if (typeof(TOther) == typeof(short))
+            if (typeof(TOther) == typeof(Half))
+            {
+                Half actualValue = (Half)(object)value;
+                result = (double)actualValue;
+                return true;
+            }
+            else if (typeof(TOther) == typeof(short))
             {
                 short actualValue = (short)(object)value;
                 result = actualValue;

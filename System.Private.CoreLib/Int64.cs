@@ -920,12 +920,12 @@ public readonly struct Int64
             result = checked((long)actualValue);
             return true;
         }
-        // else if (typeof(TOther) == typeof(Half))
-        // {
-        //     Half actualValue = (Half)(object)value;
-        //     result = checked((long)actualValue);
-        //     return true;
-        // }
+        else if (typeof(TOther) == typeof(Half))
+        {
+            Half actualValue = (Half)(object)value;
+            result = checked((long)actualValue);
+            return true;
+        }
         else if (typeof(TOther) == typeof(short))
         {
             short actualValue = (short)(object)value;
@@ -993,13 +993,13 @@ public readonly struct Int64
                 (actualValue <= MinValue) ? MinValue : (long)actualValue;
             return true;
         }
-        // else if (typeof(TOther) == typeof(Half))
-        // {
-        //     Half actualValue = (Half)(object)value;
-        //     result = (actualValue == Half.PositiveInfinity) ? MaxValue :
-        //         (actualValue == Half.NegativeInfinity) ? MinValue : (long)actualValue;
-        //     return true;
-        // }
+        else if (typeof(TOther) == typeof(Half))
+        {
+            Half actualValue = (Half)(object)value;
+            result = (actualValue == Half.PositiveInfinity) ? MaxValue :
+                (actualValue == Half.NegativeInfinity) ? MinValue : (long)actualValue;
+            return true;
+        }
         else if (typeof(TOther) == typeof(short))
         {
             short actualValue = (short)(object)value;
@@ -1069,13 +1069,13 @@ public readonly struct Int64
                 (actualValue <= MinValue) ? MinValue : (long)actualValue;
             return true;
         }
-        // else if (typeof(TOther) == typeof(Half))
-        // {
-        //     Half actualValue = (Half)(object)value;
-        //     result = (actualValue == Half.PositiveInfinity) ? MaxValue :
-        //         (actualValue == Half.NegativeInfinity) ? MinValue : (long)actualValue;
-        //     return true;
-        // }
+        else if (typeof(TOther) == typeof(Half))
+        {
+            Half actualValue = (Half)(object)value;
+            result = (actualValue == Half.PositiveInfinity) ? MaxValue :
+                (actualValue == Half.NegativeInfinity) ? MinValue : (long)actualValue;
+            return true;
+        }
         else if (typeof(TOther) == typeof(short))
         {
             short actualValue = (short)(object)value;

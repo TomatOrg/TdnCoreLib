@@ -920,12 +920,12 @@ public readonly struct UInt16
             result = (TOther)(object)actualResult;
             return true;
         }
-        // else if (typeof(TOther) == typeof(Half))
-        // {
-        //     Half actualResult = (Half)value;
-        //     result = (TOther)(object)actualResult;
-        //     return true;
-        // }
+        else if (typeof(TOther) == typeof(Half))
+        {
+            Half actualResult = (Half)value;
+            result = (TOther)(object)actualResult;
+            return true;
+        }
         else if (typeof(TOther) == typeof(short))
         {
             short actualResult = checked((short)value);
@@ -994,12 +994,12 @@ public readonly struct UInt16
             result = (TOther)(object)actualResult;
             return true;
         }
-        // else if (typeof(TOther) == typeof(Half))
-        // {
-        //     Half actualResult = (Half)value;
-        //     result = (TOther)(object)actualResult;
-        //     return true;
-        // }
+        else if (typeof(TOther) == typeof(Half))
+        {
+            Half actualResult = (Half)value;
+            result = (TOther)(object)actualResult;
+            return true;
+        }
         else if (typeof(TOther) == typeof(short))
         {
             short actualResult = (value >= short.MaxValue) ? short.MaxValue : (short)value;
@@ -1068,12 +1068,12 @@ public readonly struct UInt16
             result = (TOther)(object)actualResult;
             return true;
         }
-        // else if (typeof(TOther) == typeof(Half))
-        // {
-        //     Half actualResult = (Half)value;
-        //     result = (TOther)(object)actualResult;
-        //     return true;
-        // }
+        else if (typeof(TOther) == typeof(Half))
+        {
+            Half actualResult = (Half)value;
+            result = (TOther)(object)actualResult;
+            return true;
+        }
         else if (typeof(TOther) == typeof(short))
         {
             short actualResult = (short)value;

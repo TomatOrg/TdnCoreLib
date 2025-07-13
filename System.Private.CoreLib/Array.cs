@@ -58,6 +58,20 @@ public abstract class Array
         return lb - 1;
     }
     
+    public static void Copy<T>(T[] sourceArray, T[] destinationArray, long length)
+    {
+        int ilength = (int)length;
+        if (length != ilength)
+            ThrowHelper.ThrowArgumentOutOfRangeException(nameof(length), SR.ArgumentOutOfRange_HugeArrayNotSupported);
+
+        Copy(sourceArray, destinationArray, ilength);
+    }
+
+    public static void Copy<T>(T[] sourceArray, T[] destinationArray, int length)
+    {
+        Copy(sourceArray, 0, destinationArray, 0, length);
+    }
+    
     public static void Copy<T>(T[] sourceArray, int sourceIndex, T[] destinationArray, int destinationIndex, int length)
     {
         if (sourceArray == null)

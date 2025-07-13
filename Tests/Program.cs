@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Numerics;
 using System.Runtime.CompilerServices;
+using System.Text;
 
 namespace Tests;
 
@@ -23,16 +24,16 @@ internal static class Program
     
     public static int Main(string[] args)
     {
-        Debug.WriteLine(string.Format("{0} {1}!", "Hello", "World"));
+        var sb = new StringBuilder();
+        var list = new List<string>();
+        list.Add("1");
+        list.Add("3");
+        list.Add("6");
+        foreach (var i in list)
+        {
+            sb.Insert(0, i + "\n");
+        }
+        Debug.WriteLine(sb.ToString());
         return 0;
-        // var list = new List<string>();
-        // list.Add("1");
-        // list.Add("3");
-        // list.Add("6");
-        // foreach (var i in list)
-        // {
-        //     Debug.WriteLine(i);
-        // }
-        // return 0;
     }
 }

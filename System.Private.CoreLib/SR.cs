@@ -25,6 +25,7 @@ internal static class SR
     public const string Arg_ArgumentException = "Value does not fall within the expected range.";
     public const string Arg_FormatException = "One of the identified items was in an invalid format.";
     public const string Arg_InvalidCastException = "Specified cast is not valid.";
+    public const string Arg_LongerThanSrcString = "Source string was not long enough. Check sourceIndex and count.";
     
     public const string Arg_MustBeDouble = "Object must be of type Double.";
     public const string Arg_MustBeSByte = "Object must be of type SByte.";
@@ -84,6 +85,9 @@ internal static class SR
     public const string ArgumentOutOfRange_SmallCapacity = "capacity was less than the current size.";
     public const string ArgumentOutOfRange_ListInsert = "Index must be within the bounds of the List.";
     public const string ArgumentOutOfRange_BiggerThanCollection = "Larger than collection size.";
+    public const string ArgumentOutOfRange_Capacity = "Capacity exceeds maximum capacity.";
+    public const string ArgumentOutOfRange_LengthGreaterThanCapacity = "The length cannot be greater than the capacity.";
+    public const string ArgumentOutOfRange_OffsetOut = "Either offset did not refer to a position in the string, or there is an insufficient length of destination character array.";
     
     public const string InvalidOperation_EnumNotStarted = "Enumeration has not started. Call MoveNext.";
     public const string InvalidOperation_EnumEnded = "Enumeration already finished.";

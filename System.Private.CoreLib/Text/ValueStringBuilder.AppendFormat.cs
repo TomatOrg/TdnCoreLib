@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 
 namespace System.Text;
 
-public ref partial struct ValueStringBuilder
+internal ref partial struct ValueStringBuilder
 {
     // Copied from StringBuilder, can't be done via generic extension
     // as ValueStringBuilder is a ref struct and cannot be used in a generic.

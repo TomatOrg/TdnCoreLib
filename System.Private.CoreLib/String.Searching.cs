@@ -75,8 +75,7 @@ namespace System
         {
             if (!char.IsAscii(value))
             {
-                throw new NotImplementedException();
-                // return Ordinal.IndexOfOrdinalIgnoreCase(this, new ReadOnlySpan<char>(in value));
+                return Ordinal.IndexOfOrdinalIgnoreCase(this, new ReadOnlySpan<char>(in value));
             }
 
             if (char.IsAsciiLetter(value))
@@ -276,8 +275,7 @@ namespace System
 
                 case StringComparison.Ordinal:
                 case StringComparison.OrdinalIgnoreCase:
-                    throw new NotImplementedException();
-                    // return Ordinal.IndexOf(this, value, startIndex, count, comparisonType == StringComparison.OrdinalIgnoreCase);
+                    return Ordinal.IndexOf(this, value, startIndex, count, comparisonType == StringComparison.OrdinalIgnoreCase);
 
                 default:
                     throw (value is null)

@@ -84,8 +84,7 @@ namespace System
                 return false;
             if (value.Length == 0)  // span.Length == value.Length == 0
                 return true;
-            throw new NotImplementedException();
-            // return Ordinal.EqualsIgnoreCase(ref MemoryMarshal.GetReference(span), ref MemoryMarshal.GetReference(value), span.Length);
+            return Ordinal.EqualsIgnoreCase(ref MemoryMarshal.GetReference(span), ref MemoryMarshal.GetReference(value), span.Length);
         }
 
         /// <summary>
@@ -118,8 +117,7 @@ namespace System
 
                 default:
                     Debug.Assert(comparisonType == StringComparison.OrdinalIgnoreCase);
-                    throw new NotImplementedException();
-                    // return Ordinal.CompareStringIgnoreCase(ref MemoryMarshal.GetReference(span), span.Length, ref MemoryMarshal.GetReference(other), other.Length);
+                    return Ordinal.CompareStringIgnoreCase(ref MemoryMarshal.GetReference(span), span.Length, ref MemoryMarshal.GetReference(other), other.Length);
             }
         }
 
@@ -152,8 +150,7 @@ namespace System
 
                 default:
                     Debug.Assert(comparisonType == StringComparison.OrdinalIgnoreCase);
-                    throw new NotImplementedException();
-                    // return Ordinal.IndexOfOrdinalIgnoreCase(span, value);
+                    return Ordinal.IndexOfOrdinalIgnoreCase(span, value);
             }
         }
 
@@ -190,8 +187,7 @@ namespace System
 
                 default:
                     Debug.Assert(comparisonType == StringComparison.OrdinalIgnoreCase);
-                    throw new NotImplementedException();
-                    // return Ordinal.LastIndexOfOrdinalIgnoreCase(span, value);
+                    return Ordinal.LastIndexOfOrdinalIgnoreCase(span, value);
             }
         }
 
@@ -320,14 +316,11 @@ namespace System
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static bool EndsWithOrdinalIgnoreCase(this ReadOnlySpan<char> span, ReadOnlySpan<char> value)
-        {
-            throw new NotImplementedException();
-        }
-            // => value.Length <= span.Length
-            // && Ordinal.EqualsIgnoreCase(
-            //     ref Unsafe.Add(ref MemoryMarshal.GetReference(span), span.Length - value.Length),
-            //     ref MemoryMarshal.GetReference(value),
-            //     value.Length);
+            => value.Length <= span.Length
+            && Ordinal.EqualsIgnoreCase(
+                ref Unsafe.Add(ref MemoryMarshal.GetReference(span), span.Length - value.Length),
+                ref MemoryMarshal.GetReference(value),
+                value.Length);
 
         /// <summary>
         /// Determines whether the beginning of the <paramref name="span"/> matches the specified <paramref name="value"/> when compared using the specified <paramref name="comparisonType"/> option.
@@ -362,11 +355,8 @@ namespace System
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static bool StartsWithOrdinalIgnoreCase(this ReadOnlySpan<char> span, ReadOnlySpan<char> value)
-        {
-            throw new NotImplementedException();
-        }
-            // => value.Length <= span.Length
-            // && Ordinal.EqualsIgnoreCase(ref MemoryMarshal.GetReference(span), ref MemoryMarshal.GetReference(value), value.Length);
+            => value.Length <= span.Length
+            && Ordinal.EqualsIgnoreCase(ref MemoryMarshal.GetReference(span), ref MemoryMarshal.GetReference(value), value.Length);
 
         /// <summary>
         /// Returns an enumeration of <see cref="Rune"/> from the provided span.

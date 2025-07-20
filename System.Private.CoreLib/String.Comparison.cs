@@ -67,8 +67,7 @@ public partial class String
     {
         Debug.Assert(strA.Length == strB.Length);
 
-        throw new NotImplementedException();
-        // return Ordinal.EqualsIgnoreCase(ref strA.GetRawStringData(), ref strB.GetRawStringData(), strB.Length);
+        return Ordinal.EqualsIgnoreCase(ref strA.GetRawStringData(), ref strB.GetRawStringData(), strB.Length);
     }
 
     private static unsafe int CompareOrdinalHelper(string strA, string strB)
@@ -231,8 +230,7 @@ public partial class String
                 return CompareOrdinalHelper(strA, strB);
 
             case StringComparison.OrdinalIgnoreCase:
-                throw new NotImplementedException();
-                // return Ordinal.CompareStringIgnoreCase(ref strA.GetRawStringData(), strA.Length, ref strB.GetRawStringData(), strB.Length);
+                return Ordinal.CompareStringIgnoreCase(ref strA.GetRawStringData(), strA.Length, ref strB.GetRawStringData(), strB.Length);
 
             default:
                 throw new ArgumentException(SR.NotSupported_StringComparison, nameof(comparisonType));
@@ -398,8 +396,7 @@ public partial class String
 
             default:
                 Debug.Assert(comparisonType == StringComparison.OrdinalIgnoreCase); // CheckStringComparison validated these earlier
-                throw new NotImplementedException();
-                // return Ordinal.CompareStringIgnoreCase(ref Unsafe.Add(ref strA.GetRawStringData(), indexA), lengthA, ref Unsafe.Add(ref strB.GetRawStringData(), indexB), lengthB);
+                return Ordinal.CompareStringIgnoreCase(ref Unsafe.Add(ref strA.GetRawStringData(), indexA), lengthA, ref Unsafe.Add(ref strB.GetRawStringData(), indexB), lengthB);
         }
     }
 
@@ -548,11 +545,10 @@ public partial class String
                 return (uint)offset <= (uint)this.Length && this.AsSpan(offset).SequenceEqual(value);
 
             case StringComparison.OrdinalIgnoreCase:
-                throw new NotImplementedException();
-                // return Length >= value.Length &&
-                //        Ordinal.EqualsIgnoreCase(ref Unsafe.Add(ref GetRawStringData(), Length - value.Length),
-                //            ref value.GetRawStringData(),
-                //            value.Length);
+                return Length >= value.Length &&
+                       Ordinal.EqualsIgnoreCase(ref Unsafe.Add(ref GetRawStringData(), Length - value.Length),
+                           ref value.GetRawStringData(),
+                           value.Length);
 
             default:
                 throw new ArgumentException(SR.NotSupported_StringComparison, nameof(comparisonType));
@@ -987,8 +983,7 @@ public partial class String
                 {
                     return false;
                 }
-                throw new NotImplementedException();
-                // return Ordinal.EqualsIgnoreCase(ref this.GetRawStringData(), ref value.GetRawStringData(), value.Length);
+                return Ordinal.EqualsIgnoreCase(ref this.GetRawStringData(), ref value.GetRawStringData(), value.Length);
 
             default:
                 throw new ArgumentException(SR.NotSupported_StringComparison, nameof(comparisonType));

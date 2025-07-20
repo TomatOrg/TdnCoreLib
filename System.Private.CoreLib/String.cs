@@ -24,8 +24,8 @@ public sealed partial class String
         IEnumerable<char>,
         IComparable<string?>,
         IEquatable<string?>,
-        ICloneable
-        // ISpanParsable<string>
+        ICloneable,
+        ISpanParsable<string>
 {
     /// <summary>Maximum length allowed for a string.</summary>
     /// <remarks>Keep in sync with AllocateString in gchelpers.cpp.</remarks>
@@ -524,44 +524,44 @@ public sealed partial class String
     // IParsable
     //
 
-    // static string IParsable<string>.Parse(string s, IFormatProvider? provider)
-    // {
-    //     ArgumentNullException.ThrowIfNull(s);
-    //     return s;
-    // }
-    //
-    // static bool IParsable<string>.TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider, [MaybeNullWhen(returnValue: false)] out string result)
-    // {
-    //     result = s;
-    //     return s is not null;
-    // }
+    static string IParsable<string>.Parse(string s, IFormatProvider? provider)
+    {
+        ArgumentNullException.ThrowIfNull(s);
+        return s;
+    }
+    
+    static bool IParsable<string>.TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider, [MaybeNullWhen(returnValue: false)] out string result)
+    {
+        result = s;
+        return s is not null;
+    }
 
     //
     // ISpanParsable
     //
 
-    // static string ISpanParsable<string>.Parse(ReadOnlySpan<char> s, IFormatProvider? provider)
-    // {
-    //     if (s.Length > MaxLength)
-    //     {
-    //         ThrowHelper.ThrowFormatInvalidString();
-    //     }
-    //     return s.ToString();
-    // }
-    //
-    // static bool ISpanParsable<string>.TryParse(ReadOnlySpan<char> s, IFormatProvider? provider, [MaybeNullWhen(returnValue: false)] out string result)
-    // {
-    //     if (s.Length <= MaxLength)
-    //     {
-    //         result = s.ToString();
-    //         return true;
-    //     }
-    //     else
-    //     {
-    //         result = null;
-    //         return false;
-    //     }
-    // }
+    static string ISpanParsable<string>.Parse(ReadOnlySpan<char> s, IFormatProvider? provider)
+    {
+        if (s.Length > MaxLength)
+        {
+            ThrowHelper.ThrowFormatInvalidString();
+        }
+        return s.ToString();
+    }
+    
+    static bool ISpanParsable<string>.TryParse(ReadOnlySpan<char> s, IFormatProvider? provider, [MaybeNullWhen(returnValue: false)] out string result)
+    {
+        if (s.Length <= MaxLength)
+        {
+            result = s.ToString();
+            return true;
+        }
+        else
+        {
+            result = null;
+            return false;
+        }
+    }
     
     [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Native)]
     internal static extern string FastAllocateString(int length);

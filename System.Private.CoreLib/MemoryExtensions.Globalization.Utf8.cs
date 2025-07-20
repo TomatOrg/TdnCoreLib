@@ -21,8 +21,7 @@ public static partial class MemoryExtensions
             return true;
         }
 
-        throw new NotImplementedException();
-        // return Ordinal.EqualsIgnoreCaseUtf8(ref MemoryMarshal.GetReference(span), span.Length, ref MemoryMarshal.GetReference(value), value.Length);
+        return Ordinal.EqualsIgnoreCaseUtf8(ref MemoryMarshal.GetReference(span), span.Length, ref MemoryMarshal.GetReference(value), value.Length);
     }
 
     /// <summary>
@@ -75,7 +74,6 @@ public static partial class MemoryExtensions
             return true;
         }
 
-        throw new NotImplementedException();
-        // return Ordinal.StartsWithIgnoreCaseUtf8(ref MemoryMarshal.GetReference(span), span.Length, ref MemoryMarshal.GetReference(value), value.Length);
+        return Ordinal.StartsWithIgnoreCaseUtf8(ref MemoryMarshal.GetReference(span), span.Length, ref MemoryMarshal.GetReference(value), value.Length);
     }
 }

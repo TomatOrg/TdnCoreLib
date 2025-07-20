@@ -19,13 +19,13 @@ namespace System;
 public readonly struct Single
     : IComparable,
         // IConvertible,
-        // ISpanFormattable,
+        ISpanFormattable,
         IComparable<float>,
         IEquatable<float>,
         IBinaryFloatingPointIeee754<float>,
-        IMinMaxValue<float>
-        // IUtf8SpanFormattable,
-        // IBinaryFloatParseAndFormatInfo<float>
+        IMinMaxValue<float>,
+        IUtf8SpanFormattable,
+        IBinaryFloatParseAndFormatInfo<float>
 {
     private readonly float m_value; // Do not rename (binary serialization)
 
@@ -315,93 +315,93 @@ public readonly struct Single
         return bits;
     }
 
-    // public override string ToString()
-    // {
-    //     return Number.FormatSingle(m_value, null, NumberFormatInfo.CurrentInfo);
-    // }
-    //
-    // public string ToString(IFormatProvider? provider)
-    // {
-    //     return Number.FormatSingle(m_value, null, NumberFormatInfo.GetInstance(provider));
-    // }
-    //
-    // public string ToString([StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format)
-    // {
-    //     return Number.FormatSingle(m_value, format, NumberFormatInfo.CurrentInfo);
-    // }
-    //
-    // public string ToString([StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format, IFormatProvider? provider)
-    // {
-    //     return Number.FormatSingle(m_value, format, NumberFormatInfo.GetInstance(provider));
-    // }
-    //
-    // public bool TryFormat(Span<char> destination, out int charsWritten, [StringSyntax(StringSyntaxAttribute.NumericFormat)] ReadOnlySpan<char> format = default, IFormatProvider? provider = null)
-    // {
-    //     return Number.TryFormatSingle(m_value, format, NumberFormatInfo.GetInstance(provider), destination, out charsWritten);
-    // }
-    //
-    // /// <inheritdoc cref="IUtf8SpanFormattable.TryFormat" />
-    // public bool TryFormat(Span<byte> utf8Destination, out int bytesWritten, [StringSyntax(StringSyntaxAttribute.NumericFormat)] ReadOnlySpan<char> format = default, IFormatProvider? provider = null)
-    // {
-    //     return Number.TryFormatSingle(m_value, format, NumberFormatInfo.GetInstance(provider), utf8Destination, out bytesWritten);
-    // }
+    public override string ToString()
+    {
+        return Number.FormatSingle(m_value, null, NumberFormatInfo.CurrentInfo);
+    }
+    
+    public string ToString(IFormatProvider? provider)
+    {
+        return Number.FormatSingle(m_value, null, NumberFormatInfo.GetInstance(provider));
+    }
+    
+    public string ToString([StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format)
+    {
+        return Number.FormatSingle(m_value, format, NumberFormatInfo.CurrentInfo);
+    }
+    
+    public string ToString([StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format, IFormatProvider? provider)
+    {
+        return Number.FormatSingle(m_value, format, NumberFormatInfo.GetInstance(provider));
+    }
+    
+    public bool TryFormat(Span<char> destination, out int charsWritten, [StringSyntax(StringSyntaxAttribute.NumericFormat)] ReadOnlySpan<char> format = default, IFormatProvider? provider = null)
+    {
+        return Number.TryFormatSingle(m_value, format, NumberFormatInfo.GetInstance(provider), destination, out charsWritten);
+    }
+    
+    /// <inheritdoc cref="IUtf8SpanFormattable.TryFormat" />
+    public bool TryFormat(Span<byte> utf8Destination, out int bytesWritten, [StringSyntax(StringSyntaxAttribute.NumericFormat)] ReadOnlySpan<char> format = default, IFormatProvider? provider = null)
+    {
+        return Number.TryFormatSingle(m_value, format, NumberFormatInfo.GetInstance(provider), utf8Destination, out bytesWritten);
+    }
 
-    // // Parses a float from a String in the given style.  If
-    // // a NumberFormatInfo isn't specified, the current culture's
-    // // NumberFormatInfo is assumed.
-    // //
-    // // This method will not throw an OverflowException, but will return
-    // // PositiveInfinity or NegativeInfinity for a number that is too
-    // // large or too small.
-    // //
-    // public static float Parse(string s) => Parse(s, NumberStyles.Float | NumberStyles.AllowThousands, provider: null);
+    // Parses a float from a String in the given style.  If
+    // a NumberFormatInfo isn't specified, the current culture's
+    // NumberFormatInfo is assumed.
     //
-    // public static float Parse(string s, NumberStyles style) => Parse(s, style, provider: null);
+    // This method will not throw an OverflowException, but will return
+    // PositiveInfinity or NegativeInfinity for a number that is too
+    // large or too small.
     //
-    // public static float Parse(string s, IFormatProvider? provider) => Parse(s, NumberStyles.Float | NumberStyles.AllowThousands, provider);
-    //
-    // public static float Parse(string s, NumberStyles style, IFormatProvider? provider)
-    // {
-    //     if (s is null)
-    //     {
-    //         ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
-    //     }
-    //     return Parse(s.AsSpan(), style, provider);
-    // }
-    //
-    // public static float Parse(ReadOnlySpan<char> s, NumberStyles style = NumberStyles.Float | NumberStyles.AllowThousands, IFormatProvider? provider = null)
-    // {
-    //     NumberFormatInfo.ValidateParseStyleFloatingPoint(style);
-    //     return Number.ParseFloat<char, float>(s, style, NumberFormatInfo.GetInstance(provider));
-    // }
-    //
-    // public static bool TryParse([NotNullWhen(true)] string? s, out float result) => TryParse(s, NumberStyles.Float | NumberStyles.AllowThousands, provider: null, out result);
-    //
-    // public static bool TryParse(ReadOnlySpan<char> s, out float result) => TryParse(s, NumberStyles.Float | NumberStyles.AllowThousands, provider: null, out result);
-    //
-    // /// <summary>Tries to convert a UTF-8 character span containing the string representation of a number to its single-precision floating-point number equivalent.</summary>
-    // /// <param name="utf8Text">A read-only UTF-8 character span that contains the number to convert.</param>
-    // /// <param name="result">When this method returns, contains a single-precision floating-point number equivalent of the numeric value or symbol contained in <paramref name="utf8Text" /> if the conversion succeeded or zero if the conversion failed. The conversion fails if the <paramref name="utf8Text" /> is <see cref="ReadOnlySpan{T}.Empty" /> or is not in a valid format. This parameter is passed uninitialized; any value originally supplied in result will be overwritten.</param>
-    // /// <returns><c>true</c> if <paramref name="utf8Text" /> was converted successfully; otherwise, false.</returns>
-    // public static bool TryParse(ReadOnlySpan<byte> utf8Text, out float result) => TryParse(utf8Text, NumberStyles.Float | NumberStyles.AllowThousands, provider: null, out result);
-    //
-    // public static bool TryParse([NotNullWhen(true)] string? s, NumberStyles style, IFormatProvider? provider, out float result)
-    // {
-    //     NumberFormatInfo.ValidateParseStyleFloatingPoint(style);
-    //
-    //     if (s == null)
-    //     {
-    //         result = 0;
-    //         return false;
-    //     }
-    //     return Number.TryParseFloat(s.AsSpan(), style, NumberFormatInfo.GetInstance(provider), out result);
-    // }
-    //
-    // public static bool TryParse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider, out float result)
-    // {
-    //     NumberFormatInfo.ValidateParseStyleFloatingPoint(style);
-    //     return Number.TryParseFloat(s, style, NumberFormatInfo.GetInstance(provider), out result);
-    // }
+    public static float Parse(string s) => Parse(s, NumberStyles.Float | NumberStyles.AllowThousands, provider: null);
+    
+    public static float Parse(string s, NumberStyles style) => Parse(s, style, provider: null);
+    
+    public static float Parse(string s, IFormatProvider? provider) => Parse(s, NumberStyles.Float | NumberStyles.AllowThousands, provider);
+    
+    public static float Parse(string s, NumberStyles style, IFormatProvider? provider)
+    {
+        if (s is null)
+        {
+            ThrowHelper.ThrowArgumentNullException(nameof(s));
+        }
+        return Parse(s.AsSpan(), style, provider);
+    }
+    
+    public static float Parse(ReadOnlySpan<char> s, NumberStyles style = NumberStyles.Float | NumberStyles.AllowThousands, IFormatProvider? provider = null)
+    {
+        NumberFormatInfo.ValidateParseStyleFloatingPoint(style);
+        return Number.ParseFloat<char, float>(s, style, NumberFormatInfo.GetInstance(provider));
+    }
+    
+    public static bool TryParse([NotNullWhen(true)] string? s, out float result) => TryParse(s, NumberStyles.Float | NumberStyles.AllowThousands, provider: null, out result);
+    
+    public static bool TryParse(ReadOnlySpan<char> s, out float result) => TryParse(s, NumberStyles.Float | NumberStyles.AllowThousands, provider: null, out result);
+    
+    /// <summary>Tries to convert a UTF-8 character span containing the string representation of a number to its single-precision floating-point number equivalent.</summary>
+    /// <param name="utf8Text">A read-only UTF-8 character span that contains the number to convert.</param>
+    /// <param name="result">When this method returns, contains a single-precision floating-point number equivalent of the numeric value or symbol contained in <paramref name="utf8Text" /> if the conversion succeeded or zero if the conversion failed. The conversion fails if the <paramref name="utf8Text" /> is <see cref="ReadOnlySpan{T}.Empty" /> or is not in a valid format. This parameter is passed uninitialized; any value originally supplied in result will be overwritten.</param>
+    /// <returns><c>true</c> if <paramref name="utf8Text" /> was converted successfully; otherwise, false.</returns>
+    public static bool TryParse(ReadOnlySpan<byte> utf8Text, out float result) => TryParse(utf8Text, NumberStyles.Float | NumberStyles.AllowThousands, provider: null, out result);
+    
+    public static bool TryParse([NotNullWhen(true)] string? s, NumberStyles style, IFormatProvider? provider, out float result)
+    {
+        NumberFormatInfo.ValidateParseStyleFloatingPoint(style);
+    
+        if (s == null)
+        {
+            result = 0;
+            return false;
+        }
+        return Number.TryParseFloat(s.AsSpan(), style, NumberFormatInfo.GetInstance(provider), out result);
+    }
+    
+    public static bool TryParse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider, out float result)
+    {
+        NumberFormatInfo.ValidateParseStyleFloatingPoint(style);
+        return Number.TryParseFloat(s, style, NumberFormatInfo.GetInstance(provider), out result);
+    }
 
     //
     // IConvertible implementation
@@ -1368,9 +1368,9 @@ public readonly struct Single
     //
     // IParsable
     //
-    //
-    // /// <inheritdoc cref="IParsable{TSelf}.TryParse(string?, IFormatProvider?, out TSelf)" />
-    // public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider, out float result) => TryParse(s, NumberStyles.Float | NumberStyles.AllowThousands, provider, out result);
+    
+    /// <inheritdoc cref="IParsable{TSelf}.TryParse(string?, IFormatProvider?, out TSelf)" />
+    public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider, out float result) => TryParse(s, NumberStyles.Float | NumberStyles.AllowThousands, provider, out result);
 
     //
     // IPowerFunctions
@@ -1577,11 +1577,11 @@ public readonly struct Single
     // ISpanParsable
     //
 
-    // /// <inheritdoc cref="ISpanParsable{TSelf}.Parse(ReadOnlySpan{char}, IFormatProvider?)" />
-    // public static float Parse(ReadOnlySpan<char> s, IFormatProvider? provider) => Parse(s, NumberStyles.Float | NumberStyles.AllowThousands, provider);
-    //
-    // /// <inheritdoc cref="ISpanParsable{TSelf}.TryParse(ReadOnlySpan{char}, IFormatProvider?, out TSelf)" />
-    // public static bool TryParse(ReadOnlySpan<char> s, IFormatProvider? provider, out float result) => TryParse(s, NumberStyles.Float | NumberStyles.AllowThousands, provider, out result);
+    /// <inheritdoc cref="ISpanParsable{TSelf}.Parse(ReadOnlySpan{char}, IFormatProvider?)" />
+    public static float Parse(ReadOnlySpan<char> s, IFormatProvider? provider) => Parse(s, NumberStyles.Float | NumberStyles.AllowThousands, provider);
+    
+    /// <inheritdoc cref="ISpanParsable{TSelf}.TryParse(ReadOnlySpan{char}, IFormatProvider?, out TSelf)" />
+    public static bool TryParse(ReadOnlySpan<char> s, IFormatProvider? provider, out float result) => TryParse(s, NumberStyles.Float | NumberStyles.AllowThousands, provider, out result);
 
     //
     // ISubtractionOperators
@@ -2047,65 +2047,65 @@ public readonly struct Single
     // IUtf8SpanParsable
     //
 
-    // /// <inheritdoc cref="INumberBase{TSelf}.Parse(ReadOnlySpan{byte}, NumberStyles, IFormatProvider?)" />
-    // public static float Parse(ReadOnlySpan<byte> utf8Text, NumberStyles style = NumberStyles.Float | NumberStyles.AllowThousands, IFormatProvider? provider = null)
-    // {
-    //     NumberFormatInfo.ValidateParseStyleInteger(style);
-    //     return Number.ParseFloat<byte, float>(utf8Text, style, NumberFormatInfo.GetInstance(provider));
-    // }
+    /// <inheritdoc cref="INumberBase{TSelf}.Parse(ReadOnlySpan{byte}, NumberStyles, IFormatProvider?)" />
+    public static float Parse(ReadOnlySpan<byte> utf8Text, NumberStyles style = NumberStyles.Float | NumberStyles.AllowThousands, IFormatProvider? provider = null)
+    {
+        NumberFormatInfo.ValidateParseStyleInteger(style);
+        return Number.ParseFloat<byte, float>(utf8Text, style, NumberFormatInfo.GetInstance(provider));
+    }
+    
+    /// <inheritdoc cref="INumberBase{TSelf}.TryParse(ReadOnlySpan{byte}, NumberStyles, IFormatProvider?, out TSelf)" />
+    public static bool TryParse(ReadOnlySpan<byte> utf8Text, NumberStyles style, IFormatProvider? provider, out float result)
+    {
+        NumberFormatInfo.ValidateParseStyleInteger(style);
+        return Number.TryParseFloat(utf8Text, style, NumberFormatInfo.GetInstance(provider), out result);
+    }
+    
+    /// <inheritdoc cref="IUtf8SpanParsable{TSelf}.Parse(ReadOnlySpan{byte}, IFormatProvider?)" />
+    public static float Parse(ReadOnlySpan<byte> utf8Text, IFormatProvider? provider) => Parse(utf8Text, NumberStyles.Float | NumberStyles.AllowThousands, provider);
+    
+    /// <inheritdoc cref="IUtf8SpanParsable{TSelf}.TryParse(ReadOnlySpan{byte}, IFormatProvider?, out TSelf)" />
+    public static bool TryParse(ReadOnlySpan<byte> utf8Text, IFormatProvider? provider, out float result) => TryParse(utf8Text, NumberStyles.Float | NumberStyles.AllowThousands, provider, out result);
+    
     //
-    // /// <inheritdoc cref="INumberBase{TSelf}.TryParse(ReadOnlySpan{byte}, NumberStyles, IFormatProvider?, out TSelf)" />
-    // public static bool TryParse(ReadOnlySpan<byte> utf8Text, NumberStyles style, IFormatProvider? provider, out float result)
-    // {
-    //     NumberFormatInfo.ValidateParseStyleInteger(style);
-    //     return Number.TryParseFloat(utf8Text, style, NumberFormatInfo.GetInstance(provider), out result);
-    // }
+    // IBinaryFloatParseAndFormatInfo
     //
-    // /// <inheritdoc cref="IUtf8SpanParsable{TSelf}.Parse(ReadOnlySpan{byte}, IFormatProvider?)" />
-    // public static float Parse(ReadOnlySpan<byte> utf8Text, IFormatProvider? provider) => Parse(utf8Text, NumberStyles.Float | NumberStyles.AllowThousands, provider);
-    //
-    // /// <inheritdoc cref="IUtf8SpanParsable{TSelf}.TryParse(ReadOnlySpan{byte}, IFormatProvider?, out TSelf)" />
-    // public static bool TryParse(ReadOnlySpan<byte> utf8Text, IFormatProvider? provider, out float result) => TryParse(utf8Text, NumberStyles.Float | NumberStyles.AllowThousands, provider, out result);
-    //
-    // //
-    // // IBinaryFloatParseAndFormatInfo
-    // //
-    //
-    // static int IBinaryFloatParseAndFormatInfo<float>.NumberBufferLength => Number.SingleNumberBufferLength;
-    //
-    // static ulong IBinaryFloatParseAndFormatInfo<float>.ZeroBits => 0;
-    // static ulong IBinaryFloatParseAndFormatInfo<float>.InfinityBits => 0x7F800000;
-    //
-    // static ulong IBinaryFloatParseAndFormatInfo<float>.NormalMantissaMask => (1UL << SignificandLength) - 1;
-    // static ulong IBinaryFloatParseAndFormatInfo<float>.DenormalMantissaMask => TrailingSignificandMask;
-    //
-    // static int IBinaryFloatParseAndFormatInfo<float>.MinBinaryExponent => 1 - MaxExponent;
-    // static int IBinaryFloatParseAndFormatInfo<float>.MaxBinaryExponent => MaxExponent;
-    //
-    // static int IBinaryFloatParseAndFormatInfo<float>.MinDecimalExponent => -45;
-    // static int IBinaryFloatParseAndFormatInfo<float>.MaxDecimalExponent => 39;
-    //
-    // static int IBinaryFloatParseAndFormatInfo<float>.ExponentBias => ExponentBias;
-    // static ushort IBinaryFloatParseAndFormatInfo<float>.ExponentBits => 8;
-    //
-    // static int IBinaryFloatParseAndFormatInfo<float>.OverflowDecimalExponent => (MaxExponent + (2 * SignificandLength)) / 3;
-    // static int IBinaryFloatParseAndFormatInfo<float>.InfinityExponent => 0xFF;
-    //
-    // static ushort IBinaryFloatParseAndFormatInfo<float>.NormalMantissaBits => SignificandLength;
-    // static ushort IBinaryFloatParseAndFormatInfo<float>.DenormalMantissaBits => TrailingSignificandLength;
-    //
-    // static int IBinaryFloatParseAndFormatInfo<float>.MinFastFloatDecimalExponent => -65;
-    // static int IBinaryFloatParseAndFormatInfo<float>.MaxFastFloatDecimalExponent => 38;
-    //
-    // static int IBinaryFloatParseAndFormatInfo<float>.MinExponentRoundToEven => -17;
-    // static int IBinaryFloatParseAndFormatInfo<float>.MaxExponentRoundToEven => 10;
-    //
-    // static int IBinaryFloatParseAndFormatInfo<float>.MaxExponentFastPath => 10;
-    // static ulong IBinaryFloatParseAndFormatInfo<float>.MaxMantissaFastPath => 2UL << TrailingSignificandLength;
-    //
-    // static float IBinaryFloatParseAndFormatInfo<float>.BitsToFloat(ulong bits) => BitConverter.UInt32BitsToSingle((uint)(bits));
-    //
-    // static ulong IBinaryFloatParseAndFormatInfo<float>.FloatToBits(float value) => BitConverter.SingleToUInt32Bits(value);
+    
+    static int IBinaryFloatParseAndFormatInfo<float>.NumberBufferLength => Number.SingleNumberBufferLength;
+    
+    static ulong IBinaryFloatParseAndFormatInfo<float>.ZeroBits => 0;
+    static ulong IBinaryFloatParseAndFormatInfo<float>.InfinityBits => 0x7F800000;
+    
+    static ulong IBinaryFloatParseAndFormatInfo<float>.NormalMantissaMask => (1UL << SignificandLength) - 1;
+    static ulong IBinaryFloatParseAndFormatInfo<float>.DenormalMantissaMask => TrailingSignificandMask;
+    
+    static int IBinaryFloatParseAndFormatInfo<float>.MinBinaryExponent => 1 - MaxExponent;
+    static int IBinaryFloatParseAndFormatInfo<float>.MaxBinaryExponent => MaxExponent;
+    
+    static int IBinaryFloatParseAndFormatInfo<float>.MinDecimalExponent => -45;
+    static int IBinaryFloatParseAndFormatInfo<float>.MaxDecimalExponent => 39;
+    
+    static int IBinaryFloatParseAndFormatInfo<float>.ExponentBias => ExponentBias;
+    static ushort IBinaryFloatParseAndFormatInfo<float>.ExponentBits => 8;
+    
+    static int IBinaryFloatParseAndFormatInfo<float>.OverflowDecimalExponent => (MaxExponent + (2 * SignificandLength)) / 3;
+    static int IBinaryFloatParseAndFormatInfo<float>.InfinityExponent => 0xFF;
+    
+    static ushort IBinaryFloatParseAndFormatInfo<float>.NormalMantissaBits => SignificandLength;
+    static ushort IBinaryFloatParseAndFormatInfo<float>.DenormalMantissaBits => TrailingSignificandLength;
+    
+    static int IBinaryFloatParseAndFormatInfo<float>.MinFastFloatDecimalExponent => -65;
+    static int IBinaryFloatParseAndFormatInfo<float>.MaxFastFloatDecimalExponent => 38;
+    
+    static int IBinaryFloatParseAndFormatInfo<float>.MinExponentRoundToEven => -17;
+    static int IBinaryFloatParseAndFormatInfo<float>.MaxExponentRoundToEven => 10;
+    
+    static int IBinaryFloatParseAndFormatInfo<float>.MaxExponentFastPath => 10;
+    static ulong IBinaryFloatParseAndFormatInfo<float>.MaxMantissaFastPath => 2UL << TrailingSignificandLength;
+    
+    static float IBinaryFloatParseAndFormatInfo<float>.BitsToFloat(ulong bits) => BitConverter.UInt32BitsToSingle((uint)(bits));
+    
+    static ulong IBinaryFloatParseAndFormatInfo<float>.FloatToBits(float value) => BitConverter.SingleToUInt32Bits(value);
 
     //
     // Helpers

@@ -17,11 +17,44 @@ public static class CharUnicodeInfo
     // The starting codepoint for Unicode plane 1.  Plane 1 contains 0x010000 ~ 0x01ffff.
     internal const int UNICODE_PLANE01_START = 0x10000;
     
-    public static UnicodeCategory GetUnicodeCategory(char ch)
+    public static int GetDecimalDigitValue(char ch)
     {
         throw new NotImplementedException();
     }
     
+    
+    public static int GetDecimalDigitValue(string s, int index)
+    {
+        if (s is null)
+        {
+            ThrowHelper.ThrowArgumentNullException(nameof(s));
+        }
+        if ((uint)index >= (uint)s.Length)
+        {
+            ThrowHelper.ThrowArgumentOutOfRangeException(nameof(index));
+        }
+        throw new NotImplementedException();
+    }
+    
+    public static UnicodeCategory GetUnicodeCategory(char ch)
+    {
+        throw new NotImplementedException();
+    }
+
+    public static UnicodeCategory GetUnicodeCategory(string s, int index)
+    {
+        if (s is null)
+        {
+            ThrowHelper.ThrowArgumentNullException(nameof(s));
+        }
+        if ((uint)index >= (uint)s.Length)
+        {
+            ThrowHelper.ThrowArgumentOutOfRangeException(nameof(index));
+        }
+
+        throw new NotImplementedException();
+    }
+
     public static UnicodeCategory GetUnicodeCategory(int codePoint)
     {
         throw new NotImplementedException();

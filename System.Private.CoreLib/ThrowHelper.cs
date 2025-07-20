@@ -8,9 +8,20 @@ internal static class ThrowHelper
 {
     
     [DoesNotReturn]
+    internal static void ThrowFormatException_NeedSingleChar()
+    {
+        throw new FormatException(SR.Format_NeedSingleChar);
+    }
+    
+    [DoesNotReturn]
     internal static void ThrowArgumentException_CannotExtractScalar(string argument)
     {
         throw new ArgumentException(SR.Argument_CannotExtractScalar, argument);
+    }
+
+    internal static void ThrowFormatException_BadFormatSpecifier()
+    {
+        throw new FormatException(SR.Argument_BadFormatSpecifier);
     }
     
     [DoesNotReturn]
@@ -242,6 +253,12 @@ internal static class ThrowHelper
     internal static void ThrowCountArgumentOutOfRange_ArgumentOutOfRange_Count()
     {
         throw new ArgumentOutOfRangeException("count", SR.ArgumentOutOfRange_Count);
+    }
+    
+    [DoesNotReturn]
+    internal static void ThrowArgumentOutOfRange_Range<T>(string parameterName, T value, T minInclusive, T maxInclusive)
+    {
+        throw new ArgumentOutOfRangeException(parameterName, value, string.Format(SR.ArgumentOutOfRange_Range, minInclusive, maxInclusive));
     }
 
 }

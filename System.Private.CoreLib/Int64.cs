@@ -4,6 +4,7 @@
 using System.Buffers.Binary;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
@@ -14,14 +15,14 @@ namespace System;
 public readonly struct Int64
     : IComparable,
         // IConvertible,
-        // ISpanFormattable,
+        ISpanFormattable,
         IComparable<long>,
         IEquatable<long>,
         IBinaryInteger<long>,
         IMinMaxValue<long>,
-        ISignedNumber<long>
-        // IUtf8SpanFormattable,
-        // IBinaryIntegerParseAndFormatInfo<long>
+        ISignedNumber<long>,
+        IUtf8SpanFormattable,
+        IBinaryIntegerParseAndFormatInfo<long>
 {
     private readonly long m_value; // Do not rename (binary serialization)
 
@@ -97,82 +98,82 @@ public readonly struct Int64
         return unchecked((int)((long)m_value)) ^ (int)(m_value >> 32);
     }
 
-    // public override string ToString()
-    // {
-    //     return Number.Int64ToDecStr(m_value);
-    // }
-    //
-    // public string ToString(IFormatProvider? provider)
-    // {
-    //     return Number.FormatInt64(m_value, null, provider);
-    // }
-    //
-    // public string ToString([StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format)
-    // {
-    //     return Number.FormatInt64(m_value, format, null);
-    // }
-    //
-    // public string ToString([StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format, IFormatProvider? provider)
-    // {
-    //     return Number.FormatInt64(m_value, format, provider);
-    // }
-    //
-    // public bool TryFormat(Span<char> destination, out int charsWritten, [StringSyntax(StringSyntaxAttribute.NumericFormat)] ReadOnlySpan<char> format = default, IFormatProvider? provider = null)
-    // {
-    //     return Number.TryFormatInt64(m_value, format, provider, destination, out charsWritten);
-    // }
-    //
-    // /// <inheritdoc cref="IUtf8SpanFormattable.TryFormat" />
-    // public bool TryFormat(Span<byte> utf8Destination, out int bytesWritten, [StringSyntax(StringSyntaxAttribute.NumericFormat)] ReadOnlySpan<char> format = default, IFormatProvider? provider = null)
-    // {
-    //     return Number.TryFormatInt64(m_value, format, provider, utf8Destination, out bytesWritten);
-    // }
-    //
-    // public static long Parse(string s) => Parse(s, NumberStyles.Integer, provider: null);
-    //
-    // public static long Parse(string s, NumberStyles style) => Parse(s, style, provider: null);
-    //
-    // public static long Parse(string s, IFormatProvider? provider) => Parse(s, NumberStyles.Integer, provider);
-    //
-    // public static long Parse(string s, NumberStyles style, IFormatProvider? provider)
-    // {
-    //     if (s is null) { ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s); }
-    //     return Parse(s.AsSpan(), style, provider);
-    // }
-    //
-    // public static long Parse(ReadOnlySpan<char> s, NumberStyles style = NumberStyles.Integer, IFormatProvider? provider = null)
-    // {
-    //     NumberFormatInfo.ValidateParseStyleInteger(style);
-    //     return Number.ParseBinaryInteger<char, long>(s, style, NumberFormatInfo.GetInstance(provider));
-    // }
-    //
-    // public static bool TryParse([NotNullWhen(true)] string? s, out long result) => TryParse(s, NumberStyles.Integer, provider: null, out result);
-    //
-    // public static bool TryParse(ReadOnlySpan<char> s, out long result) => TryParse(s, NumberStyles.Integer, provider: null, out result);
-    //
-    // /// <summary>Tries to convert a UTF-8 character span containing the string representation of a number to its 64-bit signed integer equivalent.</summary>
-    // /// <param name="utf8Text">A span containing the UTF-8 characters representing the number to convert.</param>
-    // /// <param name="result">When this method returns, contains the 64-bit signed integer value equivalent to the number contained in <paramref name="utf8Text" /> if the conversion succeeded, or zero if the conversion failed. This parameter is passed uninitialized; any value originally supplied in result will be overwritten.</param>
-    // /// <returns><c>true</c> if <paramref name="utf8Text" /> was converted successfully; otherwise, false.</returns>
-    // public static bool TryParse(ReadOnlySpan<byte> utf8Text, out long result) => TryParse(utf8Text, NumberStyles.Integer, provider: null, out result);
-    //
-    // public static bool TryParse([NotNullWhen(true)] string? s, NumberStyles style, IFormatProvider? provider, out long result)
-    // {
-    //     NumberFormatInfo.ValidateParseStyleInteger(style);
-    //
-    //     if (s is null)
-    //     {
-    //         result = 0;
-    //         return false;
-    //     }
-    //     return Number.TryParseBinaryInteger(s.AsSpan(), style, NumberFormatInfo.GetInstance(provider), out result) == Number.ParsingStatus.OK;
-    // }
-    //
-    // public static bool TryParse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider, out long result)
-    // {
-    //     NumberFormatInfo.ValidateParseStyleInteger(style);
-    //     return Number.TryParseBinaryInteger(s, style, NumberFormatInfo.GetInstance(provider), out result) == Number.ParsingStatus.OK;
-    // }
+    public override string ToString()
+    {
+        return Number.Int64ToDecStr(m_value);
+    }
+    
+    public string ToString(IFormatProvider? provider)
+    {
+        return Number.FormatInt64(m_value, null, provider);
+    }
+    
+    public string ToString([StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format)
+    {
+        return Number.FormatInt64(m_value, format, null);
+    }
+    
+    public string ToString([StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format, IFormatProvider? provider)
+    {
+        return Number.FormatInt64(m_value, format, provider);
+    }
+    
+    public bool TryFormat(Span<char> destination, out int charsWritten, [StringSyntax(StringSyntaxAttribute.NumericFormat)] ReadOnlySpan<char> format = default, IFormatProvider? provider = null)
+    {
+        return Number.TryFormatInt64(m_value, format, provider, destination, out charsWritten);
+    }
+    
+    /// <inheritdoc cref="IUtf8SpanFormattable.TryFormat" />
+    public bool TryFormat(Span<byte> utf8Destination, out int bytesWritten, [StringSyntax(StringSyntaxAttribute.NumericFormat)] ReadOnlySpan<char> format = default, IFormatProvider? provider = null)
+    {
+        return Number.TryFormatInt64(m_value, format, provider, utf8Destination, out bytesWritten);
+    }
+    
+    public static long Parse(string s) => Parse(s, NumberStyles.Integer, provider: null);
+    
+    public static long Parse(string s, NumberStyles style) => Parse(s, style, provider: null);
+    
+    public static long Parse(string s, IFormatProvider? provider) => Parse(s, NumberStyles.Integer, provider);
+    
+    public static long Parse(string s, NumberStyles style, IFormatProvider? provider)
+    {
+        if (s is null) { ThrowHelper.ThrowArgumentNullException(nameof(s)); }
+        return Parse(s.AsSpan(), style, provider);
+    }
+    
+    public static long Parse(ReadOnlySpan<char> s, NumberStyles style = NumberStyles.Integer, IFormatProvider? provider = null)
+    {
+        NumberFormatInfo.ValidateParseStyleInteger(style);
+        return Number.ParseBinaryInteger<char, long>(s, style, NumberFormatInfo.GetInstance(provider));
+    }
+    
+    public static bool TryParse([NotNullWhen(true)] string? s, out long result) => TryParse(s, NumberStyles.Integer, provider: null, out result);
+    
+    public static bool TryParse(ReadOnlySpan<char> s, out long result) => TryParse(s, NumberStyles.Integer, provider: null, out result);
+    
+    /// <summary>Tries to convert a UTF-8 character span containing the string representation of a number to its 64-bit signed integer equivalent.</summary>
+    /// <param name="utf8Text">A span containing the UTF-8 characters representing the number to convert.</param>
+    /// <param name="result">When this method returns, contains the 64-bit signed integer value equivalent to the number contained in <paramref name="utf8Text" /> if the conversion succeeded, or zero if the conversion failed. This parameter is passed uninitialized; any value originally supplied in result will be overwritten.</param>
+    /// <returns><c>true</c> if <paramref name="utf8Text" /> was converted successfully; otherwise, false.</returns>
+    public static bool TryParse(ReadOnlySpan<byte> utf8Text, out long result) => TryParse(utf8Text, NumberStyles.Integer, provider: null, out result);
+    
+    public static bool TryParse([NotNullWhen(true)] string? s, NumberStyles style, IFormatProvider? provider, out long result)
+    {
+        NumberFormatInfo.ValidateParseStyleInteger(style);
+    
+        if (s is null)
+        {
+            result = 0;
+            return false;
+        }
+        return Number.TryParseBinaryInteger(s.AsSpan(), style, NumberFormatInfo.GetInstance(provider), out result) == Number.ParsingStatus.OK;
+    }
+    
+    public static bool TryParse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider, out long result)
+    {
+        NumberFormatInfo.ValidateParseStyleInteger(style);
+        return Number.TryParseBinaryInteger(s, style, NumberFormatInfo.GetInstance(provider), out result) == Number.ParsingStatus.OK;
+    }
 
     //
     // IConvertible implementation
@@ -1332,8 +1333,8 @@ public readonly struct Int64
     // IParsable
     //
 
-    // /// <inheritdoc cref="IParsable{TSelf}.TryParse(string?, IFormatProvider?, out TSelf)" />
-    // public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider, out long result) => TryParse(s, NumberStyles.Integer, provider, out result);
+    /// <inheritdoc cref="IParsable{TSelf}.TryParse(string?, IFormatProvider?, out TSelf)" />
+    public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider, out long result) => TryParse(s, NumberStyles.Integer, provider, out result);
 
     //
     // IShiftOperators
@@ -1359,11 +1360,11 @@ public readonly struct Int64
     // ISpanParsable
     //
 
-    // /// <inheritdoc cref="ISpanParsable{TSelf}.Parse(ReadOnlySpan{char}, IFormatProvider?)" />
-    // public static long Parse(ReadOnlySpan<char> s, IFormatProvider? provider) => Parse(s, NumberStyles.Integer, provider);
-    //
-    // /// <inheritdoc cref="ISpanParsable{TSelf}.TryParse(ReadOnlySpan{char}, IFormatProvider?, out TSelf)" />
-    // public static bool TryParse(ReadOnlySpan<char> s, IFormatProvider? provider, out long result) => TryParse(s, NumberStyles.Integer, provider, out result);
+    /// <inheritdoc cref="ISpanParsable{TSelf}.Parse(ReadOnlySpan{char}, IFormatProvider?)" />
+    public static long Parse(ReadOnlySpan<char> s, IFormatProvider? provider) => Parse(s, NumberStyles.Integer, provider);
+    
+    /// <inheritdoc cref="ISpanParsable{TSelf}.TryParse(ReadOnlySpan{char}, IFormatProvider?, out TSelf)" />
+    public static bool TryParse(ReadOnlySpan<char> s, IFormatProvider? provider, out long result) => TryParse(s, NumberStyles.Integer, provider, out result);
 
     //
     // ISubtractionOperators
@@ -1396,43 +1397,43 @@ public readonly struct Int64
     // IUtf8SpanParsable
     //
 
-    // /// <inheritdoc cref="INumberBase{TSelf}.Parse(ReadOnlySpan{byte}, NumberStyles, IFormatProvider?)" />
-    // public static long Parse(ReadOnlySpan<byte> utf8Text, NumberStyles style = NumberStyles.Integer, IFormatProvider? provider = null)
-    // {
-    //     NumberFormatInfo.ValidateParseStyleInteger(style);
-    //     return Number.ParseBinaryInteger<byte, long>(utf8Text, style, NumberFormatInfo.GetInstance(provider));
-    // }
+    /// <inheritdoc cref="INumberBase{TSelf}.Parse(ReadOnlySpan{byte}, NumberStyles, IFormatProvider?)" />
+    public static long Parse(ReadOnlySpan<byte> utf8Text, NumberStyles style = NumberStyles.Integer, IFormatProvider? provider = null)
+    {
+        NumberFormatInfo.ValidateParseStyleInteger(style);
+        return Number.ParseBinaryInteger<byte, long>(utf8Text, style, NumberFormatInfo.GetInstance(provider));
+    }
+    
+    /// <inheritdoc cref="INumberBase{TSelf}.TryParse(ReadOnlySpan{byte}, NumberStyles, IFormatProvider?, out TSelf)" />
+    public static bool TryParse(ReadOnlySpan<byte> utf8Text, NumberStyles style, IFormatProvider? provider, out long result)
+    {
+        NumberFormatInfo.ValidateParseStyleInteger(style);
+        return Number.TryParseBinaryInteger(utf8Text, style, NumberFormatInfo.GetInstance(provider), out result) == Number.ParsingStatus.OK;
+    }
+    
+    /// <inheritdoc cref="IUtf8SpanParsable{TSelf}.Parse(ReadOnlySpan{byte}, IFormatProvider?)" />
+    public static long Parse(ReadOnlySpan<byte> utf8Text, IFormatProvider? provider) => Parse(utf8Text, NumberStyles.Integer, provider);
+    
+    /// <inheritdoc cref="IUtf8SpanParsable{TSelf}.TryParse(ReadOnlySpan{byte}, IFormatProvider?, out TSelf)" />
+    public static bool TryParse(ReadOnlySpan<byte> utf8Text, IFormatProvider? provider, out long result) => TryParse(utf8Text, NumberStyles.Integer, provider, out result);
+    
     //
-    // /// <inheritdoc cref="INumberBase{TSelf}.TryParse(ReadOnlySpan{byte}, NumberStyles, IFormatProvider?, out TSelf)" />
-    // public static bool TryParse(ReadOnlySpan<byte> utf8Text, NumberStyles style, IFormatProvider? provider, out long result)
-    // {
-    //     NumberFormatInfo.ValidateParseStyleInteger(style);
-    //     return Number.TryParseBinaryInteger(utf8Text, style, NumberFormatInfo.GetInstance(provider), out result) == Number.ParsingStatus.OK;
-    // }
+    // IBinaryIntegerParseAndFormatInfo
     //
-    // /// <inheritdoc cref="IUtf8SpanParsable{TSelf}.Parse(ReadOnlySpan{byte}, IFormatProvider?)" />
-    // public static long Parse(ReadOnlySpan<byte> utf8Text, IFormatProvider? provider) => Parse(utf8Text, NumberStyles.Integer, provider);
-    //
-    // /// <inheritdoc cref="IUtf8SpanParsable{TSelf}.TryParse(ReadOnlySpan{byte}, IFormatProvider?, out TSelf)" />
-    // public static bool TryParse(ReadOnlySpan<byte> utf8Text, IFormatProvider? provider, out long result) => TryParse(utf8Text, NumberStyles.Integer, provider, out result);
-    //
-    // //
-    // // IBinaryIntegerParseAndFormatInfo
-    // //
-    //
-    // static bool IBinaryIntegerParseAndFormatInfo<long>.IsSigned => true;
-    //
-    // static int IBinaryIntegerParseAndFormatInfo<long>.MaxDigitCount => 19; // 9_223_372_036_854_775_807
-    //
-    // static int IBinaryIntegerParseAndFormatInfo<long>.MaxHexDigitCount => 16; // 0x7FFF_FFFF_FFFF_FFFF
-    //
-    // static long IBinaryIntegerParseAndFormatInfo<long>.MaxValueDiv10 => MaxValue / 10;
-    //
-    // static string IBinaryIntegerParseAndFormatInfo<long>.OverflowMessage => SR.Overflow_Int64;
-    //
-    // static bool IBinaryIntegerParseAndFormatInfo<long>.IsGreaterThanAsUnsigned(long left, long right) => (ulong)(left) > (ulong)(right);
-    //
-    // static long IBinaryIntegerParseAndFormatInfo<long>.MultiplyBy10(long value) => value * 10;
-    //
-    // static long IBinaryIntegerParseAndFormatInfo<long>.MultiplyBy16(long value) => value * 16;
+    
+    static bool IBinaryIntegerParseAndFormatInfo<long>.IsSigned => true;
+    
+    static int IBinaryIntegerParseAndFormatInfo<long>.MaxDigitCount => 19; // 9_223_372_036_854_775_807
+    
+    static int IBinaryIntegerParseAndFormatInfo<long>.MaxHexDigitCount => 16; // 0x7FFF_FFFF_FFFF_FFFF
+    
+    static long IBinaryIntegerParseAndFormatInfo<long>.MaxValueDiv10 => MaxValue / 10;
+    
+    static string IBinaryIntegerParseAndFormatInfo<long>.OverflowMessage => SR.Overflow_Int64;
+    
+    static bool IBinaryIntegerParseAndFormatInfo<long>.IsGreaterThanAsUnsigned(long left, long right) => (ulong)(left) > (ulong)(right);
+    
+    static long IBinaryIntegerParseAndFormatInfo<long>.MultiplyBy10(long value) => value * 10;
+    
+    static long IBinaryIntegerParseAndFormatInfo<long>.MultiplyBy16(long value) => value * 16;
 }

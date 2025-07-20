@@ -26,7 +26,9 @@ internal static class SR
     public const string Arg_FormatException = "One of the identified items was in an invalid format.";
     public const string Arg_InvalidCastException = "Specified cast is not valid.";
     public const string Arg_LongerThanSrcString = "Source string was not long enough. Check sourceIndex and count.";
-
+    public const string Arg_InvalidHexBinaryStyle = "With the AllowHexSpecifier or AllowBinarySpecifier bit set in the enum bit field, the only other valid bits that can be combined into the enum value must be AllowLeadingWhite and AllowTrailingWhite.";
+    public const string Arg_HexBinaryStylesNotSupported = "The number styles AllowHexSpecifier and AllowBinarySpecifier are not supported on floating point data types.";
+    
     public const string Arg_MustBeHalf = "Object must be of type Half.";
     public const string Arg_MustBeSingle = "Object must be of type Single.";
     public const string Arg_MustBeDouble = "Object must be of type Double.";
@@ -46,8 +48,18 @@ internal static class SR
     public const string Arg_MustBeRune = "Object must be of type Rune.";
     
     public const string Overflow_NegateTwosCompNum = "Negating the minimum value of a twos complement number is invalid.";
+    public const string Overflow_Char = "Value was either too large or too small for a character.";
+    public const string Overflow_Byte = "Value was either too large or too small for an unsigned byte.";
+    public const string Overflow_UInt16 = "Value was either too large or too small for a UInt16.";
+    public const string Overflow_UInt32 = "Value was either too large or too small for a UInt32.";
+    public const string Overflow_UInt64 = "Value was either too large or too small for a UInt64.";
+    public const string Overflow_SByte = "Value was either too large or too small for a signed byte.";
+    public const string Overflow_Int16 = "Value was either too large or too small for an Int16.";
+    public const string Overflow_Int32 = "Value was either too large or too small for an Int32.";
+    public const string Overflow_Int64 = "Value was either too large or too small for an Int64.";
     
     public const string ArgumentNull_Generic = "Value cannot be null.";
+    public const string ArgumentNull_ArrayValue = "Found a null value within an array.";
 
     public const string ArgumentException_ValueTupleIncorrectType = "Argument must be of type {0}.";
     public const string ArgumentException_ValueTupleLastArgumentNotAValueTuple = "The last element of an eight element ValueTuple must be a ValueTuple.";
@@ -65,6 +77,12 @@ internal static class SR
     public const string Argument_EmptyString = "The value cannot be an empty string.";
     public const string Argument_EmptyOrWhiteSpaceString = "The value cannot be an empty string or composed entirely of whitespace.";
     public const string Argument_CannotExtractScalar = "Cannot extract a Unicode scalar value from the specified index in the input.";
+    public const string Argument_InvalidNativeDigitCount = "The NativeDigits array must contain exactly ten members.";
+    public const string Argument_InvalidNativeDigitValue = "Each member of the NativeDigits array must be a single text element (one or more UTF-16 code points) with a Unicode Nd (Number, Decimal Digit) property indicating it is a digit.";
+    public const string Argument_InvalidDigitSubstitution = "The DigitSubstitution property must be of a valid member of the DigitShapes enumeration. Valid entries include Context, NativeNational or None.";
+    public const string Argument_InvalidGroupSize = "Every element in the value array should be between one and nine, except for the last element, which can be zero.";
+    public const string Argument_InvalidNumberStyles = "An undefined NumberStyles value is being used.";
+    public const string Argument_BadFormatSpecifier = "Format specifier was invalid.";
     
     public const string ArgumentOutOfRange_NeedNonNegNum = "Non-negative number required.";
     public const string ArgumentOutOfRange_IndexMustBeLess = "Index was out of range. Must be non-negative and less than the size of the collection.";
@@ -94,6 +112,7 @@ internal static class SR
     public const string ArgumentOutOfRange_OffsetOut = "Either offset did not refer to a position in the string, or there is an insufficient length of destination character array.";
     public const string ArgumentOutOfRange_RoundingDigits_MathF = "Rounding digits must be between 0 and 6, inclusive.";
     public const string ArgumentOutOfRange_InvalidUTF32 = "A valid UTF32 value is between 0x000000 and 0x10ffff, inclusive, and should not include surrogate codepoint values (0x00d800 ~ 0x00dfff).";
+    public const string ArgumentOutOfRange_Range = "Valid values are between {0} and {1}, inclusive.";
     
     public const string InvalidOperation_EnumNotStarted = "Enumeration has not started. Call MoveNext.";
     public const string InvalidOperation_EnumEnded = "Enumeration already finished.";
@@ -102,6 +121,7 @@ internal static class SR
     public const string InvalidOperation_IComparerFailed = "Failed to compare two elements in the array.";
     public const string InvalidOperation_EnumFailedVersion = "Collection was modified after the enumerator was instantiated.";
     public const string InvalidOperation_EnumOpCantHappen = "Enumeration has either not started or has already finished.";
+    public const string InvalidOperation_ReadOnly = "Instance is read-only.";
     
     public const string HashCode_HashCodeNotSupported = "HashCode is a mutable struct and should not be compared with other HashCodes. Use ToHashCode to retrieve the computed hash code.";
     public const string HashCode_EqualityNotSupported = "HashCode is a mutable struct and should not be compared with other HashCodes.";
@@ -120,6 +140,8 @@ internal static class SR
     public const string Format_InvalidStringWithOffsetAndReason = "Input string was not in a correct format. Failure to parse near offset {0}. {1}";
     public const string Format_UnexpectedClosingBrace = "Unexpected closing brace without a corresponding opening brace.";
     public const string Format_IndexOutOfRange = "Index (zero based) must be greater than or equal to zero and less than the size of the argument list.";
+    public const string Format_InvalidStringWithValue = "The input string '{0}' was not in a correct format.";
+    public const string Format_NeedSingleChar = "String must be exactly one character long.";
     
     public const string OutOfMemory_StringTooLong = "String length exceeded supported range.";
 

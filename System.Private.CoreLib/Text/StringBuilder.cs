@@ -958,27 +958,27 @@ public sealed partial class StringBuilder
         m_ChunkLength++;
     }
 
-    // public StringBuilder Append(sbyte value) => AppendSpanFormattable(value);
-    //
-    // public StringBuilder Append(byte value) => AppendSpanFormattable(value);
-    //
-    // public StringBuilder Append(short value) => AppendSpanFormattable(value);
-    //
-    // public StringBuilder Append(int value) => AppendSpanFormattable(value);
-    //
-    // public StringBuilder Append(long value) => AppendSpanFormattable(value);
-    //
-    // public StringBuilder Append(float value) => AppendSpanFormattable(value);
-    //
-    // public StringBuilder Append(double value) => AppendSpanFormattable(value);
-    //
-    // // public StringBuilder Append(decimal value) => AppendSpanFormattable(value);
-    //
-    // public StringBuilder Append(ushort value) => AppendSpanFormattable(value);
-    //
-    // public StringBuilder Append(uint value) => AppendSpanFormattable(value);
-    //
-    // public StringBuilder Append(ulong value) => AppendSpanFormattable(value);
+    public StringBuilder Append(sbyte value) => AppendSpanFormattable(value);
+    
+    public StringBuilder Append(byte value) => AppendSpanFormattable(value);
+    
+    public StringBuilder Append(short value) => AppendSpanFormattable(value);
+    
+    public StringBuilder Append(int value) => AppendSpanFormattable(value);
+    
+    public StringBuilder Append(long value) => AppendSpanFormattable(value);
+    
+    public StringBuilder Append(float value) => AppendSpanFormattable(value);
+    
+    public StringBuilder Append(double value) => AppendSpanFormattable(value);
+    
+    // public StringBuilder Append(decimal value) => AppendSpanFormattable(value);
+    
+    public StringBuilder Append(ushort value) => AppendSpanFormattable(value);
+    
+    public StringBuilder Append(uint value) => AppendSpanFormattable(value);
+    
+    public StringBuilder Append(ulong value) => AppendSpanFormattable(value);
 
     private StringBuilder AppendSpanFormattable<T>(T value) where T : ISpanFormattable
     {
@@ -1167,11 +1167,11 @@ public sealed partial class StringBuilder
     public StringBuilder Insert(int index, bool value) => Insert(index, value.ToString().AsSpan(), 1);
 #pragma warning restore CA1830
 
-    // public StringBuilder Insert(int index, sbyte value) => InsertSpanFormattable(index, value);
-    //
-    // public StringBuilder Insert(int index, byte value) => InsertSpanFormattable(index, value);
-    //
-    // public StringBuilder Insert(int index, short value) => InsertSpanFormattable(index, value);
+    public StringBuilder Insert(int index, sbyte value) => InsertSpanFormattable(index, value);
+    
+    public StringBuilder Insert(int index, byte value) => InsertSpanFormattable(index, value);
+    
+    public StringBuilder Insert(int index, short value) => InsertSpanFormattable(index, value);
 
     public StringBuilder Insert(int index, char value)
     {
@@ -1230,21 +1230,21 @@ public sealed partial class StringBuilder
         return this;
     }
 
-    // public StringBuilder Insert(int index, int value) => InsertSpanFormattable(index, value);
-    //
-    // public StringBuilder Insert(int index, long value) => InsertSpanFormattable(index, value);
-    //
-    // public StringBuilder Insert(int index, float value) => InsertSpanFormattable(index, value);
-    //
-    // public StringBuilder Insert(int index, double value) => InsertSpanFormattable(index, value);
-    //
+    public StringBuilder Insert(int index, int value) => InsertSpanFormattable(index, value);
+    
+    public StringBuilder Insert(int index, long value) => InsertSpanFormattable(index, value);
+    
+    public StringBuilder Insert(int index, float value) => InsertSpanFormattable(index, value);
+    
+    public StringBuilder Insert(int index, double value) => InsertSpanFormattable(index, value);
+    
     // public StringBuilder Insert(int index, decimal value) => InsertSpanFormattable(index, value);
-    //
-    // public StringBuilder Insert(int index, ushort value) => InsertSpanFormattable(index, value);
-    //
-    // public StringBuilder Insert(int index, uint value) => InsertSpanFormattable(index, value);
-    //
-    // public StringBuilder Insert(int index, ulong value) => InsertSpanFormattable(index, value);
+    
+    public StringBuilder Insert(int index, ushort value) => InsertSpanFormattable(index, value);
+    
+    public StringBuilder Insert(int index, uint value) => InsertSpanFormattable(index, value);
+    
+    public StringBuilder Insert(int index, ulong value) => InsertSpanFormattable(index, value);
 
     public StringBuilder Insert(int index, object? value) => (value == null) ? this : Insert(index, value.ToString(), 1);
 

@@ -4,6 +4,7 @@
 using System.Buffers.Binary;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
@@ -18,12 +19,11 @@ public readonly struct IntPtr
     : IEquatable<nint>,
         IComparable,
         IComparable<nint>,
-        // ISpanFormattable,
-        // ISerializable,
+        ISpanFormattable,
         IBinaryInteger<nint>,
         IMinMaxValue<nint>,
-        ISignedNumber<nint>
-        // IUtf8SpanFormattable
+        ISignedNumber<nint>,
+        IUtf8SpanFormattable
 {
     private readonly nint _value;
 
@@ -119,76 +119,76 @@ public readonly struct IntPtr
 
     public bool Equals(nint other) => _value == other;
 
-    // public override string ToString() => ((nint_t)_value).ToString();
-    // public string ToString([StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format) => ((nint_t)_value).ToString(format);
-    // public string ToString(IFormatProvider? provider) => ((nint_t)_value).ToString(provider);
-    // public string ToString([StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format, IFormatProvider? provider) => ((nint_t)_value).ToString(format, provider);
-    //
-    // public bool TryFormat(Span<char> destination, out int charsWritten, [StringSyntax(StringSyntaxAttribute.NumericFormat)] ReadOnlySpan<char> format = default, IFormatProvider? provider = null) =>
-    //     ((nint_t)_value).TryFormat(destination, out charsWritten, format, provider);
-    //
-    // /// <inheritdoc cref="IUtf8SpanFormattable.TryFormat" />
-    // public bool TryFormat(Span<byte> utf8Destination, out int bytesWritten, [StringSyntax(StringSyntaxAttribute.NumericFormat)] ReadOnlySpan<char> format = default, IFormatProvider? provider = null) =>
-    //     ((nint_t)_value).TryFormat(utf8Destination, out bytesWritten, format, provider);
-    //
-    // public static nint Parse(string s) => (nint)nint_t.Parse(s);
-    // public static nint Parse(string s, NumberStyles style) => (nint)nint_t.Parse(s, style);
-    // public static nint Parse(string s, IFormatProvider? provider) => (nint)nint_t.Parse(s, provider);
-    // public static nint Parse(string s, NumberStyles style, IFormatProvider? provider) => (nint)nint_t.Parse(s, style, provider);
-    // public static nint Parse(ReadOnlySpan<char> s, IFormatProvider? provider) => (nint)nint_t.Parse(s, provider);
-    // public static nint Parse(ReadOnlySpan<char> s, NumberStyles style = NumberStyles.Integer, IFormatProvider? provider = null) => (nint)nint_t.Parse(s, style, provider);
-    //
-    // public static bool TryParse([NotNullWhen(true)] string? s, out nint result)
-    // {
-    //     Unsafe.SkipInit(out result);
-    //     return nint_t.TryParse(s, out Unsafe.As<nint, nint_t>(ref result));
-    // }
-    //
-    // /// <inheritdoc cref="IParsable{TSelf}.TryParse(string?, IFormatProvider?, out TSelf)" />
-    // public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider, out nint result)
-    // {
-    //     Unsafe.SkipInit(out result);
-    //     return nint_t.TryParse(s, provider, out Unsafe.As<nint, nint_t>(ref result));
-    // }
-    //
-    // public static bool TryParse([NotNullWhen(true)] string? s, NumberStyles style, IFormatProvider? provider, out nint result)
-    // {
-    //     Unsafe.SkipInit(out result);
-    //     return nint_t.TryParse(s, style, provider, out Unsafe.As<nint, nint_t>(ref result));
-    // }
-    //
-    // public static bool TryParse(ReadOnlySpan<char> s, out nint result)
-    // {
-    //     Unsafe.SkipInit(out result);
-    //     return nint_t.TryParse(s, out Unsafe.As<nint, nint_t>(ref result));
-    // }
-    //
-    // /// <summary>Tries to convert a UTF-8 character span containing the string representation of a number to its signed integer equivalent.</summary>
-    // /// <param name="utf8Text">A span containing the UTF-8 characters representing the number to convert.</param>
-    // /// <param name="result">When this method returns, contains the signed integer value equivalent to the number contained in <paramref name="utf8Text" /> if the conversion succeeded, or zero if the conversion failed. This parameter is passed uninitialized; any value originally supplied in result will be overwritten.</param>
-    // /// <returns><c>true</c> if <paramref name="utf8Text" /> was converted successfully; otherwise, false.</returns>
-    // public static bool TryParse(ReadOnlySpan<byte> utf8Text, out nint result)
-    // {
-    //     Unsafe.SkipInit(out result);
-    //     return nint_t.TryParse(utf8Text, out Unsafe.As<nint, nint_t>(ref result));
-    // }
-    //
-    // /// <summary>Tries to parse a string into a value.</summary>
-    // /// <param name="s">A read-only span of characters containing a number to convert.</param>
-    // /// <param name="provider">An object that provides culture-specific formatting information about <paramref name="s" />.</param>
-    // /// <param name="result">When this method returns, contains the result of successfully parsing <paramref name="s" /> or an undefined value on failure.</param>
-    // /// <returns><see langword="true" /> if <paramref name="s" /> was converted successfully; otherwise, <see langword="false" />.</returns>
-    // public static bool TryParse(ReadOnlySpan<char> s, IFormatProvider? provider, out nint result)
-    // {
-    //     Unsafe.SkipInit(out result);
-    //     return nint_t.TryParse(s, provider, out Unsafe.As<nint, nint_t>(ref result));
-    // }
-    //
-    // public static bool TryParse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider, out nint result)
-    // {
-    //     Unsafe.SkipInit(out result);
-    //     return nint_t.TryParse(s, style, provider, out Unsafe.As<nint, nint_t>(ref result));
-    // }
+    public override string ToString() => ((nint_t)_value).ToString();
+    public string ToString([StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format) => ((nint_t)_value).ToString(format);
+    public string ToString(IFormatProvider? provider) => ((nint_t)_value).ToString(provider);
+    public string ToString([StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format, IFormatProvider? provider) => ((nint_t)_value).ToString(format, provider);
+    
+    public bool TryFormat(Span<char> destination, out int charsWritten, [StringSyntax(StringSyntaxAttribute.NumericFormat)] ReadOnlySpan<char> format = default, IFormatProvider? provider = null) =>
+        ((nint_t)_value).TryFormat(destination, out charsWritten, format, provider);
+    
+    /// <inheritdoc cref="IUtf8SpanFormattable.TryFormat" />
+    public bool TryFormat(Span<byte> utf8Destination, out int bytesWritten, [StringSyntax(StringSyntaxAttribute.NumericFormat)] ReadOnlySpan<char> format = default, IFormatProvider? provider = null) =>
+        ((nint_t)_value).TryFormat(utf8Destination, out bytesWritten, format, provider);
+    
+    public static nint Parse(string s) => (nint)nint_t.Parse(s);
+    public static nint Parse(string s, NumberStyles style) => (nint)nint_t.Parse(s, style);
+    public static nint Parse(string s, IFormatProvider? provider) => (nint)nint_t.Parse(s, provider);
+    public static nint Parse(string s, NumberStyles style, IFormatProvider? provider) => (nint)nint_t.Parse(s, style, provider);
+    public static nint Parse(ReadOnlySpan<char> s, IFormatProvider? provider) => (nint)nint_t.Parse(s, provider);
+    public static nint Parse(ReadOnlySpan<char> s, NumberStyles style = NumberStyles.Integer, IFormatProvider? provider = null) => (nint)nint_t.Parse(s, style, provider);
+    
+    public static bool TryParse([NotNullWhen(true)] string? s, out nint result)
+    {
+        Unsafe.SkipInit(out result);
+        return nint_t.TryParse(s, out Unsafe.As<nint, nint_t>(ref result));
+    }
+    
+    /// <inheritdoc cref="IParsable{TSelf}.TryParse(string?, IFormatProvider?, out TSelf)" />
+    public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider, out nint result)
+    {
+        Unsafe.SkipInit(out result);
+        return nint_t.TryParse(s, provider, out Unsafe.As<nint, nint_t>(ref result));
+    }
+    
+    public static bool TryParse([NotNullWhen(true)] string? s, NumberStyles style, IFormatProvider? provider, out nint result)
+    {
+        Unsafe.SkipInit(out result);
+        return nint_t.TryParse(s, style, provider, out Unsafe.As<nint, nint_t>(ref result));
+    }
+    
+    public static bool TryParse(ReadOnlySpan<char> s, out nint result)
+    {
+        Unsafe.SkipInit(out result);
+        return nint_t.TryParse(s, out Unsafe.As<nint, nint_t>(ref result));
+    }
+    
+    /// <summary>Tries to convert a UTF-8 character span containing the string representation of a number to its signed integer equivalent.</summary>
+    /// <param name="utf8Text">A span containing the UTF-8 characters representing the number to convert.</param>
+    /// <param name="result">When this method returns, contains the signed integer value equivalent to the number contained in <paramref name="utf8Text" /> if the conversion succeeded, or zero if the conversion failed. This parameter is passed uninitialized; any value originally supplied in result will be overwritten.</param>
+    /// <returns><c>true</c> if <paramref name="utf8Text" /> was converted successfully; otherwise, false.</returns>
+    public static bool TryParse(ReadOnlySpan<byte> utf8Text, out nint result)
+    {
+        Unsafe.SkipInit(out result);
+        return nint_t.TryParse(utf8Text, out Unsafe.As<nint, nint_t>(ref result));
+    }
+    
+    /// <summary>Tries to parse a string into a value.</summary>
+    /// <param name="s">A read-only span of characters containing a number to convert.</param>
+    /// <param name="provider">An object that provides culture-specific formatting information about <paramref name="s" />.</param>
+    /// <param name="result">When this method returns, contains the result of successfully parsing <paramref name="s" /> or an undefined value on failure.</param>
+    /// <returns><see langword="true" /> if <paramref name="s" /> was converted successfully; otherwise, <see langword="false" />.</returns>
+    public static bool TryParse(ReadOnlySpan<char> s, IFormatProvider? provider, out nint result)
+    {
+        Unsafe.SkipInit(out result);
+        return nint_t.TryParse(s, provider, out Unsafe.As<nint, nint_t>(ref result));
+    }
+    
+    public static bool TryParse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider, out nint result)
+    {
+        Unsafe.SkipInit(out result);
+        return nint_t.TryParse(s, style, provider, out Unsafe.As<nint, nint_t>(ref result));
+    }
 
     //
     // IAdditionOperators
@@ -1312,23 +1312,23 @@ public readonly struct IntPtr
     // IUtf8SpanParsable
     //
 
-    // /// <inheritdoc cref="INumberBase{TSelf}.Parse(ReadOnlySpan{byte}, NumberStyles, IFormatProvider?)" />
-    // public static nint Parse(ReadOnlySpan<byte> utf8Text, NumberStyles style = NumberStyles.Integer, IFormatProvider? provider = null) => (nint)nint_t.Parse(utf8Text, style, provider);
-    //
-    // /// <inheritdoc cref="INumberBase{TSelf}.TryParse(ReadOnlySpan{byte}, NumberStyles, IFormatProvider?, out TSelf)" />
-    // public static bool TryParse(ReadOnlySpan<byte> utf8Text, NumberStyles style, IFormatProvider? provider, out nint result)
-    // {
-    //     Unsafe.SkipInit(out result);
-    //     return nint_t.TryParse(utf8Text, style, provider, out Unsafe.As<nint, nint_t>(ref result));
-    // }
-    //
-    // /// <inheritdoc cref="IUtf8SpanParsable{TSelf}.Parse(ReadOnlySpan{byte}, IFormatProvider?)" />
-    // public static nint Parse(ReadOnlySpan<byte> utf8Text, IFormatProvider? provider) => (nint)nint_t.Parse(utf8Text, provider);
-    //
-    // /// <inheritdoc cref="IUtf8SpanParsable{TSelf}.TryParse(ReadOnlySpan{byte}, IFormatProvider?, out TSelf)" />
-    // public static bool TryParse(ReadOnlySpan<byte> utf8Text, IFormatProvider? provider, out nint result)
-    // {
-    //     Unsafe.SkipInit(out result);
-    //     return nint_t.TryParse(utf8Text, provider, out Unsafe.As<nint, nint_t>(ref result));
-    // }
+    /// <inheritdoc cref="INumberBase{TSelf}.Parse(ReadOnlySpan{byte}, NumberStyles, IFormatProvider?)" />
+    public static nint Parse(ReadOnlySpan<byte> utf8Text, NumberStyles style = NumberStyles.Integer, IFormatProvider? provider = null) => (nint)nint_t.Parse(utf8Text, style, provider);
+    
+    /// <inheritdoc cref="INumberBase{TSelf}.TryParse(ReadOnlySpan{byte}, NumberStyles, IFormatProvider?, out TSelf)" />
+    public static bool TryParse(ReadOnlySpan<byte> utf8Text, NumberStyles style, IFormatProvider? provider, out nint result)
+    {
+        Unsafe.SkipInit(out result);
+        return nint_t.TryParse(utf8Text, style, provider, out Unsafe.As<nint, nint_t>(ref result));
+    }
+    
+    /// <inheritdoc cref="IUtf8SpanParsable{TSelf}.Parse(ReadOnlySpan{byte}, IFormatProvider?)" />
+    public static nint Parse(ReadOnlySpan<byte> utf8Text, IFormatProvider? provider) => (nint)nint_t.Parse(utf8Text, provider);
+    
+    /// <inheritdoc cref="IUtf8SpanParsable{TSelf}.TryParse(ReadOnlySpan{byte}, IFormatProvider?, out TSelf)" />
+    public static bool TryParse(ReadOnlySpan<byte> utf8Text, IFormatProvider? provider, out nint result)
+    {
+        Unsafe.SkipInit(out result);
+        return nint_t.TryParse(utf8Text, provider, out Unsafe.As<nint, nint_t>(ref result));
+    }
 }

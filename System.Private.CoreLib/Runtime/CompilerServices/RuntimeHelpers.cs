@@ -3,6 +3,12 @@ namespace System.Runtime.CompilerServices;
 public static class RuntimeHelpers
 {
 
+    public static extern int OffsetToStringData
+    {
+        [MethodImpl(MethodImplOptions.AggressiveInlining, MethodCodeType = MethodCodeType.Runtime)]
+        get;
+    }
+    
     [MethodImpl(MethodCodeType = MethodCodeType.Native)]
     public static extern void InitializeArray(Array array, RuntimeFieldHandle fldHandle);
     

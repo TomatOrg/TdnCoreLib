@@ -25,13 +25,15 @@ internal static class Program
     public static int Main(string[] args)
     {
         var sb = new StringBuilder();
-        var list = new List<string>();
-        list.Add("1");
-        list.Add("3");
-        list.Add("6");
+        var list = new List<int>();
+        list.Add(1);
+        list.Add(2);
+        list.Add(3);
         foreach (var i in list)
         {
-            sb.Insert(0, i + "\n");
+            sb.Insert(0, "\n");
+            sb.Insert(0, i);
+            
         }
         Debug.WriteLine(sb.ToString());
         return 0;

@@ -86,7 +86,7 @@ public readonly ref struct Span<T>
     /// Thrown when the specified <paramref name="length"/> is negative.
     /// </exception>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    internal unsafe Span(void* pointer, int length)
+    public unsafe Span(void* pointer, int length)
     {
         if (length < 0)
             ThrowHelper.ThrowArgumentOutOfRangeException();

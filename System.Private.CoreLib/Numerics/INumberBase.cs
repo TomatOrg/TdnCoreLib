@@ -1,8 +1,11 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using System.Buffers;
 using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.Runtime.CompilerServices;
+using System.Text;
 
 namespace System.Numerics
 {
@@ -18,12 +21,12 @@ namespace System.Numerics
           IIncrementOperators<TSelf>,
           IMultiplicativeIdentity<TSelf, TSelf>,
           IMultiplyOperators<TSelf, TSelf, TSelf>,
-          // ISpanFormattable,
-          // ISpanParsable<TSelf>,
+          ISpanFormattable,
+          ISpanParsable<TSelf>,
           ISubtractionOperators<TSelf, TSelf, TSelf>,
           IUnaryPlusOperators<TSelf, TSelf>,
-          IUnaryNegationOperators<TSelf, TSelf>
-          // IUtf8SpanFormattable,
+          IUnaryNegationOperators<TSelf, TSelf>,
+          IUtf8SpanFormattable
           // IUtf8SpanParsable<TSelf>
         where TSelf : INumberBase<TSelf>?
     {
@@ -254,27 +257,27 @@ namespace System.Numerics
         /// <remarks>For <see cref="IFloatingPointIeee754{TSelf}" /> this method matches the IEEE 754:2019 <c>minimumMagnitudeNumber</c> function. This requires NaN inputs to not be propagated back to the caller and for <c>-0.0</c> to be treated as less than <c>+0.0</c>.</remarks>
         static abstract TSelf MinMagnitudeNumber(TSelf x, TSelf y);
 
-        // /// <summary>Parses a string into a value.</summary>
-        // /// <param name="s">The string to parse.</param>
-        // /// <param name="style">A bitwise combination of number styles that can be present in <paramref name="s" />.</param>
-        // /// <param name="provider">An object that provides culture-specific formatting information about <paramref name="s" />.</param>
-        // /// <returns>The result of parsing <paramref name="s" />.</returns>
-        // /// <exception cref="ArgumentException"><paramref name="style" /> is not a supported <see cref="NumberStyles" /> value.</exception>
-        // /// <exception cref="ArgumentNullException"><paramref name="s" /> is <c>null</c>.</exception>
-        // /// <exception cref="FormatException"><paramref name="s" /> is not in the correct format.</exception>
-        // /// <exception cref="OverflowException"><paramref name="s" /> is not representable by <typeparamref name="TSelf" />.</exception>
-        // static abstract TSelf Parse(string s, NumberStyles style, IFormatProvider? provider);
-        //
-        // /// <summary>Parses a span of characters into a value.</summary>
-        // /// <param name="s">The span of characters to parse.</param>
-        // /// <param name="style">A bitwise combination of number styles that can be present in <paramref name="s" />.</param>
-        // /// <param name="provider">An object that provides culture-specific formatting information about <paramref name="s" />.</param>
-        // /// <returns>The result of parsing <paramref name="s" />.</returns>
-        // /// <exception cref="ArgumentException"><paramref name="style" /> is not a supported <see cref="NumberStyles" /> value.</exception>
-        // /// <exception cref="FormatException"><paramref name="s" /> is not in the correct format.</exception>
-        // /// <exception cref="OverflowException"><paramref name="s" /> is not representable by <typeparamref name="TSelf" />.</exception>
-        // static abstract TSelf Parse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider);
-        //
+        /// <summary>Parses a string into a value.</summary>
+        /// <param name="s">The string to parse.</param>
+        /// <param name="style">A bitwise combination of number styles that can be present in <paramref name="s" />.</param>
+        /// <param name="provider">An object that provides culture-specific formatting information about <paramref name="s" />.</param>
+        /// <returns>The result of parsing <paramref name="s" />.</returns>
+        /// <exception cref="ArgumentException"><paramref name="style" /> is not a supported <see cref="NumberStyles" /> value.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="s" /> is <c>null</c>.</exception>
+        /// <exception cref="FormatException"><paramref name="s" /> is not in the correct format.</exception>
+        /// <exception cref="OverflowException"><paramref name="s" /> is not representable by <typeparamref name="TSelf" />.</exception>
+        static abstract TSelf Parse(string s, NumberStyles style, IFormatProvider? provider);
+        
+        /// <summary>Parses a span of characters into a value.</summary>
+        /// <param name="s">The span of characters to parse.</param>
+        /// <param name="style">A bitwise combination of number styles that can be present in <paramref name="s" />.</param>
+        /// <param name="provider">An object that provides culture-specific formatting information about <paramref name="s" />.</param>
+        /// <returns>The result of parsing <paramref name="s" />.</returns>
+        /// <exception cref="ArgumentException"><paramref name="style" /> is not a supported <see cref="NumberStyles" /> value.</exception>
+        /// <exception cref="FormatException"><paramref name="s" /> is not in the correct format.</exception>
+        /// <exception cref="OverflowException"><paramref name="s" /> is not representable by <typeparamref name="TSelf" />.</exception>
+        static abstract TSelf Parse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider);
+        
         // /// <summary>Parses a span of UTF-8 characters into a value.</summary>
         // /// <param name="utf8Text">The span of UTF-8 characters to parse.</param>
         // /// <param name="style">A bitwise combination of number styles that can be present in <paramref name="utf8Text" />.</param>
@@ -386,24 +389,24 @@ namespace System.Numerics
             where TOther : INumberBase<TOther>;
 #nullable restore
 
-        // /// <summary>Tries to parse a string into a value.</summary>
-        // /// <param name="s">The string to parse.</param>
-        // /// <param name="style">A bitwise combination of number styles that can be present in <paramref name="s" />.</param>
-        // /// <param name="provider">An object that provides culture-specific formatting information about <paramref name="s" />.</param>
-        // /// <param name="result">On return, contains the result of successfully parsing <paramref name="s" /> or an undefined value on failure.</param>
-        // /// <returns><c>true</c> if <paramref name="s" /> was successfully parsed; otherwise, <c>false</c>.</returns>
-        // /// <exception cref="ArgumentException"><paramref name="style" /> is not a supported <see cref="NumberStyles" /> value.</exception>
-        // static abstract bool TryParse([NotNullWhen(true)] string? s, NumberStyles style, IFormatProvider? provider, [MaybeNullWhen(false)] out TSelf result);
-        //
-        // /// <summary>Tries to parse a span of characters into a value.</summary>
-        // /// <param name="s">The span of characters to parse.</param>
-        // /// <param name="style">A bitwise combination of number styles that can be present in <paramref name="s" />.</param>
-        // /// <param name="provider">An object that provides culture-specific formatting information about <paramref name="s" />.</param>
-        // /// <param name="result">On return, contains the result of successfully parsing <paramref name="s" /> or an undefined value on failure.</param>
-        // /// <returns><c>true</c> if <paramref name="s" /> was successfully parsed; otherwise, <c>false</c>.</returns>
-        // /// <exception cref="ArgumentException"><paramref name="style" /> is not a supported <see cref="NumberStyles" /> value.</exception>
-        // static abstract bool TryParse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider, [MaybeNullWhen(false)] out TSelf result);
-        //
+        /// <summary>Tries to parse a string into a value.</summary>
+        /// <param name="s">The string to parse.</param>
+        /// <param name="style">A bitwise combination of number styles that can be present in <paramref name="s" />.</param>
+        /// <param name="provider">An object that provides culture-specific formatting information about <paramref name="s" />.</param>
+        /// <param name="result">On return, contains the result of successfully parsing <paramref name="s" /> or an undefined value on failure.</param>
+        /// <returns><c>true</c> if <paramref name="s" /> was successfully parsed; otherwise, <c>false</c>.</returns>
+        /// <exception cref="ArgumentException"><paramref name="style" /> is not a supported <see cref="NumberStyles" /> value.</exception>
+        static abstract bool TryParse([NotNullWhen(true)] string? s, NumberStyles style, IFormatProvider? provider, [MaybeNullWhen(false)] out TSelf result);
+        
+        /// <summary>Tries to parse a span of characters into a value.</summary>
+        /// <param name="s">The span of characters to parse.</param>
+        /// <param name="style">A bitwise combination of number styles that can be present in <paramref name="s" />.</param>
+        /// <param name="provider">An object that provides culture-specific formatting information about <paramref name="s" />.</param>
+        /// <param name="result">On return, contains the result of successfully parsing <paramref name="s" /> or an undefined value on failure.</param>
+        /// <returns><c>true</c> if <paramref name="s" /> was successfully parsed; otherwise, <c>false</c>.</returns>
+        /// <exception cref="ArgumentException"><paramref name="style" /> is not a supported <see cref="NumberStyles" /> value.</exception>
+        static abstract bool TryParse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider, [MaybeNullWhen(false)] out TSelf result);
+        
         // /// <summary>Tries to parse a span of UTF-8 characters into a value.</summary>
         // /// <param name="utf8Text">The span of UTF-8 characters to parse.</param>
         // /// <param name="style">A bitwise combination of number styles that can be present in <paramref name="utf8Text" />.</param>

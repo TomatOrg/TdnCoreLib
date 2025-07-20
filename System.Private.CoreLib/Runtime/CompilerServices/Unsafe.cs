@@ -74,11 +74,17 @@ public static unsafe class Unsafe
     [MethodImpl(MethodImplOptions.AggressiveInlining, MethodCodeType = MethodCodeType.Runtime)]
     public static extern void CopyBlock(ref byte destination, ref readonly byte source, uint byteCount);
 
-    [MethodImpl(MethodImplOptions.AggressiveInlining, MethodCodeType = MethodCodeType.Runtime)]
-    public static extern void CopyBlockUnaligned(void* destination, void* source, uint byteCount);
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static void CopyBlockUnaligned(void* destination, void* source, uint byteCount)
+    {
+        Buffer.Memmove(ref Unsafe.AsRef<byte>(destination), ref Unsafe.AsRef<byte>(source), byteCount);
+    }
 
-    [MethodImpl(MethodImplOptions.AggressiveInlining, MethodCodeType = MethodCodeType.Runtime)]
-    public static extern void CopyBlockUnaligned(ref byte destination, ref readonly byte source, uint byteCount);
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static void CopyBlockUnaligned(ref byte destination, ref readonly byte source, uint byteCount)
+    {
+        Buffer.Memmove(ref destination, ref Unsafe.AsRef<byte>(source), byteCount);
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining, MethodCodeType = MethodCodeType.Runtime)]
     public static extern bool IsAddressGreaterThan<T>([AllowNull] ref readonly T left, [AllowNull] ref readonly T right);
@@ -86,17 +92,29 @@ public static unsafe class Unsafe
     [MethodImpl(MethodImplOptions.AggressiveInlining, MethodCodeType = MethodCodeType.Runtime)]
     public static extern bool IsAddressLessThan<T>([AllowNull] ref readonly T left, [AllowNull] ref readonly T right);
 
-    [MethodImpl(MethodImplOptions.AggressiveInlining, MethodCodeType = MethodCodeType.Runtime)]
-    public static extern void InitBlock(void* startAddress, byte value, uint byteCount);
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static void InitBlock(void* startAddress, byte value, uint byteCount)
+    {
+        SpanHelpers.Fill(ref Unsafe.AsRef<byte>(startAddress), byteCount, value);
+    }
 
-    [MethodImpl(MethodImplOptions.AggressiveInlining, MethodCodeType = MethodCodeType.Runtime)]
-    public static extern void InitBlock(ref byte startAddress, byte value, uint byteCount);
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static void InitBlock(ref byte startAddress, byte value, uint byteCount)
+    {
+        SpanHelpers.Fill(ref Unsafe.AsRef<byte>(ref startAddress), byteCount, value);
+    }
 
-    [MethodImpl(MethodImplOptions.AggressiveInlining, MethodCodeType = MethodCodeType.Runtime)]
-    public static extern void InitBlockUnaligned(void* startAddress, byte value, uint byteCount);
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static void InitBlockUnaligned(void* startAddress, byte value, uint byteCount)
+    {
+        SpanHelpers.Fill(ref Unsafe.AsRef<byte>(startAddress), byteCount, value);
+    }
 
-    [MethodImpl(MethodImplOptions.AggressiveInlining, MethodCodeType = MethodCodeType.Runtime)]
-    public static extern void InitBlockUnaligned(ref byte startAddress, byte value, uint byteCount);
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static void InitBlockUnaligned(ref byte startAddress, byte value, uint byteCount)
+    {
+        SpanHelpers.Fill(ref Unsafe.AsRef<byte>(ref startAddress), byteCount, value);
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static T ReadUnaligned<T>(void* source)

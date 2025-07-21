@@ -7,6 +7,7 @@
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
+using System.Threading;
 
 namespace System.Diagnostics
 {
@@ -21,10 +22,7 @@ namespace System.Diagnostics
         {
             ArgumentNullException.ThrowIfNull(provider);
 
-            var old = s_provider;
-            s_provider = provider;
-            return old;
-            // TODO: return Interlocked.Exchange(ref s_provider, provider);
+            return Interlocked.Exchange(ref s_provider, provider);
         }
 
         public static bool AutoFlush

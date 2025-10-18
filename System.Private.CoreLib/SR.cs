@@ -28,6 +28,7 @@ internal static class SR
     public const string Arg_LongerThanSrcString = "Source string was not long enough. Check sourceIndex and count.";
     public const string Arg_InvalidHexBinaryStyle = "With the AllowHexSpecifier or AllowBinarySpecifier bit set in the enum bit field, the only other valid bits that can be combined into the enum value must be AllowLeadingWhite and AllowTrailingWhite.";
     public const string Arg_HexBinaryStylesNotSupported = "The number styles AllowHexSpecifier and AllowBinarySpecifier are not supported on floating point data types.";
+    public const string Arg_GuidArrayCtor = "Byte array for Guid must be exactly {0} bytes long.";
     
     public const string Arg_MustBeHalf = "Object must be of type Half.";
     public const string Arg_MustBeSingle = "Object must be of type Single.";
@@ -46,6 +47,7 @@ internal static class SR
     public const string Arg_MustBeBoolean = "Object must be of type Boolean.";
     public const string Arg_MustBeString = "Object must be of type String.";
     public const string Arg_MustBeRune = "Object must be of type Rune.";
+    public const string Arg_MustBeGuid = "Object must be of type GUID.";
     
     public const string Overflow_NegateTwosCompNum = "Negating the minimum value of a twos complement number is invalid.";
     public const string Overflow_Char = "Value was either too large or too small for a character.";
@@ -142,6 +144,17 @@ internal static class SR
     public const string Format_IndexOutOfRange = "Index (zero based) must be greater than or equal to zero and less than the size of the argument list.";
     public const string Format_InvalidStringWithValue = "The input string '{0}' was not in a correct format.";
     public const string Format_NeedSingleChar = "String must be exactly one character long.";
+    public const string Format_ExtraJunkAtEnd = "Additional non-parsable characters are at the end of the string.";
+    public const string Format_GuidBraceAfterLastNumber = "Could not find a brace, or the length between the previous token and the brace was zero (i.e., '0x,'etc.).";
+    public const string Format_GuidBrace = "Expected {0xdddddddd, etc}.";
+    public const string Format_GuidComma = "Could not find a comma, or the length between the previous token and the comma was zero (i.e., '0x,'etc.).";
+    public const string Format_GuidDashes = "Dashes are in the wrong position for GUID parsing.";
+    public const string Format_GuidEndBrace = "Could not find the ending brace.";
+    public const string Format_GuidHexPrefix = "Expected 0x prefix.";
+    public const string Format_GuidInvalidChar = "Guid string should only contain hexadecimal characters.";
+    public const string Format_GuidInvLen = "Guid should contain 32 digits with 4 dashes (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx).";
+    public const string Format_GuidUnrecognized = "Unrecognized Guid format.";
+    public const string Format_InvalidGuidFormatSpecification = "Format string can be only \"D\", \"d\", \"N\", \"n\", \"P\", \"p\", \"B\", \"b\", \"X\" or \"x\".";
     
     public const string OutOfMemory_StringTooLong = "String length exceeded supported range.";
 

@@ -416,7 +416,8 @@ public static partial class MemoryMarshal
     {
         var type = Unsafe.As<RuntimeTypeInfo>(array.GetType());
         var align = type._stackAlignment;
-        var offset = (((16 + 8) + align - 1) & ~(align - 1)) - 16;
+        const int arrayHeaderSize = 24;
+        var offset = (arrayHeaderSize + align - 1) & ~(align - 1);
         return ref Unsafe.AddByteOffset(ref Unsafe.As<RawData>(array).Data, offset);
     }
 

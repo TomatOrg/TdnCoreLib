@@ -7,6 +7,9 @@ internal static class SR
     public const string DebugAssertLongMessage = "---- Assert Long Message ----";
     public const string DebugAssertShortMessage = "---- Assert Short Message ----";
 
+    public const string Exception_WasThrown = "Exception of type '{0}' was thrown.";
+    public const string Exception_EndOfInnerExceptionStack = "--- End of inner exception stack trace ---";
+
     public const string Arg_ArgumentOutOfRangeException = "Specified argument was out of the range of valid values.";
     public const string Arg_NotSupportedException = "Specified method is not supported.";
     public const string Arg_NotImplementedException = "The method or operation is not implemented.";

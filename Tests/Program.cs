@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -24,18 +25,7 @@ internal static class Program
     
     public static int Main(string[] args)
     {
-        var sb = new StringBuilder();
-        var list = new List<int>();
-        list.Add(1);
-        list.Add(2);
-        list.Add(3);
-        foreach (var i in list)
-        {
-            sb.Insert(0, "\n");
-            sb.Insert(0, i);
-            
-        }
-        Debug.WriteLine(sb.ToString());
+        Debug.WriteLine(1.0);
         return 0;
     }
 }

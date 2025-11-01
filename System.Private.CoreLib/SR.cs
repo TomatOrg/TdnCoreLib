@@ -88,6 +88,13 @@ internal static class SR
     public const string Argument_InvalidGroupSize = "Every element in the value array should be between one and nine, except for the last element, which can be zero.";
     public const string Argument_InvalidNumberStyles = "An undefined NumberStyles value is being used.";
     public const string Argument_BadFormatSpecifier = "Format specifier was invalid.";
+    public const string Argument_InvalidId = "The specified ID parameter '{0}' is not supported.";
+    public const string Argument_CultureNotSupported = "Culture is not supported.";
+    public const string Argument_CultureInvalidIdentifier = "{0} is an invalid culture identifier.";
+    public const string Argument_InvalidResourceCultureName = "The given culture name '{0}' cannot be used to locate a resource file. Resource filenames must consist of only letters, numbers, hyphens or underscores.";
+    public const string Argument_OneOfCulturesNotSupported = "Culture name {0} or {1} is not supported.";
+    public const string Argument_InvalidPredefinedCultureName = "Culture name '{0}' is not a predefined culture.";
+    public const string Argument_CultureIetfNotSupported = "Culture IETF Name {0} is not a recognized IETF name.";
     
     public const string ArgumentOutOfRange_NeedNonNegNum = "Non-negative number required.";
     public const string ArgumentOutOfRange_IndexMustBeLess = "Index was out of range. Must be non-negative and less than the size of the collection.";
@@ -118,6 +125,7 @@ internal static class SR
     public const string ArgumentOutOfRange_RoundingDigits_MathF = "Rounding digits must be between 0 and 6, inclusive.";
     public const string ArgumentOutOfRange_InvalidUTF32 = "A valid UTF32 value is between 0x000000 and 0x10ffff, inclusive, and should not include surrogate codepoint values (0x00d800 ~ 0x00dfff).";
     public const string ArgumentOutOfRange_Range = "Valid values are between {0} and {1}, inclusive.";
+    public const string ArgumentOutOfRange_PartialWCHAR = "Pointer startIndex and length do not refer to a valid string.";
     
     public const string InvalidOperation_EnumNotStarted = "Enumeration has not started. Call MoveNext.";
     public const string InvalidOperation_EnumEnded = "Enumeration already finished.";

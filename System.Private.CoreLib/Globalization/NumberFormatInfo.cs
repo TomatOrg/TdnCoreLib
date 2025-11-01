@@ -185,8 +185,8 @@ public sealed class NumberFormatInfo : IFormatProvider, ICloneable
         {
             // We directly use fields here since these data is coming from data table or Win32, so we
             // don't need to verify their values (except for invalid parsing situations).
-            // TODO: cultureData.GetNFIValues(this);
-            
+            cultureData.GetNFIValues(this);
+
             InitializeInvariantAndNegativeSignFlags();
         }
     }
@@ -386,7 +386,7 @@ public sealed class NumberFormatInfo : IFormatProvider, ICloneable
             MemoryMarshal.Cast<char, TChar>(_currencySymbol) :
             MemoryMarshal.Cast<byte, TChar>(_currencySymbolUtf8 ??= Encoding.UTF8.GetBytes(_currencySymbol));
     }
-    
+
     internal byte[]? CurrencySymbolUtf8 => _currencySymbolUtf8 ??= Encoding.UTF8.GetBytes(_currencySymbol);
 
     /// <summary>

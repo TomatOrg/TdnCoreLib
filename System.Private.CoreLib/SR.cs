@@ -88,6 +88,7 @@ internal static class SR
     public const string Argument_InvalidGroupSize = "Every element in the value array should be between one and nine, except for the last element, which can be zero.";
     public const string Argument_InvalidNumberStyles = "An undefined NumberStyles value is being used.";
     public const string Argument_BadFormatSpecifier = "Format specifier was invalid.";
+    public const string ArgumentOutOfRange_PartialWCHAR = "Pointer startIndex and length do not refer to a valid string.";
     
     public const string ArgumentOutOfRange_NeedNonNegNum = "Non-negative number required.";
     public const string ArgumentOutOfRange_IndexMustBeLess = "Index was out of range. Must be non-negative and less than the size of the collection.";

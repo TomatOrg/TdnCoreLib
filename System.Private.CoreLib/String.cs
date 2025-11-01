@@ -53,53 +53,208 @@ public sealed partial class String
      * src/vm/ecall.cpp for instructions on how to add new overloads.
      */
 
-    [MethodImpl(MethodImplOptions.InternalCall)]
-    public String(char[]? value)
+    [MethodImpl(MethodCodeType = MethodCodeType.Native)]
+    public extern String(char[]? value);
+
+    private static string Ctor(char[]? value)
     {
         if (value == null || value.Length == 0)
-            return;
+            return Empty;
+
+        string result = FastAllocateString(value.Length);
 
         Buffer.Memmove(
-            elementCount: (uint)this.Length, // derefing Length now allows JIT to prove 'result' not null below
-            destination: ref this._firstChar,
+            elementCount: (uint)result.Length, // derefing Length now allows JIT to prove 'result' not null below
+            destination: ref result._firstChar,
             source: ref MemoryMarshal.GetArrayDataReference(value));
+
+        return result;
     }
 
-    [MethodImpl(MethodImplOptions.InternalCall)]
-    public String(char[] value, int startIndex, int length)
+    [MethodImpl(MethodCodeType = MethodCodeType.Native)]
+    public extern String(char[] value, int startIndex, int length);
+
+    private static string Ctor(char[] value, int startIndex, int length)
     {
         ArgumentNullException.ThrowIfNull(value);
         ArgumentOutOfRangeException.ThrowIfNegative(startIndex);
         ArgumentOutOfRangeException.ThrowIfNegative(length);
         ArgumentOutOfRangeException.ThrowIfGreaterThan(startIndex, value.Length - length);
-        
+
+        if (length == 0)
+            return Empty;
+
+        string result = FastAllocateString(length);
+
         Buffer.Memmove(
-            elementCount: (uint)this.Length, // derefing Length now allows JIT to prove 'result' not null below
-            destination: ref this._firstChar,
+            elementCount: (uint)result.Length, // derefing Length now allows JIT to prove 'result' not null below
+            destination: ref result._firstChar,
             source: ref Unsafe.Add(ref MemoryMarshal.GetArrayDataReference(value), startIndex));
+
+        return result;
     }
 
-    [MethodImpl(MethodImplOptions.InternalCall)]
-    public String(char c, int count)
+    [MethodImpl(MethodCodeType = MethodCodeType.Native)]
+    internal extern unsafe String(char* value);
+
+    private static unsafe string Ctor(char* ptr)
+    {
+        if (ptr == null)
+            return Empty;
+
+        int count = wcslen(ptr);
+        if (count == 0)
+            return Empty;
+
+        string result = FastAllocateString(count);
+
+        Buffer.Memmove(
+            elementCount: (uint)result.Length, // derefing Length now allows JIT to prove 'result' not null below
+            destination: ref result._firstChar,
+            source: ref *ptr);
+
+        return result;
+    }
+
+    [MethodImpl(MethodCodeType = MethodCodeType.Native)]
+    internal extern unsafe String(char* value, int startIndex, int length);
+
+    private static unsafe string Ctor(char* ptr, int startIndex, int length)
+    {
+        ArgumentOutOfRangeException.ThrowIfNegative(length);
+        ArgumentOutOfRangeException.ThrowIfNegative(startIndex);
+
+        char* pStart = ptr + startIndex;
+
+        // overflow check
+        if (pStart < ptr)
+            throw new ArgumentOutOfRangeException(nameof(startIndex), SR.ArgumentOutOfRange_PartialWCHAR);
+
+        if (length == 0)
+            return Empty;
+
+        if (ptr == null)
+            throw new ArgumentOutOfRangeException(nameof(ptr), SR.ArgumentOutOfRange_PartialWCHAR);
+
+        string result = FastAllocateString(length);
+
+        Buffer.Memmove(
+            elementCount: (uint)result.Length, // derefing Length now allows JIT to prove 'result' not null below
+            destination: ref result._firstChar,
+            source: ref *pStart);
+
+        return result;
+    }
+
+    // [MethodImpl(MethodImplOptions.InternalCall)]
+    // internal extern unsafe String(sbyte* value);
+    //
+    // private static unsafe string Ctor(sbyte* value)
+    // {
+    //     byte* pb = (byte*)value;
+    //     if (pb == null)
+    //         return Empty;
+    //
+    //     int numBytes = strlen((byte*)value);
+    //
+    //     return CreateStringForSByteConstructor(pb, numBytes);
+    // }
+
+    // [MethodImpl(MethodImplOptions.InternalCall)]
+    // internal extern unsafe String(sbyte* value, int startIndex, int length);
+    //
+    // private static unsafe string Ctor(sbyte* value, int startIndex, int length)
+    // {
+    //     ArgumentOutOfRangeException.ThrowIfNegative(startIndex);
+    //     ArgumentOutOfRangeException.ThrowIfNegative(length);
+    //
+    //     if (value == null)
+    //     {
+    //         if (length == 0)
+    //             return Empty;
+    //
+    //         ArgumentNullException.Throw(nameof(value));
+    //     }
+    //
+    //     byte* pStart = (byte*)(value + startIndex);
+    //
+    //     // overflow check
+    //     if (pStart < value)
+    //         throw new ArgumentOutOfRangeException(nameof(value), SR.ArgumentOutOfRange_PartialWCHAR);
+    //
+    //     return CreateStringForSByteConstructor(pStart, length);
+    // }
+
+    // // Encoder for String..ctor(sbyte*) and String..ctor(sbyte*, int, int)
+    // private static unsafe string CreateStringForSByteConstructor(byte* pb, int numBytes)
+    // {
+    //     Debug.Assert(numBytes >= 0);
+    //     Debug.Assert(pb <= (pb + numBytes));
+    //
+    //     if (numBytes == 0)
+    //         return Empty;
+    //
+    //     return CreateStringFromEncoding(pb, numBytes, Encoding.UTF8);
+    // }
+
+    // [MethodImpl(MethodImplOptions.InternalCall)]
+    // internal extern unsafe String(sbyte* value, int startIndex, int length, Encoding enc);
+    //
+    // private static unsafe string Ctor(sbyte* value, int startIndex, int length, Encoding? enc)
+    // {
+    //     if (enc == null)
+    //         return new string(value, startIndex, length);
+    //
+    //     ArgumentOutOfRangeException.ThrowIfNegative(length);
+    //     ArgumentOutOfRangeException.ThrowIfNegative(startIndex);
+    //
+    //     if (value == null)
+    //     {
+    //         if (length == 0)
+    //             return Empty;
+    //
+    //         ArgumentNullException.Throw(nameof(value));
+    //     }
+    //
+    //     byte* pStart = (byte*)(value + startIndex);
+    //
+    //     // overflow check
+    //     if (pStart < value)
+    //         throw new ArgumentOutOfRangeException(nameof(startIndex), SR.ArgumentOutOfRange_PartialWCHAR);
+    //
+    //     return enc.GetString(new ReadOnlySpan<byte>(pStart, length));
+    // }
+
+    [MethodImpl(MethodCodeType = MethodCodeType.Native)]
+    public extern String(char c, int count);
+
+    private static string Ctor(char c, int count)
     {
         if (count <= 0)
         {
             ArgumentOutOfRangeException.ThrowIfNegative(count);
-            return;
+            return Empty;
         }
-        
+
+        string result = FastAllocateString(count);
         if (c != '\0')
         {
-            SpanHelpers.Fill(ref this._firstChar, (uint)count, c);
+            SpanHelpers.Fill(ref result._firstChar, (uint)count, c);
         }
+        return result;
     }
 
-    [MethodImpl(MethodImplOptions.InternalCall)]
-    public String(ReadOnlySpan<char> value)
+    [MethodImpl(MethodCodeType = MethodCodeType.Native)]
+    public extern String(ReadOnlySpan<char> value);
+
+    private static unsafe string Ctor(ReadOnlySpan<char> value)
     {
         if (value.Length == 0)
-            return;
-        Buffer.Memmove(ref this._firstChar, ref MemoryMarshal.GetReference(value), (uint)value.Length);
+            return Empty;
+
+        string result = FastAllocateString(value.Length);
+        Buffer.Memmove(ref result._firstChar, ref MemoryMarshal.GetReference(value), (uint)value.Length);
+        return result;
     }
 
     public static string Create<TState>(int length, TState state, SpanAction<char, TState> action)
@@ -130,7 +285,7 @@ public sealed partial class String
     /// <returns>The string that results for formatting the interpolated string using the specified format provider.</returns>
     public static string Create(IFormatProvider? provider, [InterpolatedStringHandlerArgument(nameof(provider))] ref DefaultInterpolatedStringHandler handler) =>
         handler.ToStringAndClear();
-    
+
     /// <summary>Creates a new string by using the specified provider to control the formatting of the specified interpolated string.</summary>
     /// <param name="provider">An object that supplies culture-specific formatting information.</param>
     /// <param name="initialBuffer">The initial buffer that may be used as temporary space as part of the formatting operation. The contents of this buffer may be overwritten.</param>
@@ -164,7 +319,7 @@ public sealed partial class String
 
     [EditorBrowsable(EditorBrowsableState.Never)]
     [Obsolete("This API should not be used to create mutable strings. See https://go.microsoft.com/fwlink/?linkid=2084035 for alternatives.")]
-    public static string Copy(string str)
+    public static unsafe string Copy(string str)
     {
         ArgumentNullException.ThrowIfNull(str);
 
@@ -183,7 +338,7 @@ public sealed partial class String
     // sourceIndex + count - 1 to the character array buffer, beginning
     // at destinationIndex.
     //
-    public void CopyTo(int sourceIndex, char[] destination, int destinationIndex, int count)
+    public unsafe void CopyTo(int sourceIndex, char[] destination, int destinationIndex, int count)
     {
         ArgumentNullException.ThrowIfNull(destination);
 
@@ -374,9 +529,13 @@ public sealed partial class String
         return new StringRuneEnumerator(this);
     }
 
-    // //
-    // // IConvertible implementation
-    // //
+    internal static unsafe int wcslen(char* ptr) => SpanHelpers.IndexOfNullCharacter(ptr);
+
+    internal static unsafe int strlen(byte* ptr) => SpanHelpers.IndexOfNullByte(ptr);
+
+    //
+    // IConvertible implementation
+    //
     //
     // public TypeCode GetTypeCode()
     // {
@@ -529,7 +688,7 @@ public sealed partial class String
         ArgumentNullException.ThrowIfNull(s);
         return s;
     }
-    
+
     static bool IParsable<string>.TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider, [MaybeNullWhen(returnValue: false)] out string result)
     {
         result = s;
@@ -548,7 +707,7 @@ public sealed partial class String
         }
         return s.ToString();
     }
-    
+
     static bool ISpanParsable<string>.TryParse(ReadOnlySpan<char> s, IFormatProvider? provider, [MaybeNullWhen(returnValue: false)] out string result)
     {
         if (s.Length <= MaxLength)
@@ -563,7 +722,7 @@ public sealed partial class String
         }
     }
     
-    [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Native)]
+    [MethodImpl(MethodCodeType = MethodCodeType.Native)]
     internal static extern string FastAllocateString(int length);
-    
+
 }

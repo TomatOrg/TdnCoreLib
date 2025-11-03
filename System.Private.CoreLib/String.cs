@@ -261,7 +261,7 @@ public sealed partial class String
     {
         if (action is null)
         {
-            ThrowHelper.ThrowArgumentNullException(nameof(action));
+            ThrowHelper.ThrowArgumentNullException(ExceptionArgument.action);
         }
 
         if (length <= 0)
@@ -271,7 +271,7 @@ public sealed partial class String
                 return Empty;
             }
 
-            ThrowHelper.ThrowArgumentOutOfRangeException(nameof(length));
+            ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.length);
         }
 
         string result = FastAllocateString(length);

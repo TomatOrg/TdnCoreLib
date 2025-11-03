@@ -64,7 +64,7 @@ public readonly struct Rune : IComparable, IComparable<Rune>, IEquatable<Rune>
         uint expanded = ch;
         if (UnicodeUtility.IsSurrogateCodePoint(expanded))
         {
-            ThrowHelper.ThrowArgumentOutOfRangeException(nameof(ch));
+            ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.ch);
         }
         _value = expanded;
     }
@@ -102,7 +102,7 @@ public readonly struct Rune : IComparable, IComparable<Rune>, IEquatable<Rune>
     {
         if (!UnicodeUtility.IsValidUnicodeScalar(value))
         {
-            ThrowHelper.ThrowArgumentOutOfRangeException(nameof(value));
+            ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.value);
         }
         _value = value;
     }
@@ -736,7 +736,7 @@ public readonly struct Rune : IComparable, IComparable<Rune>, IEquatable<Rune>
         int runeValue = ReadRuneFromString(input, index);
         if (runeValue < 0)
         {
-            ThrowHelper.ThrowArgumentException_CannotExtractScalar(nameof(index));
+            ThrowHelper.ThrowArgumentException_CannotExtractScalar(ExceptionArgument.index);
         }
 
         return UnsafeCreate((uint)runeValue);
@@ -796,7 +796,7 @@ public readonly struct Rune : IComparable, IComparable<Rune>, IEquatable<Rune>
     {
         if (input is null)
         {
-            ThrowHelper.ThrowArgumentNullException(nameof(input));
+            ThrowHelper.ThrowArgumentNullException(ExceptionArgument.input);
         }
 
         if ((uint)index >= (uint)input.Length)
@@ -1311,7 +1311,7 @@ public readonly struct Rune : IComparable, IComparable<Rune>, IEquatable<Rune>
     // {
     //     if (culture is null)
     //     {
-    //         ThrowHelper.ThrowArgumentNullException(nameof(culture));
+    //         ThrowHelper.ThrowArgumentNullException(ExceptionArgument.culture);
     //     }
     //
     //     // We don't want to special-case ASCII here since the specified culture might handle
@@ -1343,7 +1343,7 @@ public readonly struct Rune : IComparable, IComparable<Rune>, IEquatable<Rune>
     // {
     //     if (culture is null)
     //     {
-    //         ThrowHelper.ThrowArgumentNullException(nameof(culture));
+    //         ThrowHelper.ThrowArgumentNullException(ExceptionArgument.culture);
     //     }
     //
     //     // We don't want to special-case ASCII here since the specified culture might handle

@@ -153,7 +153,7 @@ public readonly struct ReadOnlyMemory<T> : IEquatable<ReadOnlyMemory<T>>
     {
         if ((uint)start > (uint)_length)
         {
-            ThrowHelper.ThrowArgumentOutOfRangeException(nameof(start));
+            ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.start);
         }
 
         // It is expected for _index + start to be negative if the memory is already pre-pinned.
@@ -173,7 +173,7 @@ public readonly struct ReadOnlyMemory<T> : IEquatable<ReadOnlyMemory<T>>
     {
         // See comment in Span<T>.Slice for how this works.
         if ((ulong)(uint)start + (ulong)(uint)length > (ulong)(uint)_length)
-            ThrowHelper.ThrowArgumentOutOfRangeException(nameof(start));
+            ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.start);
 
         // It is expected for _index + start to be negative if the memory is already pre-pinned.
         return new ReadOnlyMemory<T>(_object, _index + start, length);

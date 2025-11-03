@@ -787,7 +787,7 @@ public partial class String
                 return GetHashCodeOrdinalIgnoreCase(value);
 
             default:
-                ThrowHelper.ThrowArgumentException(SR.NotSupported_StringComparison, nameof(comparisonType));
+                ThrowHelper.ThrowArgumentException(ExceptionResource.NotSupported_StringComparison, ExceptionArgument.comparisonType);
                 Debug.Fail("Should not reach this point.");
                 return default;
         }
@@ -1023,7 +1023,7 @@ public partial class String
         // Single comparison to check if comparisonType is within [CurrentCulture .. OrdinalIgnoreCase]
         if ((uint)comparisonType > (uint)StringComparison.OrdinalIgnoreCase)
         {
-            ThrowHelper.ThrowArgumentException(SR.NotSupported_StringComparison, nameof(comparisonType));
+            ThrowHelper.ThrowArgumentException(ExceptionResource.NotSupported_StringComparison, ExceptionArgument.comparisonType);
         }
     }
 

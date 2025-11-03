@@ -218,7 +218,7 @@ public readonly struct Memory<T> : IEquatable<Memory<T>>
     {
         if ((uint)start > (uint)_length)
         {
-            ThrowHelper.ThrowArgumentOutOfRangeException(nameof(start));
+            ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.start);
         }
 
         // It is expected for _index + start to be negative if the memory is already pre-pinned.

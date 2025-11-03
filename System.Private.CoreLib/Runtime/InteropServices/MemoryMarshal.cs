@@ -321,7 +321,7 @@ public static partial class MemoryMarshal
     {
         if (sizeof(T) > source.Length)
         {
-            ThrowHelper.ThrowArgumentOutOfRangeException("length");
+            ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.length);
         }
         return Unsafe.ReadUnaligned<T>(ref GetReference(source));
     }
@@ -352,7 +352,7 @@ public static partial class MemoryMarshal
     {
         if ((uint)sizeof(T) > (uint)destination.Length)
         {
-            ThrowHelper.ThrowArgumentOutOfRangeException("length");
+            ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.length);
         }
         Unsafe.WriteUnaligned(ref GetReference(destination), value);
     }
@@ -386,7 +386,7 @@ public static partial class MemoryMarshal
     {
         if (sizeof(T) > (uint)span.Length)
         {
-            ThrowHelper.ThrowArgumentOutOfRangeException("length");
+            ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.length);
         }
         return ref Unsafe.As<byte, T>(ref GetReference(span));
     }
@@ -404,7 +404,7 @@ public static partial class MemoryMarshal
     {
         if (sizeof(T) > (uint)span.Length)
         {
-            ThrowHelper.ThrowArgumentOutOfRangeException("length");
+            ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.length);
         }
         return ref Unsafe.As<byte, T>(ref GetReference(span));
     }

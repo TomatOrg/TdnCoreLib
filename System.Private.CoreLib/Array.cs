@@ -36,7 +36,7 @@ public abstract class Array
     public static int IndexOf<T>(T[]? array, T value, int startIndex, int count)
     {
         if (array == null)
-            ThrowHelper.ThrowArgumentNullException(nameof(array));
+            ThrowHelper.ThrowArgumentNullException(ExceptionArgument.array);
         // if (array.Rank != 1)
         //     ThrowHelper.ThrowRankException(ExceptionResource.Rank_MultiDimNotSupported);
 
@@ -62,7 +62,7 @@ public abstract class Array
     {
         int ilength = (int)length;
         if (length != ilength)
-            ThrowHelper.ThrowArgumentOutOfRangeException(nameof(length), SR.ArgumentOutOfRange_HugeArrayNotSupported);
+            ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.length, ExceptionResource.ArgumentOutOfRange_HugeArrayNotSupported);
 
         Copy(sourceArray, destinationArray, ilength);
     }
@@ -75,9 +75,9 @@ public abstract class Array
     public static void Copy<T>(T[] sourceArray, int sourceIndex, T[] destinationArray, int destinationIndex, int length)
     {
         if (sourceArray == null)
-            ThrowHelper.ThrowArgumentNullException(nameof(sourceArray));
+            ThrowHelper.ThrowArgumentNullException(ExceptionArgument.sourceArray);
         if (destinationArray == null)
-            ThrowHelper.ThrowArgumentNullException(nameof(destinationArray));
+            ThrowHelper.ThrowArgumentNullException(ExceptionArgument.destinationArray);
 
         ArgumentOutOfRangeException.ThrowIfNegative(length);
 
@@ -104,7 +104,7 @@ public abstract class Array
     public static void Resize<T>([NotNull] ref T[]? array, int newSize)
     {
         if (newSize < 0)
-            ThrowHelper.ThrowArgumentOutOfRangeException(nameof(newSize), SR.ArgumentOutOfRange_NeedNonNegNum);
+            ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.newSize, ExceptionResource.ArgumentOutOfRange_NeedNonNegNum);
 
         T[]? larray = array; // local copy
         if (larray == null)

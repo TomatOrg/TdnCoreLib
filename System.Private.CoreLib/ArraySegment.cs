@@ -35,7 +35,7 @@ public readonly struct ArraySegment<T> : IList<T>, IReadOnlyList<T>
     public ArraySegment(T[] array)
     {
         if (array == null)
-            ThrowHelper.ThrowArgumentNullException(nameof(array));
+            ThrowHelper.ThrowArgumentNullException(ExceptionArgument.array);
 
         _array = array;
         _offset = 0;
@@ -265,7 +265,7 @@ public readonly struct ArraySegment<T> : IList<T>, IReadOnlyList<T>
     {
         if (_array == null)
         {
-            ThrowHelper.ThrowInvalidOperationException(SR.InvalidOperation_NullArray);
+            ThrowHelper.ThrowInvalidOperationException(ExceptionResource.InvalidOperation_NullArray);
         }
     }
 

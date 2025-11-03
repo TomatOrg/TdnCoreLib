@@ -15,7 +15,7 @@ namespace System
             where TComparable : IComparable<T>
         {
             if (comparable == null)
-                ThrowHelper.ThrowArgumentNullException(nameof(comparable));
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.comparable);
 
             return BinarySearch(ref MemoryMarshal.GetReference(span), span.Length, comparable);
         }

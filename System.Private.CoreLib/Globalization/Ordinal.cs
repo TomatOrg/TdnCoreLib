@@ -239,12 +239,12 @@ internal static partial class Ordinal
     {
         if (source == null)
         {
-            ThrowHelper.ThrowArgumentNullException(nameof(source));
+            ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
         }
 
         if (value == null)
         {
-            ThrowHelper.ThrowArgumentNullException(nameof(value));
+            ThrowHelper.ThrowArgumentNullException(ExceptionArgument.value);
         }
 
         if (!source.TryGetSpan(startIndex, count, out ReadOnlySpan<char> sourceSpan))
@@ -254,11 +254,11 @@ internal static partial class Ordinal
 
             if ((uint)startIndex > (uint)source.Length)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(nameof(startIndex), SR.ArgumentOutOfRange_IndexMustBeLessOrEqual);
+                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.startIndex, ExceptionResource.ArgumentOutOfRange_IndexMustBeLessOrEqual);
             }
             else
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(nameof(count), SR.ArgumentOutOfRange_Count);
+                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.count, ExceptionResource.ArgumentOutOfRange_Count);
             }
         }
 
@@ -528,12 +528,12 @@ internal static partial class Ordinal
     {
         if (source == null)
         {
-            ThrowHelper.ThrowArgumentNullException(nameof(source));
+            ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
         }
 
         if (value == null)
         {
-            ThrowHelper.ThrowArgumentNullException(nameof(value));
+            ThrowHelper.ThrowArgumentNullException(ExceptionArgument.value);
         }
 
         if (value.Length == 0)
@@ -558,11 +558,11 @@ internal static partial class Ordinal
 
             if ((uint)startIndex > (uint)source.Length)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(nameof(startIndex), SR.ArgumentOutOfRange_IndexMustBeLessOrEqual);
+                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.startIndex, ExceptionResource.ArgumentOutOfRange_IndexMustBeLessOrEqual);
             }
             else
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(nameof(count), SR.ArgumentOutOfRange_Count);
+                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.count, ExceptionResource.ArgumentOutOfRange_Count);
             }
         }
 
@@ -597,7 +597,7 @@ internal static partial class Ordinal
     internal static int ToUpperOrdinal(ReadOnlySpan<char> source, Span<char> destination)
     {
         if (source.Overlaps(destination))
-            ThrowHelper.ThrowInvalidOperationException(SR.InvalidOperation_SpanOverlappedOperation);
+            ThrowHelper.ThrowInvalidOperationException(ExceptionResource.InvalidOperation_SpanOverlappedOperation);
 
         // Assuming that changing case does not affect length
         if (destination.Length < source.Length)

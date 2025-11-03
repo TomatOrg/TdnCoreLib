@@ -137,7 +137,7 @@ public readonly struct Int64
     
     public static long Parse(string s, NumberStyles style, IFormatProvider? provider)
     {
-        if (s is null) { ThrowHelper.ThrowArgumentNullException(nameof(s)); }
+        if (s is null) { ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s); }
         return Parse(s.AsSpan(), style, provider);
     }
     

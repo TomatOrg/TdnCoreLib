@@ -86,7 +86,7 @@ internal sealed partial class ArraySortHelper<T> : IArraySortHelper<T>
         }
         catch (Exception e)
         {
-            ThrowHelper.ThrowInvalidOperationException(SR.InvalidOperation_IComparerFailed, e);
+            ThrowHelper.ThrowInvalidOperationException(ExceptionResource.InvalidOperation_IComparerFailed, e);
         }
     }
 
@@ -99,7 +99,7 @@ internal sealed partial class ArraySortHelper<T> : IArraySortHelper<T>
         }
         catch (Exception e)
         {
-            ThrowHelper.ThrowInvalidOperationException(SR.InvalidOperation_IComparerFailed, e);
+            ThrowHelper.ThrowInvalidOperationException(ExceptionResource.InvalidOperation_IComparerFailed, e);
             return 0;
         }
     }
@@ -121,7 +121,7 @@ internal sealed partial class ArraySortHelper<T> : IArraySortHelper<T>
         }
         catch (Exception e)
         {
-            ThrowHelper.ThrowInvalidOperationException(SR.InvalidOperation_IComparerFailed, e);
+            ThrowHelper.ThrowInvalidOperationException(ExceptionResource.InvalidOperation_IComparerFailed, e);
         }
     }
 
@@ -372,7 +372,7 @@ internal sealed partial class GenericArraySortHelper<T>
         }
         catch (Exception e)
         {
-            ThrowHelper.ThrowInvalidOperationException(SR.InvalidOperation_IComparerFailed, e);
+            ThrowHelper.ThrowInvalidOperationException(ExceptionResource.InvalidOperation_IComparerFailed, e);
         }
     }
 
@@ -394,7 +394,7 @@ internal sealed partial class GenericArraySortHelper<T>
         }
         catch (Exception e)
         {
-            ThrowHelper.ThrowInvalidOperationException(SR.InvalidOperation_IComparerFailed, e);
+            ThrowHelper.ThrowInvalidOperationException(ExceptionResource.InvalidOperation_IComparerFailed, e);
             return 0;
         }
     }
@@ -682,7 +682,7 @@ internal sealed partial class ArraySortHelper<TKey, TValue>
         }
         catch (Exception e)
         {
-            ThrowHelper.ThrowInvalidOperationException(SR.InvalidOperation_IComparerFailed, e);
+            ThrowHelper.ThrowInvalidOperationException(ExceptionResource.InvalidOperation_IComparerFailed, e);
         }
     }
 
@@ -925,7 +925,7 @@ internal sealed partial class GenericArraySortHelper<TKey, TValue>
         }
         catch (Exception e)
         {
-            ThrowHelper.ThrowInvalidOperationException(SR.InvalidOperation_IComparerFailed, e);
+            ThrowHelper.ThrowInvalidOperationException(ExceptionResource.InvalidOperation_IComparerFailed, e);
         }
     }
 

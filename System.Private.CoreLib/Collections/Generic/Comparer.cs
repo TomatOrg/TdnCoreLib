@@ -18,7 +18,7 @@ public abstract class Comparer<T> : IComparer, IComparer<T>
         if (x == null) return y == null ? 0 : -1;
         if (y == null) return 1;
         if (x is T && y is T) return Compare((T)x, (T)y);
-        ThrowHelper.ThrowArgumentException(SR.Argument_InvalidArgumentForComparison);
+        ThrowHelper.ThrowArgumentException(ExceptionResource.Argument_InvalidArgumentForComparison);
         return 0;
     }
 }

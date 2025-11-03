@@ -46,29 +46,29 @@ public class ArgumentException : SystemException
         _paramName = paramName;
     }
 
-    // public override string Message
-    // {
-    //     get
-    //     {
-    //         SetMessageField();
-    //
-    //         string s = base.Message;
-    //         if (!string.IsNullOrEmpty(_paramName))
-    //         {
-    //             s += " " + SR.Format(SR.Arg_ParamName_Name, _paramName);
-    //         }
-    //
-    //         return s;
-    //     }
-    // }
+    public override string Message
+    {
+        get
+        {
+            SetMessageField();
 
-    // private void SetMessageField()
-    // {
-    //     if (_message == null && HResult == HResults.COR_E_ARGUMENT)
-    //     {
-    //         _message = SR.Arg_ArgumentException;
-    //     }
-    // }
+            string s = base.Message;
+            if (!string.IsNullOrEmpty(_paramName))
+            {
+                s += " " + string.Format(SR.Arg_ParamName_Name, _paramName);
+            }
+
+            return s;
+        }
+    }
+
+    private void SetMessageField()
+    {
+        if (_message == null && GetType() == typeof(ArgumentException))
+        {
+            _message = SR.Arg_ArgumentException;
+        }
+    }
 
     public virtual string? ParamName => _paramName;
 

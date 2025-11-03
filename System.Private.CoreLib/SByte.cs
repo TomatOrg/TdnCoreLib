@@ -132,7 +132,7 @@ public readonly struct SByte
     
     public static sbyte Parse(string s, NumberStyles style, IFormatProvider? provider)
     {
-        if (s is null) { ThrowHelper.ThrowArgumentNullException(nameof(s)); }
+        if (s is null) { ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s); }
         return Parse(s.AsSpan(), style, provider);
     }
     

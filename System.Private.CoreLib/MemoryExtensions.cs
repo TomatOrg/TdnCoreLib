@@ -44,7 +44,7 @@ public static partial class MemoryExtensions
         if (array == null)
         {
             if (!startIndex.Equals(Index.Start))
-                ThrowHelper.ThrowArgumentNullException(nameof(array));
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.array);
 
             return default;
         }
@@ -68,7 +68,7 @@ public static partial class MemoryExtensions
             Index endIndex = range.End;
 
             if (!startIndex.Equals(Index.Start) || !endIndex.Equals(Index.Start))
-                ThrowHelper.ThrowArgumentNullException(nameof(array));
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.array);
 
             return default;
         }
@@ -105,12 +105,12 @@ public static partial class MemoryExtensions
         if (text == null)
         {
             if (start != 0)
-                ThrowHelper.ThrowArgumentOutOfRangeException(nameof(start));
+                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.start);
             return default;
         }
 
         if ((uint)start > (uint)text.Length)
-            ThrowHelper.ThrowArgumentOutOfRangeException(nameof(start));
+            ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.start);
 
         return new ReadOnlySpan<char>(ref Unsafe.Add(ref text.GetRawStringData(), (nint)(uint)start /* force zero-extension */), text.Length - start);
     }
@@ -126,7 +126,7 @@ public static partial class MemoryExtensions
         {
             if (!startIndex.Equals(Index.Start))
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(nameof(startIndex));
+                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.startIndex);
             }
 
             return default;
@@ -135,7 +135,7 @@ public static partial class MemoryExtensions
         int actualIndex = startIndex.GetOffset(text.Length);
         if ((uint)actualIndex > (uint)text.Length)
         {
-            ThrowHelper.ThrowArgumentOutOfRangeException(nameof(startIndex));
+            ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.startIndex);
         }
 
         return new ReadOnlySpan<char>(ref Unsafe.Add(ref text.GetRawStringData(), (nint)(uint)actualIndex /* force zero-extension */), text.Length - actualIndex);
@@ -157,7 +157,7 @@ public static partial class MemoryExtensions
 
             if (!startIndex.Equals(Index.Start) || !endIndex.Equals(Index.Start))
             {
-                ThrowHelper.ThrowArgumentNullException(nameof(text));
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.text);
             }
 
             return default;
@@ -183,13 +183,13 @@ public static partial class MemoryExtensions
         if (text == null)
         {
             if (start != 0 || length != 0)
-                ThrowHelper.ThrowArgumentOutOfRangeException(nameof(start));
+                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.start);
             return default;
         }
 
         // See comment in Span<T>.Slice for how this works.
         if ((ulong)(uint)start + (ulong)(uint)length > (ulong)(uint)text.Length)
-            ThrowHelper.ThrowArgumentOutOfRangeException(nameof(start));
+            ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.start);
 
         return new ReadOnlySpan<char>(ref Unsafe.Add(ref text.GetRawStringData(), (nint)(uint)start /* force zero-extension */), length);
     }
@@ -217,12 +217,12 @@ public static partial class MemoryExtensions
         if (text == null)
         {
             if (start != 0)
-                ThrowHelper.ThrowArgumentOutOfRangeException(nameof(start));
+                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.start);
             return default;
         }
 
         if ((uint)start > (uint)text.Length)
-            ThrowHelper.ThrowArgumentOutOfRangeException(nameof(start));
+            ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.start);
 
         return new ReadOnlyMemory<char>(text, start, text.Length - start);
     }
@@ -235,7 +235,7 @@ public static partial class MemoryExtensions
         if (text == null)
         {
             if (!startIndex.Equals(Index.Start))
-                ThrowHelper.ThrowArgumentNullException(nameof(text));
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.text);
 
             return default;
         }
@@ -260,13 +260,13 @@ public static partial class MemoryExtensions
         if (text == null)
         {
             if (start != 0 || length != 0)
-                ThrowHelper.ThrowArgumentOutOfRangeException(nameof(start));
+                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.start);
             return default;
         }
 
         // See comment in Span<T>.Slice for how this works.
         if ((ulong)(uint)start + (ulong)(uint)length > (ulong)(uint)text.Length)
-            ThrowHelper.ThrowArgumentOutOfRangeException(nameof(start));
+            ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.start);
 
         return new ReadOnlyMemory<char>(text, start, length);
     }
@@ -282,7 +282,7 @@ public static partial class MemoryExtensions
             Index endIndex = range.End;
 
             if (!startIndex.Equals(Index.Start) || !endIndex.Equals(Index.Start))
-                ThrowHelper.ThrowArgumentNullException(nameof(text));
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.text);
 
             return default;
         }
@@ -2572,7 +2572,7 @@ public static partial class MemoryExtensions
     public static Span<T> AsSpan<T>(this ArraySegment<T> segment, int start)
     {
         if (((uint)start) > (uint)segment.Count)
-            ThrowHelper.ThrowArgumentOutOfRangeException(nameof(start));
+            ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.start);
 
         return new Span<T>(segment.Array, segment.Offset + start, segment.Count - start);
     }
@@ -2606,9 +2606,9 @@ public static partial class MemoryExtensions
     public static Span<T> AsSpan<T>(this ArraySegment<T> segment, int start, int length)
     {
         if (((uint)start) > (uint)segment.Count)
-            ThrowHelper.ThrowArgumentOutOfRangeException(nameof(start));
+            ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.start);
         if (((uint)length) > (uint)(segment.Count - start))
-            ThrowHelper.ThrowArgumentOutOfRangeException(nameof(length));
+            ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.length);
 
         return new Span<T>(segment.Array, segment.Offset + start, length);
     }
@@ -2652,7 +2652,7 @@ public static partial class MemoryExtensions
         if (array == null)
         {
             if (!startIndex.Equals(Index.Start))
-                ThrowHelper.ThrowArgumentNullException(nameof(array));
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.array);
 
             return default;
         }
@@ -2686,7 +2686,7 @@ public static partial class MemoryExtensions
             Index startIndex = range.Start;
             Index endIndex = range.End;
             if (!startIndex.Equals(Index.Start) || !endIndex.Equals(Index.Start))
-                ThrowHelper.ThrowArgumentNullException(nameof(array));
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.array);
 
             return default;
         }
@@ -2714,7 +2714,7 @@ public static partial class MemoryExtensions
     public static Memory<T> AsMemory<T>(this ArraySegment<T> segment, int start)
     {
         if (((uint)start) > (uint)segment.Count)
-            ThrowHelper.ThrowArgumentOutOfRangeException(nameof(start));
+            ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.start);
 
         return new Memory<T>(segment.Array, segment.Offset + start, segment.Count - start);
     }
@@ -2734,9 +2734,9 @@ public static partial class MemoryExtensions
     public static Memory<T> AsMemory<T>(this ArraySegment<T> segment, int start, int length)
     {
         if (((uint)start) > (uint)segment.Count)
-            ThrowHelper.ThrowArgumentOutOfRangeException(nameof(start));
+            ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.start);
         if (((uint)length) > (uint)(segment.Count - start))
-            ThrowHelper.ThrowArgumentOutOfRangeException(nameof(length));
+            ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.length);
 
         return new Memory<T>(segment.Array, segment.Offset + start, length);
     }
@@ -3114,7 +3114,7 @@ public static partial class MemoryExtensions
         where TComparer : IComparer<T>
     {
         if (comparer == null)
-            ThrowHelper.ThrowArgumentNullException(nameof(comparer));
+            ThrowHelper.ThrowArgumentNullException(ExceptionArgument.comparer);
 
         var comparable = new SpanHelpers.ComparerComparable<T, TComparer>(
             value, comparer);
@@ -3169,7 +3169,7 @@ public static partial class MemoryExtensions
     public static void Sort<T>(this Span<T> span, Comparison<T> comparison)
     {
         if (comparison == null)
-            ThrowHelper.ThrowArgumentNullException(nameof(comparison));
+            ThrowHelper.ThrowArgumentNullException(ExceptionArgument.comparison);
 
         if (span.Length > 1)
         {
@@ -3219,7 +3219,7 @@ public static partial class MemoryExtensions
         where TComparer : IComparer<TKey>?
     {
         if (keys.Length != items.Length)
-            ThrowHelper.ThrowArgumentException(SR.Argument_SpansMustHaveSameLength);
+            ThrowHelper.ThrowArgumentException(ExceptionResource.Argument_SpansMustHaveSameLength);
 
         if (keys.Length > 1)
         {
@@ -3243,9 +3243,9 @@ public static partial class MemoryExtensions
     public static void Sort<TKey, TValue>(this Span<TKey> keys, Span<TValue> items, Comparison<TKey> comparison)
     {
         if (comparison == null)
-            ThrowHelper.ThrowArgumentNullException(nameof(comparison));
+            ThrowHelper.ThrowArgumentNullException(ExceptionArgument.comparison);
         if (keys.Length != items.Length)
-            ThrowHelper.ThrowArgumentException(SR.Argument_SpansMustHaveSameLength);
+            ThrowHelper.ThrowArgumentException(ExceptionResource.Argument_SpansMustHaveSameLength);
 
         if (keys.Length > 1)
         {
@@ -3350,7 +3350,7 @@ public static partial class MemoryExtensions
             ((nuint)byteOffset < (nuint)((nint)source.Length * sizeof(T)) ||
              (nuint)byteOffset > (nuint)(-((nint)destination.Length * sizeof(T)))))
         {
-            ThrowHelper.ThrowArgumentException(SR.InvalidOperation_SpanOverlappedOperation);
+            ThrowHelper.ThrowArgumentException(ExceptionResource.InvalidOperation_SpanOverlappedOperation);
         }
 
         if (RuntimeHelpers.IsBitwiseEquatable<T>())

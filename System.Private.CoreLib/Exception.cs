@@ -9,7 +9,7 @@ public class Exception
 
     private protected const string InnerExceptionPrefix = " ---> ";
     
-    private string? _message;
+    internal string? _message;
     private readonly Exception? _innerException;
 
     public virtual string Message => _message ?? string.Format(SR.Exception_WasThrown, GetClassName());

@@ -11,7 +11,7 @@ namespace System
         public bool Contains(string value)
         {
             if (value == null)
-                ThrowHelper.ThrowArgumentNullException(nameof(value));
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.value);
 
             return SpanHelpers.IndexOf(
                 ref _firstChar,
@@ -94,12 +94,12 @@ namespace System
         {
             if ((uint)startIndex > (uint)Length)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(nameof(startIndex), SR.ArgumentOutOfRange_IndexMustBeLessOrEqual);
+                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.startIndex, ExceptionResource.ArgumentOutOfRange_IndexMustBeLessOrEqual);
             }
 
             if ((uint)count > (uint)(Length - startIndex))
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(nameof(count), SR.ArgumentOutOfRange_Count);
+                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.count, ExceptionResource.ArgumentOutOfRange_Count);
             }
 
             int result = SpanHelpers.IndexOfChar(ref Unsafe.Add(ref _firstChar, startIndex), value, count);
@@ -114,7 +114,7 @@ namespace System
         {
             if (anyOf is null)
             {
-                ThrowHelper.ThrowArgumentNullException(nameof(anyOf));
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.anyOf);
             }
 
             return new ReadOnlySpan<char>(ref _firstChar, Length).IndexOfAny(anyOf);
@@ -129,17 +129,17 @@ namespace System
         {
             if (anyOf is null)
             {
-                ThrowHelper.ThrowArgumentNullException(nameof(anyOf));
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.anyOf);
             }
 
             if ((uint)startIndex > (uint)Length)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(nameof(startIndex), SR.ArgumentOutOfRange_IndexMustBeLessOrEqual);
+                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.startIndex, ExceptionResource.ArgumentOutOfRange_IndexMustBeLessOrEqual);
             }
 
             if ((uint)count > (uint)(Length - startIndex))
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(nameof(count), SR.ArgumentOutOfRange_Count);
+                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.count, ExceptionResource.ArgumentOutOfRange_Count);
             }
 
             int result = new ReadOnlySpan<char>(ref Unsafe.Add(ref _firstChar, startIndex), count).IndexOfAny(anyOf);
@@ -305,12 +305,12 @@ namespace System
 
             if ((uint)startIndex >= (uint)Length)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(nameof(startIndex), SR.ArgumentOutOfRange_IndexMustBeLess);
+                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.startIndex, ExceptionResource.ArgumentOutOfRange_IndexMustBeLess);
             }
 
             if ((uint)count > (uint)startIndex + 1)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(nameof(count), SR.ArgumentOutOfRange_Count);
+                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.count, ExceptionResource.ArgumentOutOfRange_Count);
             }
 
             int startSearchAt = startIndex + 1 - count;
@@ -328,7 +328,7 @@ namespace System
         {
             if (anyOf is null)
             {
-                ThrowHelper.ThrowArgumentNullException(nameof(anyOf));
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.anyOf);
             }
 
             return new ReadOnlySpan<char>(ref _firstChar, Length).LastIndexOfAny(anyOf);
@@ -343,7 +343,7 @@ namespace System
         {
             if (anyOf is null)
             {
-                ThrowHelper.ThrowArgumentNullException(nameof(anyOf));
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.anyOf);
             }
 
             if (Length == 0)
@@ -353,12 +353,12 @@ namespace System
 
             if ((uint)startIndex >= (uint)Length)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(nameof(startIndex), SR.ArgumentOutOfRange_IndexMustBeLess);
+                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.startIndex, ExceptionResource.ArgumentOutOfRange_IndexMustBeLess);
             }
 
             if ((count < 0) || ((count - 1) > startIndex))
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(nameof(count), SR.ArgumentOutOfRange_Count);
+                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.count, ExceptionResource.ArgumentOutOfRange_Count);
             }
 
             int startSearchAt = startIndex + 1 - count;

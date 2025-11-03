@@ -660,7 +660,7 @@ public partial class String
     {
         if (value == null)
         {
-            ThrowHelper.ThrowArgumentNullException(nameof(value));
+            ThrowHelper.ThrowArgumentNullException(ExceptionArgument.value);
         }
 
         return JoinCore(new ReadOnlySpan<char>(in separator), new ReadOnlySpan<string?>(value));
@@ -670,7 +670,7 @@ public partial class String
     {
         if (value == null)
         {
-            ThrowHelper.ThrowArgumentNullException(nameof(value));
+            ThrowHelper.ThrowArgumentNullException(ExceptionArgument.value);
         }
 
         return JoinCore(separator.AsSpan(), new ReadOnlySpan<string?>(value));
@@ -706,7 +706,7 @@ public partial class String
 
         if (values == null)
         {
-            ThrowHelper.ThrowArgumentNullException(nameof(values));
+            ThrowHelper.ThrowArgumentNullException(ExceptionArgument.values);
         }
 
         using (IEnumerator<string?> en = values.GetEnumerator())
@@ -750,7 +750,7 @@ public partial class String
     {
         if (values == null)
         {
-            ThrowHelper.ThrowArgumentNullException(nameof(values));
+            ThrowHelper.ThrowArgumentNullException(ExceptionArgument.values);
         }
 
         if (values.Length == 0)
@@ -805,7 +805,7 @@ public partial class String
 
         if (values == null)
         {
-            ThrowHelper.ThrowArgumentNullException(nameof(values));
+            ThrowHelper.ThrowArgumentNullException(ExceptionArgument.values);
         }
 
         using (IEnumerator<T> e = values.GetEnumerator())
@@ -2019,7 +2019,7 @@ public partial class String
         if ((options & ~AllValidFlags) != 0)
         {
             // at least one invalid flag was set
-            ThrowHelper.ThrowArgumentException(SR.Argument_InvalidFlag, nameof(options));
+            ThrowHelper.ThrowArgumentException(ExceptionResource.Argument_InvalidFlag, ExceptionArgument.options);
         }
     }
 

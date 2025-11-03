@@ -314,7 +314,7 @@ public readonly struct Half
     {
         if (s is null)
         {
-            ThrowHelper.ThrowArgumentNullException(nameof(s));
+            ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
         }
         return Parse(s.AsSpan(), style, provider);
     }

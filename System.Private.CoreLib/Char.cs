@@ -191,7 +191,7 @@ public readonly struct Char
 
     public static char Parse(string s)
     {
-        if (s is null) { ThrowHelper.ThrowArgumentNullException(nameof(s)); }
+        if (s is null) { ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s); }
         return Parse(s.AsSpan());
     }
 
@@ -452,7 +452,7 @@ public readonly struct Char
     // {
     //     if (culture == null)
     //     {
-    //         ThrowHelper.ThrowArgumentNullException(nameof(culture));
+    //         ThrowHelper.ThrowArgumentNullException(ExceptionArgument.culture);
     //     }
     //
     //     return culture.TextInfo.ToUpper(c);
@@ -482,7 +482,7 @@ public readonly struct Char
     // {
     //     if (culture == null)
     //     {
-    //         ThrowHelper.ThrowArgumentNullException(nameof(culture));
+    //         ThrowHelper.ThrowArgumentNullException(ExceptionArgument.culture);
     //     }
     //
     //     return culture.TextInfo.ToLower(c);
@@ -597,11 +597,11 @@ public readonly struct Char
     {
         if (s == null)
         {
-            ThrowHelper.ThrowArgumentNullException(nameof(s));
+            ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
         }
         if ((uint)index >= (uint)s.Length)
         {
-            ThrowHelper.ThrowArgumentOutOfRangeException(nameof(index));
+            ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.index);
         }
 
         // Control chars are always in the BMP, so don't need to worry about surrogate handling.
@@ -612,11 +612,11 @@ public readonly struct Char
     {
         if (s == null)
         {
-            ThrowHelper.ThrowArgumentNullException(nameof(s));
+            ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
         }
         if ((uint)index >= (uint)s.Length)
         {
-            ThrowHelper.ThrowArgumentOutOfRangeException(nameof(index));
+            ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.index);
         }
 
         char c = s[index];
@@ -632,11 +632,11 @@ public readonly struct Char
     {
         if (s == null)
         {
-            ThrowHelper.ThrowArgumentNullException(nameof(s));
+            ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
         }
         if ((uint)index >= (uint)s.Length)
         {
-            ThrowHelper.ThrowArgumentOutOfRangeException(nameof(index));
+            ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.index);
         }
 
         char c = s[index];
@@ -653,11 +653,11 @@ public readonly struct Char
     {
         if (s == null)
         {
-            ThrowHelper.ThrowArgumentNullException(nameof(s));
+            ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
         }
         if ((uint)index >= (uint)s.Length)
         {
-            ThrowHelper.ThrowArgumentOutOfRangeException(nameof(index));
+            ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.index);
         }
 
         char c = s[index];
@@ -670,11 +670,11 @@ public readonly struct Char
     {
         if (s == null)
         {
-            ThrowHelper.ThrowArgumentNullException(nameof(s));
+            ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
         }
         if ((uint)index >= (uint)s.Length)
         {
-            ThrowHelper.ThrowArgumentOutOfRangeException(nameof(index));
+            ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.index);
         }
 
         char c = s[index];
@@ -712,11 +712,11 @@ public readonly struct Char
     {
         if (s == null)
         {
-            ThrowHelper.ThrowArgumentNullException(nameof(s));
+            ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
         }
         if ((uint)index >= (uint)s.Length)
         {
-            ThrowHelper.ThrowArgumentOutOfRangeException(nameof(index));
+            ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.index);
         }
 
         char c = s[index];
@@ -745,11 +745,11 @@ public readonly struct Char
     {
         if (s == null)
         {
-            ThrowHelper.ThrowArgumentNullException(nameof(s));
+            ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
         }
         if ((uint)index >= (uint)s.Length)
         {
-            ThrowHelper.ThrowArgumentOutOfRangeException(nameof(index));
+            ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.index);
         }
 
         char c = s[index];
@@ -787,11 +787,11 @@ public readonly struct Char
     {
         if (s == null)
         {
-            ThrowHelper.ThrowArgumentNullException(nameof(s));
+            ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
         }
         if ((uint)index >= (uint)s.Length)
         {
-            ThrowHelper.ThrowArgumentOutOfRangeException(nameof(index));
+            ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.index);
         }
 
         char c = s[index];
@@ -812,11 +812,11 @@ public readonly struct Char
     {
         if (s == null)
         {
-            ThrowHelper.ThrowArgumentNullException(nameof(s));
+            ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
         }
         if ((uint)index >= (uint)s.Length)
         {
-            ThrowHelper.ThrowArgumentOutOfRangeException(nameof(index));
+            ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.index);
         }
 
         return IsSurrogate(s[index]);
@@ -842,11 +842,11 @@ public readonly struct Char
     {
         if (s == null)
         {
-            ThrowHelper.ThrowArgumentNullException(nameof(s));
+            ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
         }
         if ((uint)index >= (uint)s.Length)
         {
-            ThrowHelper.ThrowArgumentOutOfRangeException(nameof(index));
+            ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.index);
         }
 
         char c = s[index];
@@ -859,11 +859,11 @@ public readonly struct Char
     {
         if (s == null)
         {
-            ThrowHelper.ThrowArgumentNullException(nameof(s));
+            ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
         }
         if ((uint)index >= (uint)s.Length)
         {
-            ThrowHelper.ThrowArgumentOutOfRangeException(nameof(index));
+            ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.index);
         }
 
         char c = s[index];
@@ -879,11 +879,11 @@ public readonly struct Char
     {
         if (s == null)
         {
-            ThrowHelper.ThrowArgumentNullException(nameof(s));
+            ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
         }
         if ((uint)index >= (uint)s.Length)
         {
-            ThrowHelper.ThrowArgumentOutOfRangeException(nameof(index));
+            ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.index);
         }
 
         // All white space code points are within the BMP,
@@ -905,11 +905,11 @@ public readonly struct Char
     {
         if (s == null)
         {
-            ThrowHelper.ThrowArgumentNullException(nameof(s));
+            ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
         }
         if ((uint)index >= (uint)s.Length)
         {
-            ThrowHelper.ThrowArgumentOutOfRangeException(nameof(index));
+            ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.index);
         }
 
         if (IsLatin1(s[index]))
@@ -929,11 +929,11 @@ public readonly struct Char
     {
         if (s == null)
         {
-            ThrowHelper.ThrowArgumentNullException(nameof(s));
+            ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
         }
         if ((uint)index >= (uint)s.Length)
         {
-            ThrowHelper.ThrowArgumentOutOfRangeException(nameof(index));
+            ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.index);
         }
 
         return CharUnicodeInfo.GetNumericValueInternal(s, index);
@@ -951,11 +951,11 @@ public readonly struct Char
     {
         if (s == null)
         {
-            ThrowHelper.ThrowArgumentNullException(nameof(s));
+            ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
         }
         if ((uint)index >= (uint)s.Length)
         {
-            ThrowHelper.ThrowArgumentOutOfRangeException(nameof(index));
+            ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.index);
         }
 
         return IsHighSurrogate(s[index]);
@@ -973,11 +973,11 @@ public readonly struct Char
     {
         if (s == null)
         {
-            ThrowHelper.ThrowArgumentNullException(nameof(s));
+            ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
         }
         if ((uint)index >= (uint)s.Length)
         {
-            ThrowHelper.ThrowArgumentOutOfRangeException(nameof(index));
+            ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.index);
         }
 
         return IsLowSurrogate(s[index]);
@@ -990,11 +990,11 @@ public readonly struct Char
     {
         if (s == null)
         {
-            ThrowHelper.ThrowArgumentNullException(nameof(s));
+            ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
         }
         if ((uint)index >= (uint)s.Length)
         {
-            ThrowHelper.ThrowArgumentOutOfRangeException(nameof(index));
+            ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.index);
         }
 
         if ((uint)(index + 1) < (uint)s.Length)
@@ -1096,12 +1096,12 @@ public readonly struct Char
     {
         if (s == null)
         {
-            ThrowHelper.ThrowArgumentNullException(nameof(s));
+            ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
         }
 
         if ((uint)index >= (uint)s.Length)
         {
-            ThrowHelper.ThrowArgumentOutOfRangeException(nameof(index), SR.ArgumentOutOfRange_IndexMustBeLess);
+            ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.index, ExceptionResource.ArgumentOutOfRange_IndexMustBeLess);
         }
 
         // Check if the character at index is a high surrogate.

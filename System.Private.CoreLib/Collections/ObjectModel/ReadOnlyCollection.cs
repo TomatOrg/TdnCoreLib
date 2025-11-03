@@ -17,7 +17,7 @@ public class ReadOnlyCollection<T> : IList<T>, IList, IReadOnlyList<T>
     {
         if (list == null)
         {
-            ThrowHelper.ThrowArgumentNullException(nameof(list));
+            ThrowHelper.ThrowArgumentNullException(ExceptionArgument.list);
         }
         this.list = list;
     }
@@ -57,33 +57,33 @@ public class ReadOnlyCollection<T> : IList<T>, IList, IReadOnlyList<T>
     T IList<T>.this[int index]
     {
         get => list[index];
-        set => ThrowHelper.ThrowNotSupportedException(SR.NotSupported_ReadOnlyCollection);
+        set => ThrowHelper.ThrowNotSupportedException(ExceptionResource.NotSupported_ReadOnlyCollection);
     }
 
     void ICollection<T>.Add(T value)
     {
-        ThrowHelper.ThrowNotSupportedException(SR.NotSupported_ReadOnlyCollection);
+        ThrowHelper.ThrowNotSupportedException(ExceptionResource.NotSupported_ReadOnlyCollection);
     }
 
     void ICollection<T>.Clear()
     {
-        ThrowHelper.ThrowNotSupportedException(SR.NotSupported_ReadOnlyCollection);
+        ThrowHelper.ThrowNotSupportedException(ExceptionResource.NotSupported_ReadOnlyCollection);
     }
 
     void IList<T>.Insert(int index, T value)
     {
-        ThrowHelper.ThrowNotSupportedException(SR.NotSupported_ReadOnlyCollection);
+        ThrowHelper.ThrowNotSupportedException(ExceptionResource.NotSupported_ReadOnlyCollection);
     }
 
     bool ICollection<T>.Remove(T value)
     {
-        ThrowHelper.ThrowNotSupportedException(SR.NotSupported_ReadOnlyCollection);
+        ThrowHelper.ThrowNotSupportedException(ExceptionResource.NotSupported_ReadOnlyCollection);
         return false;
     }
 
     void IList<T>.RemoveAt(int index)
     {
-        ThrowHelper.ThrowNotSupportedException(SR.NotSupported_ReadOnlyCollection);
+        ThrowHelper.ThrowNotSupportedException(ExceptionResource.NotSupported_ReadOnlyCollection);
     }
 
     IEnumerator IEnumerable.GetEnumerator()
@@ -184,7 +184,7 @@ public class ReadOnlyCollection<T> : IList<T>, IList, IReadOnlyList<T>
 
     void IList.Clear()
     {
-        ThrowHelper.ThrowNotSupportedException(SR.NotSupported_ReadOnlyCollection);
+        ThrowHelper.ThrowNotSupportedException(ExceptionResource.NotSupported_ReadOnlyCollection);
     }
 
     private static bool IsCompatibleObject(object? value)

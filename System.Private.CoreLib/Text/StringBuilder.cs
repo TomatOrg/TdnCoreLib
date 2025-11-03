@@ -1086,7 +1086,7 @@ public sealed partial class StringBuilder
 
         if (values == null)
         {
-            ThrowHelper.ThrowArgumentNullException(nameof(values));
+            ThrowHelper.ThrowArgumentNullException(ExceptionArgument.values);
         }
 
         Debug.Assert(values != null);
@@ -1120,7 +1120,7 @@ public sealed partial class StringBuilder
     {
         if (values == null)
         {
-            ThrowHelper.ThrowArgumentNullException(nameof(values));
+            ThrowHelper.ThrowArgumentNullException(ExceptionArgument.values);
         }
 
         Debug.Assert(values != null);
@@ -1387,7 +1387,7 @@ public sealed partial class StringBuilder
                 // This wasn't an escape, so it must be an opening brace.
                 if (brace != '{')
                 {
-                    ThrowHelper.ThrowFormatInvalidString(pos, SR.Format_UnexpectedClosingBrace);
+                    ThrowHelper.ThrowFormatInvalidString(pos, ExceptionResource.Format_UnexpectedClosingBrace);
                 }
 
                 // Proceed to parse the hole.
@@ -1410,7 +1410,7 @@ public sealed partial class StringBuilder
             int index = ch - '0';
             if ((uint)index >= 10u)
             {
-                ThrowHelper.ThrowFormatInvalidString(pos, SR.Format_ExpectedAsciiDigit);
+                ThrowHelper.ThrowFormatInvalidString(pos, ExceptionResource.Format_ExpectedAsciiDigit);
             }
 
             // Common case is a single digit index followed by a closing brace.  If it's not a closing brace,
@@ -1457,7 +1457,7 @@ public sealed partial class StringBuilder
                     width = ch - '0';
                     if ((uint)width >= 10u)
                     {
-                        ThrowHelper.ThrowFormatInvalidString(pos, SR.Format_ExpectedAsciiDigit);
+                        ThrowHelper.ThrowFormatInvalidString(pos, ExceptionResource.Format_ExpectedAsciiDigit);
                     }
                     ch = MoveNext(format, ref pos);
                     while (char.IsAsciiDigit(ch) && width < WidthLimit)
@@ -1480,7 +1480,7 @@ public sealed partial class StringBuilder
                     if (ch != ':')
                     {
                         // Unexpected character
-                        ThrowHelper.ThrowFormatInvalidString(pos, SR.Format_UnclosedFormatItem);
+                        ThrowHelper.ThrowFormatInvalidString(pos, ExceptionResource.Format_UnclosedFormatItem);
                     }
 
                     // Search for the closing brace; everything in between is the format,
@@ -1499,7 +1499,7 @@ public sealed partial class StringBuilder
                         if (ch == '{')
                         {
                             // Braces inside the argument hole are not supported
-                            ThrowHelper.ThrowFormatInvalidString(pos, SR.Format_UnclosedFormatItem);
+                            ThrowHelper.ThrowFormatInvalidString(pos, ExceptionResource.Format_UnclosedFormatItem);
                         }
                     }
 
@@ -1600,7 +1600,7 @@ public sealed partial class StringBuilder
             pos++;
             if ((uint)pos >= (uint)format.Length)
             {
-                ThrowHelper.ThrowFormatInvalidString(pos, SR.Format_UnclosedFormatItem);
+                ThrowHelper.ThrowFormatInvalidString(pos, ExceptionResource.Format_UnclosedFormatItem);
             }
             return format[pos];
         }

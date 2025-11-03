@@ -63,7 +63,7 @@ internal ref partial struct ValueStringBuilder
                 // This wasn't an escape, so it must be an opening brace.
                 if (brace != '{')
                 {
-                    ThrowHelper.ThrowFormatInvalidString(pos, SR.Format_UnexpectedClosingBrace);
+                    ThrowHelper.ThrowFormatInvalidString(pos, ExceptionResource.Format_UnexpectedClosingBrace);
                 }
 
                 // Proceed to parse the hole.
@@ -86,7 +86,7 @@ internal ref partial struct ValueStringBuilder
             int index = ch - '0';
             if ((uint)index >= 10u)
             {
-                ThrowHelper.ThrowFormatInvalidString(pos, SR.Format_ExpectedAsciiDigit);
+                ThrowHelper.ThrowFormatInvalidString(pos, ExceptionResource.Format_ExpectedAsciiDigit);
             }
 
             // Common case is a single digit index followed by a closing brace.  If it's not a closing brace,
@@ -133,7 +133,7 @@ internal ref partial struct ValueStringBuilder
                     width = ch - '0';
                     if ((uint)width >= 10u)
                     {
-                        ThrowHelper.ThrowFormatInvalidString(pos, SR.Format_ExpectedAsciiDigit);
+                        ThrowHelper.ThrowFormatInvalidString(pos, ExceptionResource.Format_ExpectedAsciiDigit);
                     }
                     ch = MoveNext(format, ref pos);
                     while (char.IsAsciiDigit(ch) && width < WidthLimit)
@@ -156,7 +156,7 @@ internal ref partial struct ValueStringBuilder
                     if (ch != ':')
                     {
                         // Unexpected character
-                        ThrowHelper.ThrowFormatInvalidString(pos, SR.Format_UnclosedFormatItem);
+                        ThrowHelper.ThrowFormatInvalidString(pos, ExceptionResource.Format_UnclosedFormatItem);
                     }
 
                     // Search for the closing brace; everything in between is the format,
@@ -175,7 +175,7 @@ internal ref partial struct ValueStringBuilder
                         if (ch == '{')
                         {
                             // Braces inside the argument hole are not supported
-                            ThrowHelper.ThrowFormatInvalidString(pos, SR.Format_UnclosedFormatItem);
+                            ThrowHelper.ThrowFormatInvalidString(pos, ExceptionResource.Format_UnclosedFormatItem);
                         }
                     }
 
@@ -268,7 +268,7 @@ internal ref partial struct ValueStringBuilder
             pos++;
             if ((uint)pos >= (uint)format.Length)
             {
-                ThrowHelper.ThrowFormatInvalidString(pos, SR.Format_UnclosedFormatItem);
+                ThrowHelper.ThrowFormatInvalidString(pos, ExceptionResource.Format_UnclosedFormatItem);
             }
             return format[pos];
         }

@@ -359,7 +359,7 @@ namespace System
         {
             if (s is null)
             {
-                ThrowHelper.ThrowArgumentNullException(nameof(s));
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
             }
             return Parse(s.AsSpan(), style, provider);
         }

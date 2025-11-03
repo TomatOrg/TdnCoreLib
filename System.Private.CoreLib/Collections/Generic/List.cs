@@ -45,7 +45,7 @@ namespace System.Collections.Generic
         public List(int capacity)
         {
             if (capacity < 0)
-                ThrowHelper.ThrowArgumentOutOfRangeException(nameof(capacity), SR.ArgumentOutOfRange_NeedNonNegNum);
+                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.capacity, ExceptionResource.ArgumentOutOfRange_NeedNonNegNum);
 
             if (capacity == 0)
                 _items = s_emptyArray;
@@ -60,7 +60,7 @@ namespace System.Collections.Generic
         public List(IEnumerable<T> collection)
         {
             if (collection == null)
-                ThrowHelper.ThrowArgumentNullException(nameof(collection));
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.collection);
 
             if (collection is ICollection<T> c)
             {
@@ -100,7 +100,7 @@ namespace System.Collections.Generic
             {
                 if (value < _size)
                 {
-                    ThrowHelper.ThrowArgumentOutOfRangeException(nameof(value), SR.ArgumentOutOfRange_SmallCapacity);
+                    ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.value, ExceptionResource.ArgumentOutOfRange_SmallCapacity);
                 }
 
                 if (value != _items.Length)
@@ -243,7 +243,7 @@ namespace System.Collections.Generic
         {
             if (collection == null)
             {
-                ThrowHelper.ThrowArgumentNullException(nameof(collection));
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.collection);
             }
 
             if (collection is ICollection<T> c)
@@ -301,9 +301,9 @@ namespace System.Collections.Generic
             if (index < 0)
                 ThrowHelper.ThrowIndexArgumentOutOfRange_NeedNonNegNumException();
             if (count < 0)
-                ThrowHelper.ThrowArgumentOutOfRangeException(nameof(count), SR.ArgumentOutOfRange_NeedNonNegNum);
+                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.count, ExceptionResource.ArgumentOutOfRange_NeedNonNegNum);
             if (_size - index < count)
-                ThrowHelper.ThrowArgumentException(SR.Argument_InvalidOffLen);
+                ThrowHelper.ThrowArgumentException(ExceptionResource.Argument_InvalidOffLen);
 
             return _items.AsSpan(index, count).BinarySearch(item, comparer);
         }
@@ -364,7 +364,7 @@ namespace System.Collections.Generic
         {
             if (converter == null)
             {
-                ThrowHelper.ThrowArgumentNullException(nameof(converter));
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.converter);
             }
 
             List<TOutput> list = new List<TOutput>(_size);
@@ -409,7 +409,7 @@ namespace System.Collections.Generic
         {
             if (_size - index < count)
             {
-                ThrowHelper.ThrowArgumentException(SR.Argument_InvalidOffLen);
+                ThrowHelper.ThrowArgumentException(ExceptionResource.Argument_InvalidOffLen);
             }
 
             // Delegate rest of error checking to Array.Copy.
@@ -433,7 +433,7 @@ namespace System.Collections.Generic
         {
             if (capacity < 0)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(nameof(capacity), SR.ArgumentOutOfRange_NeedNonNegNum);
+                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.capacity, ExceptionResource.ArgumentOutOfRange_NeedNonNegNum);
             }
             if (_items.Length < capacity)
             {
@@ -471,7 +471,7 @@ namespace System.Collections.Generic
         {
             if (match == null)
             {
-                ThrowHelper.ThrowArgumentNullException(nameof(match));
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.match);
             }
 
             for (int i = 0; i < _size; i++)
@@ -488,7 +488,7 @@ namespace System.Collections.Generic
         {
             if (match == null)
             {
-                ThrowHelper.ThrowArgumentNullException(nameof(match));
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.match);
             }
 
             List<T> list = new List<T>();
@@ -522,7 +522,7 @@ namespace System.Collections.Generic
 
             if (match == null)
             {
-                ThrowHelper.ThrowArgumentNullException(nameof(match));
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.match);
             }
 
             int endIndex = startIndex + count;
@@ -537,7 +537,7 @@ namespace System.Collections.Generic
         {
             if (match == null)
             {
-                ThrowHelper.ThrowArgumentNullException(nameof(match));
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.match);
             }
 
             for (int i = _size - 1; i >= 0; i--)
@@ -560,7 +560,7 @@ namespace System.Collections.Generic
         {
             if (match == null)
             {
-                ThrowHelper.ThrowArgumentNullException(nameof(match));
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.match);
             }
 
             if (_size == 0)
@@ -601,7 +601,7 @@ namespace System.Collections.Generic
         {
             if (action == null)
             {
-                ThrowHelper.ThrowArgumentNullException(nameof(action));
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.action);
             }
 
             int version = _version;
@@ -641,12 +641,12 @@ namespace System.Collections.Generic
 
             if (count < 0)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(nameof(count), SR.ArgumentOutOfRange_NeedNonNegNum);
+                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.count, ExceptionResource.ArgumentOutOfRange_NeedNonNegNum);
             }
 
             if (_size - index < count)
             {
-                ThrowHelper.ThrowArgumentException(SR.Argument_InvalidOffLen);
+                ThrowHelper.ThrowArgumentException(ExceptionResource.Argument_InvalidOffLen);
             }
 
             List<T> list = new List<T>(count);
@@ -734,7 +734,7 @@ namespace System.Collections.Generic
             // Note that insertions at the end are legal.
             if ((uint)index > (uint)_size)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(nameof(index), SR.ArgumentOutOfRange_ListInsert);
+                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.index, ExceptionResource.ArgumentOutOfRange_ListInsert);
             }
             if (_size == _items.Length) Grow(_size + 1);
             if (index < _size)
@@ -769,7 +769,7 @@ namespace System.Collections.Generic
         {
             if (collection == null)
             {
-                ThrowHelper.ThrowArgumentNullException(nameof(collection));
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.collection);
             }
 
             if ((uint)index > (uint)_size)
@@ -873,7 +873,7 @@ namespace System.Collections.Generic
 
             if ((Count != 0) && (count < 0))
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(nameof(count), SR.ArgumentOutOfRange_NeedNonNegNum);
+                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.count, ExceptionResource.ArgumentOutOfRange_NeedNonNegNum);
             }
 
             if (_size == 0)
@@ -883,12 +883,12 @@ namespace System.Collections.Generic
 
             if (index >= _size)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(nameof(index), SR.ArgumentOutOfRange_BiggerThanCollection);
+                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.index, ExceptionResource.ArgumentOutOfRange_BiggerThanCollection);
             }
 
             if (count > index + 1)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(nameof(count), SR.ArgumentOutOfRange_BiggerThanCollection);
+                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.count, ExceptionResource.ArgumentOutOfRange_BiggerThanCollection);
             }
 
             throw new NotImplementedException();
@@ -923,7 +923,7 @@ namespace System.Collections.Generic
         {
             if (match == null)
             {
-                ThrowHelper.ThrowArgumentNullException(nameof(match));
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.match);
             }
 
             int freeIndex = 0;   // the first free slot in items array
@@ -986,11 +986,11 @@ namespace System.Collections.Generic
 
             if (count < 0)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(nameof(count), SR.ArgumentOutOfRange_NeedNonNegNum);
+                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.count, ExceptionResource.ArgumentOutOfRange_NeedNonNegNum);
             }
 
             if (_size - index < count)
-                ThrowHelper.ThrowArgumentException(SR.Argument_InvalidOffLen);
+                ThrowHelper.ThrowArgumentException(ExceptionResource.Argument_InvalidOffLen);
 
             if (count > 0)
             {
@@ -1026,11 +1026,11 @@ namespace System.Collections.Generic
 
             if (count < 0)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(nameof(count), SR.ArgumentOutOfRange_NeedNonNegNum);
+                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.count, ExceptionResource.ArgumentOutOfRange_NeedNonNegNum);
             }
 
             if (_size - index < count)
-                ThrowHelper.ThrowArgumentException(SR.Argument_InvalidOffLen);
+                ThrowHelper.ThrowArgumentException(ExceptionResource.Argument_InvalidOffLen);
 
             if (count > 1)
             {
@@ -1066,11 +1066,11 @@ namespace System.Collections.Generic
 
             if (count < 0)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(nameof(count), SR.ArgumentOutOfRange_NeedNonNegNum);
+                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.count, ExceptionResource.ArgumentOutOfRange_NeedNonNegNum);
             }
 
             if (_size - index < count)
-                ThrowHelper.ThrowArgumentException(SR.Argument_InvalidOffLen);
+                ThrowHelper.ThrowArgumentException(ExceptionResource.Argument_InvalidOffLen);
 
             if (count > 1)
             {
@@ -1083,7 +1083,7 @@ namespace System.Collections.Generic
         {
             if (comparison == null)
             {
-                ThrowHelper.ThrowArgumentNullException(nameof(comparison));
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.comparison);
             }
 
             if (_size > 1)
@@ -1129,7 +1129,7 @@ namespace System.Collections.Generic
         {
             if (match == null)
             {
-                ThrowHelper.ThrowArgumentNullException(nameof(match));
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.match);
             }
 
             for (int i = 0; i < _size; i++)

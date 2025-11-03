@@ -334,7 +334,7 @@ namespace System
         public static char ToChar(ReadOnlySpan<byte> value)
         {
             if (value.Length < sizeof(char))
-                ThrowHelper.ThrowArgumentOutOfRangeException(nameof(value));
+                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.value);
             return Unsafe.ReadUnaligned<char>(ref MemoryMarshal.GetReference(value));
         }
 
@@ -350,11 +350,11 @@ namespace System
         public static short ToInt16(byte[] value, int startIndex)
         {
             if (value == null)
-                ThrowHelper.ThrowArgumentNullException(nameof(value));
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.value);
             if (unchecked((uint)startIndex) >= unchecked((uint)value.Length))
-                ThrowHelper.ThrowArgumentOutOfRangeException(nameof(startIndex), SR.ArgumentOutOfRange_IndexMustBeLess);
+                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.startIndex, ExceptionResource.ArgumentOutOfRange_IndexMustBeLess);
             if (startIndex > value.Length - sizeof(short))
-                ThrowHelper.ThrowArgumentException(SR.Arg_ByteArrayTooSmallForValue, nameof(value));
+                ThrowHelper.ThrowArgumentException(ExceptionResource.Arg_ByteArrayTooSmallForValue, ExceptionArgument.value);
 
             return Unsafe.ReadUnaligned<short>(ref value[startIndex]);
         }
@@ -369,7 +369,7 @@ namespace System
         public static short ToInt16(ReadOnlySpan<byte> value)
         {
             if (value.Length < sizeof(short))
-                ThrowHelper.ThrowArgumentOutOfRangeException(nameof(value));
+                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.value);
             return Unsafe.ReadUnaligned<short>(ref MemoryMarshal.GetReference(value));
         }
 
@@ -388,11 +388,11 @@ namespace System
         public static int ToInt32(byte[] value, int startIndex)
         {
             if (value == null)
-                ThrowHelper.ThrowArgumentNullException(nameof(value));
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.value);
             if (unchecked((uint)startIndex) >= unchecked((uint)value.Length))
-                ThrowHelper.ThrowArgumentOutOfRangeException(nameof(startIndex), SR.ArgumentOutOfRange_IndexMustBeLess);
+                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.startIndex, ExceptionResource.ArgumentOutOfRange_IndexMustBeLess);
             if (startIndex > value.Length - sizeof(int))
-                ThrowHelper.ThrowArgumentException(SR.Arg_ByteArrayTooSmallForValue, nameof(value));
+                ThrowHelper.ThrowArgumentException(ExceptionResource.Arg_ByteArrayTooSmallForValue, ExceptionArgument.value);
 
             return Unsafe.ReadUnaligned<int>(ref value[startIndex]);
         }
@@ -407,7 +407,7 @@ namespace System
         public static int ToInt32(ReadOnlySpan<byte> value)
         {
             if (value.Length < sizeof(int))
-                ThrowHelper.ThrowArgumentOutOfRangeException(nameof(value));
+                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.value);
             return Unsafe.ReadUnaligned<int>(ref MemoryMarshal.GetReference(value));
         }
 
@@ -426,11 +426,11 @@ namespace System
         public static long ToInt64(byte[] value, int startIndex)
         {
             if (value == null)
-                ThrowHelper.ThrowArgumentNullException(nameof(value));
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.value);
             if (unchecked((uint)startIndex) >= unchecked((uint)value.Length))
-                ThrowHelper.ThrowArgumentOutOfRangeException(nameof(startIndex), SR.ArgumentOutOfRange_IndexMustBeLess);
+                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.startIndex, ExceptionResource.ArgumentOutOfRange_IndexMustBeLess);
             if (startIndex > value.Length - sizeof(long))
-                ThrowHelper.ThrowArgumentException(SR.Arg_ByteArrayTooSmallForValue, nameof(value));
+                ThrowHelper.ThrowArgumentException(ExceptionResource.Arg_ByteArrayTooSmallForValue, ExceptionArgument.value);
 
             return Unsafe.ReadUnaligned<long>(ref value[startIndex]);
         }
@@ -445,7 +445,7 @@ namespace System
         public static long ToInt64(ReadOnlySpan<byte> value)
         {
             if (value.Length < sizeof(long))
-                ThrowHelper.ThrowArgumentOutOfRangeException(nameof(value));
+                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.value);
             return Unsafe.ReadUnaligned<long>(ref MemoryMarshal.GetReference(value));
         }
 
@@ -470,7 +470,7 @@ namespace System
         public static ushort ToUInt16(ReadOnlySpan<byte> value)
         {
             if (value.Length < sizeof(ushort))
-                ThrowHelper.ThrowArgumentOutOfRangeException(nameof(value));
+                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.value);
             return Unsafe.ReadUnaligned<ushort>(ref MemoryMarshal.GetReference(value));
         }
 
@@ -498,7 +498,7 @@ namespace System
         public static uint ToUInt32(ReadOnlySpan<byte> value)
         {
             if (value.Length < sizeof(uint))
-                ThrowHelper.ThrowArgumentOutOfRangeException(nameof(value));
+                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.value);
             return Unsafe.ReadUnaligned<uint>(ref MemoryMarshal.GetReference(value));
         }
 
@@ -526,7 +526,7 @@ namespace System
         public static ulong ToUInt64(ReadOnlySpan<byte> value)
         {
             if (value.Length < sizeof(ulong))
-                ThrowHelper.ThrowArgumentOutOfRangeException(nameof(value));
+                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.value);
             return Unsafe.ReadUnaligned<ulong>(ref MemoryMarshal.GetReference(value));
         }
 
@@ -551,7 +551,7 @@ namespace System
         public static unsafe Half ToHalf(ReadOnlySpan<byte> value)
         {
             if (value.Length < sizeof(Half))
-                ThrowHelper.ThrowArgumentOutOfRangeException(nameof(value));
+                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.value);
             return Unsafe.ReadUnaligned<Half>(ref MemoryMarshal.GetReference(value));
         }
 
@@ -579,7 +579,7 @@ namespace System
         public static float ToSingle(ReadOnlySpan<byte> value)
         {
             if (value.Length < sizeof(float))
-                ThrowHelper.ThrowArgumentOutOfRangeException(nameof(value));
+                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.value);
             return Unsafe.ReadUnaligned<float>(ref MemoryMarshal.GetReference(value));
         }
 
@@ -607,7 +607,7 @@ namespace System
         public static double ToDouble(ReadOnlySpan<byte> value)
         {
             if (value.Length < sizeof(double))
-                ThrowHelper.ThrowArgumentOutOfRangeException(nameof(value));
+                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.value);
             return Unsafe.ReadUnaligned<double>(ref MemoryMarshal.GetReference(value));
         }
 
@@ -634,12 +634,12 @@ namespace System
         public static string ToString(byte[] value, int startIndex, int length)
         {
             if (value == null)
-                ThrowHelper.ThrowArgumentNullException(nameof(value));
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.value);
             if (startIndex < 0 || startIndex >= value.Length && startIndex > 0)
-                ThrowHelper.ThrowArgumentOutOfRangeException(nameof(startIndex), SR.ArgumentOutOfRange_IndexMustBeLess);
+                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.startIndex, ExceptionResource.ArgumentOutOfRange_IndexMustBeLess);
             ArgumentOutOfRangeException.ThrowIfNegative(length);
             if (startIndex > value.Length - length)
-                ThrowHelper.ThrowArgumentException(SR.Arg_ByteArrayTooSmallForValue, nameof(value));
+                ThrowHelper.ThrowArgumentException(ExceptionResource.Arg_ByteArrayTooSmallForValue, ExceptionArgument.value);
         
             if (length == 0)
             {
@@ -681,7 +681,7 @@ namespace System
         public static string ToString(byte[] value)
         {
             if (value == null)
-                ThrowHelper.ThrowArgumentNullException(nameof(value));
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.value);
             return ToString(value, 0, value.Length);
         }
         
@@ -699,7 +699,7 @@ namespace System
         public static string ToString(byte[] value, int startIndex)
         {
             if (value == null)
-                ThrowHelper.ThrowArgumentNullException(nameof(value));
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.value);
             return ToString(value, startIndex, value.Length - startIndex);
         }
 
@@ -714,11 +714,11 @@ namespace System
         public static bool ToBoolean(byte[] value, int startIndex)
         {
             if (value == null)
-                ThrowHelper.ThrowArgumentNullException(nameof(value));
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.value);
             if (startIndex < 0)
-                ThrowHelper.ThrowArgumentOutOfRangeException(nameof(startIndex), SR.ArgumentOutOfRange_IndexMustBeLess);
+                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.startIndex, ExceptionResource.ArgumentOutOfRange_IndexMustBeLess);
             if (startIndex >= value.Length)
-                ThrowHelper.ThrowArgumentOutOfRangeException(nameof(startIndex), SR.ArgumentOutOfRange_IndexMustBeLess); // differs from other overloads, which throw base ArgumentException
+                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.startIndex, ExceptionResource.ArgumentOutOfRange_IndexMustBeLess); // differs from other overloads, which throw base ArgumentException
 
             return value[startIndex] != 0;
         }
@@ -733,7 +733,7 @@ namespace System
         public static bool ToBoolean(ReadOnlySpan<byte> value)
         {
             if (value.Length < sizeof(byte))
-                ThrowHelper.ThrowArgumentOutOfRangeException(nameof(value));
+                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.value);
             return Unsafe.ReadUnaligned<byte>(ref MemoryMarshal.GetReference(value)) != 0;
         }
 

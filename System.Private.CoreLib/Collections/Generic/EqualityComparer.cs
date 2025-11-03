@@ -34,7 +34,7 @@ public abstract class EqualityComparer<T> : IEqualityComparer, IEqualityComparer
     {
         if (obj == null) return 0;
         if (obj is T) return GetHashCode((T)obj);
-        ThrowHelper.ThrowArgumentException(SR.Argument_InvalidArgumentForComparison);
+        ThrowHelper.ThrowArgumentException(ExceptionResource.Argument_InvalidArgumentForComparison);
         return 0;
     }
 
@@ -43,7 +43,7 @@ public abstract class EqualityComparer<T> : IEqualityComparer, IEqualityComparer
         if (x == y) return true;
         if (x == null || y == null) return false;
         if ((x is T) && (y is T)) return Equals((T)x, (T)y);
-        ThrowHelper.ThrowArgumentException(SR.Argument_InvalidArgumentForComparison);
+        ThrowHelper.ThrowArgumentException(ExceptionResource.Argument_InvalidArgumentForComparison);
         return false;
     }
 }

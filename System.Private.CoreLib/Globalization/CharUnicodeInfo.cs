@@ -41,11 +41,11 @@ public static partial class CharUnicodeInfo
     {
         if (s is null)
         {
-            ThrowHelper.ThrowArgumentNullException(nameof(s));
+            ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
         }
         if ((uint)index >= (uint)s.Length)
         {
-            ThrowHelper.ThrowArgumentOutOfRangeException(nameof(index));
+            ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.index);
         }
 
         return GetBidiCategoryNoBoundsChecks((uint)GetCodePointFromString(s, index));
@@ -108,11 +108,11 @@ public static partial class CharUnicodeInfo
     {
         if (s is null)
         {
-            ThrowHelper.ThrowArgumentNullException(nameof(s));
+            ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
         }
         if ((uint)index >= (uint)s.Length)
         {
-            ThrowHelper.ThrowArgumentOutOfRangeException(nameof(index));
+            ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.index);
         }
 
         return GetDecimalDigitValueInternalNoBoundsCheck((uint)GetCodePointFromString(s, index));
@@ -142,11 +142,11 @@ public static partial class CharUnicodeInfo
     {
         if (s is null)
         {
-            ThrowHelper.ThrowArgumentNullException(nameof(s));
+            ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
         }
         if ((uint)index >= (uint)s.Length)
         {
-            ThrowHelper.ThrowArgumentOutOfRangeException(nameof(index));
+            ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.index);
         }
 
         return GetDigitValueInternalNoBoundsCheck((uint)GetCodePointFromString(s, index));
@@ -207,7 +207,7 @@ public static partial class CharUnicodeInfo
     {
         if (!UnicodeUtility.IsValidCodePoint((uint)codePoint))
         {
-            ThrowHelper.ThrowArgumentOutOfRangeException(nameof(codePoint));
+            ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.codePoint);
         }
 
         return GetNumericValueNoBoundsCheck((uint)codePoint);
@@ -217,11 +217,11 @@ public static partial class CharUnicodeInfo
     {
         if (s is null)
         {
-            ThrowHelper.ThrowArgumentNullException(nameof(s));
+            ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
         }
         if ((uint)index >= (uint)s.Length)
         {
-            ThrowHelper.ThrowArgumentOutOfRangeException(nameof(index));
+            ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.index);
         }
 
         return GetNumericValueInternal(s, index);
@@ -268,7 +268,7 @@ public static partial class CharUnicodeInfo
     {
         if (!UnicodeUtility.IsValidCodePoint(codePoint))
         {
-            ThrowHelper.ThrowArgumentOutOfRangeException(nameof(codePoint));
+            ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.codePoint);
         }
 
         nuint offset = GetCategoryCasingTableOffsetNoBoundsChecks(codePoint);
@@ -303,7 +303,7 @@ public static partial class CharUnicodeInfo
     {
         if (!UnicodeUtility.IsValidCodePoint(codePoint))
         {
-            ThrowHelper.ThrowArgumentOutOfRangeException(nameof(codePoint));
+            ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.codePoint);
         }
 
         nuint offset = GetCategoryCasingTableOffsetNoBoundsChecks(codePoint);
@@ -336,7 +336,7 @@ public static partial class CharUnicodeInfo
     {
         if (!UnicodeUtility.IsValidCodePoint((uint)codePoint))
         {
-            ThrowHelper.ThrowArgumentOutOfRangeException(nameof(codePoint));
+            ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.codePoint);
         }
 
         return GetUnicodeCategoryNoBoundsChecks((uint)codePoint);
@@ -346,11 +346,11 @@ public static partial class CharUnicodeInfo
     {
         if (s is null)
         {
-            ThrowHelper.ThrowArgumentNullException(nameof(s));
+            ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
         }
         if ((uint)index >= (uint)s.Length)
         {
-            ThrowHelper.ThrowArgumentOutOfRangeException(nameof(index));
+            ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.index);
         }
 
         return GetUnicodeCategoryInternal(s, index);

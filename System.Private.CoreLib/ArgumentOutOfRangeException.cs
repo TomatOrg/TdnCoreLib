@@ -44,22 +44,21 @@ public class ArgumentOutOfRangeException : ArgumentException
         _actualValue = actualValue;
     }
 
-
-    // public override string Message
-    // {
-    //     get
-    //     {
-    //         string s = base.Message;
-    //         if (_actualValue != null)
-    //         {
-    //             string valueMessage = string.Format(SR.ArgumentOutOfRange_ActualValue, _actualValue);
-    //             if (s == null)
-    //                 return valueMessage;
-    //             return s + Environment.NewLineConst + valueMessage;
-    //         }
-    //         return s;
-    //     }
-    // }
+    public override string Message
+    {
+        get
+        {
+            string s = base.Message;
+            if (_actualValue != null)
+            {
+                string valueMessage = string.Format(SR.ArgumentOutOfRange_ActualValue, _actualValue);
+                if (s == null)
+                    return valueMessage;
+                return s + Environment.NewLineConst + valueMessage;
+            }
+            return s;
+        }
+    }
 
     // Gets the value of the argument that caused the exception.
     public virtual object? ActualValue => _actualValue;
